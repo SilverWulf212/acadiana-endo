@@ -6,6 +6,11 @@ import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
 import EmergencyBanner from "@/app/components/EmergencyBanner";
 import ClickToCall from "@/app/components/ClickToCall";
+import {
+  LocalBusinessSchema,
+  WebSiteSchema,
+  MedicalOrganizationSchema,
+} from "@/app/components/SchemaMarkup";
 
 const figtree = Figtree({
   variable: "--font-figtree",
@@ -31,6 +36,7 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.svg",
   },
+  manifest: "/site.webmanifest",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -57,6 +63,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <LocalBusinessSchema />
+        <WebSiteSchema />
+        <MedicalOrganizationSchema />
+      </head>
       <body
         className={`${figtree.variable} ${sourceSans3.variable} antialiased`}
       >

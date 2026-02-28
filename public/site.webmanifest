@@ -1,0 +1,14 @@
+{
+  "name": "Acadiana Endodontics",
+  "short_name": "Acadiana Endo",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#1B3A5C",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}
