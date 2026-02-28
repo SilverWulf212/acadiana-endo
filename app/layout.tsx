@@ -20,15 +20,33 @@ const sourceSans3 = Source_Sans_3({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://acadianaendo.com"),
   title: {
     default:
       "Acadiana Endodontics | Expert Root Canal Treatment in Lafayette, LA",
     template: "%s | Acadiana Endodontics",
   },
   description:
-    "Acadiana Endodontics provides expert root canal therapy and endodontic care in Lafayette and New Iberia, Louisiana. Gentle, advanced treatment you can trust.",
+    "Board-certified endodontists in Lafayette & New Iberia, LA. Gentle root canal therapy, retreatment, apicoectomy & emergency dental care. Call (337) 981-0144.",
   icons: {
     icon: "/favicon.svg",
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "Acadiana Endodontics",
+    title: "Acadiana Endodontics | Expert Root Canal Treatment in Lafayette, LA",
+    description:
+      "Board-certified endodontists in Lafayette & New Iberia, LA. Gentle root canal therapy, retreatment, apicoectomy & emergency dental care.",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Acadiana Endodontics | Expert Root Canal Treatment",
+    description:
+      "Board-certified endodontists in Lafayette & New Iberia, LA. Gentle, advanced treatment you can trust.",
+  },
+  alternates: {
+    canonical: "/",
   },
 };
 

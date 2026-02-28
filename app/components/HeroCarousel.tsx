@@ -77,6 +77,7 @@ export default function HeroCarousel() {
       aria-label="Hero highlights"
     >
       {/* Slides */}
+      <div aria-live="polite" aria-atomic="true" className="absolute inset-0">
       {slides.map((slide, index) => (
         <div
           key={index}
@@ -182,6 +183,7 @@ export default function HeroCarousel() {
           </div>
         </div>
       ))}
+      </div>
 
       {/* Dot indicators */}
       <div className="absolute bottom-8 left-0 right-0 z-20 flex justify-center gap-3">

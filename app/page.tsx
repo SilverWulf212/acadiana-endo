@@ -14,9 +14,9 @@ import { PHONE_LAFAYETTE } from "@/app/lib/constants";
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "Acadiana Endodontics | Expert Root Canal Treatment in Lafayette, LA",
-  description:
-    "Board-certified endodontists in Lafayette & New Iberia, LA. Gentle root canal therapy, retreatment, apicoectomy & emergency dental care. Call (337) 981-0144.",
+  alternates: {
+    canonical: "/",
+  },
 };
 
 // ─── Service Data (inline; will move to data file in Task 5) ──────────────────
@@ -34,7 +34,7 @@ const services = [
     slug: "retreatment",
     icon: "retreatment",
     shortDescription:
-      "When a previous root canal needs attention, our specialists can retreeat and restore the tooth to full health.",
+      "When a previous root canal needs attention, our specialists can retreat and restore the tooth to full health.",
   },
   {
     title: "Apicoectomy",

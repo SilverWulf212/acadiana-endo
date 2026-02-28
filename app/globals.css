@@ -212,6 +212,8 @@ body {
    Component Classes
    ═══════════════════════════════════════════════════════════════════════════ */
 
+@layer components {
+
 /* ─── Buttons ─────────────────────────────────────────────────────────────── */
 
 .btn {
@@ -247,6 +249,11 @@ body {
   border-color: var(--color-navy-700);
 }
 
+.btn-primary:active {
+  transform: scale(0.98);
+  background-color: var(--color-navy-900);
+}
+
 .btn-secondary {
   background-color: var(--color-gold-400);
   color: var(--color-navy-900);
@@ -258,6 +265,11 @@ body {
   border-color: var(--color-gold-500);
 }
 
+.btn-secondary:active {
+  transform: scale(0.98);
+  background-color: var(--color-gold-600);
+}
+
 .btn-outline {
   background-color: transparent;
   color: var(--color-navy-800);
@@ -267,6 +279,10 @@ body {
 .btn-outline:hover {
   background-color: var(--color-navy-800);
   color: #ffffff;
+}
+
+.btn-outline:active {
+  transform: scale(0.98);
 }
 
 .btn-ghost {
@@ -300,7 +316,7 @@ body {
 }
 
 .card:hover {
-  box-shadow: 0 4px 20px oklch(0.34 0.070 252 / 0.08);
+  box-shadow: 0 4px 20px color-mix(in oklch, var(--color-navy-800) 8%, transparent);
   transform: translateY(-2px);
 }
 
@@ -335,3 +351,5 @@ body {
   background-color: var(--color-gold-400);
   border-radius: 9999px;
 }
+
+} /* end @layer components */

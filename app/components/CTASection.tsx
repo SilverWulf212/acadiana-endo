@@ -80,12 +80,21 @@ export default function CTASection({
               </Link>
             )}
             {secondaryCTA && (
-              <Link
-                href={secondaryCTA.href}
-                className="btn btn-lg border-white/25 text-white hover:bg-white/10"
-              >
-                {secondaryCTA.label}
-              </Link>
+              secondaryCTA.href.startsWith("tel:") || secondaryCTA.href.startsWith("mailto:") ? (
+                <a
+                  href={secondaryCTA.href}
+                  className="btn btn-lg border-white/25 text-white hover:bg-white/10"
+                >
+                  {secondaryCTA.label}
+                </a>
+              ) : (
+                <Link
+                  href={secondaryCTA.href}
+                  className="btn btn-lg border-white/25 text-white hover:bg-white/10"
+                >
+                  {secondaryCTA.label}
+                </Link>
+              )
             )}
           </div>
         )}
