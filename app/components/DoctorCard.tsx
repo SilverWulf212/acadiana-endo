@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/app/lib/utils";
 
@@ -55,10 +56,11 @@ export default function DoctorCard({
       <div className="mb-6">
         {hasImage ? (
           <div className="relative h-36 w-36 overflow-hidden rounded-full ring-4 ring-navy-100 transition-all duration-300 group-hover:ring-gold-200">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={imageUrl}
               alt={`${name}, ${credentials}`}
+              width={288}
+              height={288}
               className="h-full w-full object-cover"
             />
           </div>

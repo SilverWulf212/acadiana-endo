@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
 import PageHero from "@/app/components/PageHero";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
@@ -133,6 +134,7 @@ export default function AboutPage() {
       <PageHero
         title="About Acadiana Endodontics"
         description="Board-certified endodontists dedicated to saving your natural teeth with gentle, advanced care"
+        backgroundImage="/images/office/lafayette-exterior.jpg"
         breadcrumbs={
           <Breadcrumbs
             items={[
@@ -166,6 +168,20 @@ export default function AboutPage() {
                 as comfortable and stress-free as possible. We take the time to
                 listen, educate, and partner with you in your care decisions.
               </p>
+            </div>
+          </ScrollReveal>
+
+          {/* Office Exterior Photo */}
+          <ScrollReveal delay={200}>
+            <div className="mx-auto mt-12 max-w-5xl overflow-hidden rounded-2xl shadow-xl shadow-navy-800/10">
+              <Image
+                src="/images/office/lafayette-exterior.jpg"
+                alt="Acadiana Endodontics office in Lafayette, Louisiana"
+                width={1100}
+                height={589}
+                className="h-auto w-full object-cover"
+                priority
+              />
             </div>
           </ScrollReveal>
 
@@ -243,16 +259,17 @@ export default function AboutPage() {
                         {/* Decorative ring */}
                         <div className="absolute -inset-3 rounded-full bg-gradient-to-br from-gold-200 via-gold-100 to-navy-100 opacity-60" />
                         {hasImage ? (
-                          <div className="relative h-48 w-48 overflow-hidden rounded-full ring-4 ring-white lg:h-56 lg:w-56">
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
+                          <div className="relative h-52 w-52 overflow-hidden rounded-full ring-4 ring-white lg:h-64 lg:w-64">
+                            <Image
                               src={doctor.imageUrl}
                               alt={`${doctor.name}, ${doctor.credentials}`}
+                              width={512}
+                              height={512}
                               className="h-full w-full object-cover"
                             />
                           </div>
                         ) : (
-                          <div className="relative flex h-48 w-48 items-center justify-center rounded-full bg-gradient-to-br from-navy-100 via-navy-50 to-steel-100 ring-4 ring-white lg:h-56 lg:w-56">
+                          <div className="relative flex h-52 w-52 items-center justify-center rounded-full bg-gradient-to-br from-navy-100 via-navy-50 to-steel-100 ring-4 ring-white lg:h-64 lg:w-64">
                             <span className="font-heading text-5xl font-bold text-navy-400 lg:text-6xl">
                               {initials}
                             </span>
@@ -390,9 +407,85 @@ export default function AboutPage() {
       </section>
 
       {/* ════════════════════════════════════════════════════════════════════════
-          PROFESSIONAL AFFILIATIONS
+          ADVANCED TECHNOLOGY
           ════════════════════════════════════════════════════════════════════════ */}
       <section className="section bg-white">
+        <div className="container">
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+            {/* Photo */}
+            <ScrollReveal animation="slide-in-left">
+              <div className="overflow-hidden rounded-2xl shadow-xl shadow-navy-800/10">
+                <Image
+                  src="/images/office/treatment-room.jpg"
+                  alt="Dr. Fowler performing endodontic treatment using a surgical microscope at Acadiana Endodontics"
+                  width={1097}
+                  height={800}
+                  className="h-auto w-full object-cover"
+                />
+              </div>
+            </ScrollReveal>
+
+            {/* Text */}
+            <ScrollReveal animation="slide-in-right" delay={150}>
+              <div>
+                <div className="accent-bar mb-4" />
+                <h2 className="heading-section">Advanced Technology</h2>
+                <p className="text-lead mt-6">
+                  Precision instruments and cutting-edge imaging for the best
+                  possible outcomes.
+                </p>
+                <div className="mt-6 space-y-4 text-base leading-relaxed text-gray-700">
+                  <p>
+                    At {PRACTICE_NAME}, we invest in the latest endodontic
+                    technology to provide our patients with the highest standard of
+                    care. Our surgical operating microscopes deliver up to 25x
+                    magnification, allowing our specialists to visualize the
+                    intricate anatomy of each tooth with extraordinary clarity.
+                  </p>
+                  <p>
+                    Combined with CBCT 3D imaging, digital radiography, and
+                    advanced ultrasonic instrumentation, our technology enables us
+                    to diagnose complex cases with greater accuracy, perform
+                    minimally invasive procedures, and achieve consistently
+                    superior results.
+                  </p>
+                </div>
+                <ul className="mt-8 space-y-3">
+                  {[
+                    "Surgical operating microscopes",
+                    "CBCT 3D cone beam imaging",
+                    "Digital radiography",
+                    "Ultrasonic instrumentation",
+                    "Electronic apex locators",
+                  ].map((item) => (
+                    <li key={item} className="flex items-center gap-3 text-sm font-medium text-navy-800">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        className="h-5 w-5 shrink-0 text-gold-500"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fillRule="evenodd"
+                          d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════════════════════
+          PROFESSIONAL AFFILIATIONS
+          ════════════════════════════════════════════════════════════════════════ */}
+      <section className="section bg-gray-50">
         <div className="container">
           <ScrollReveal>
             <div className="mx-auto mb-12 max-w-2xl text-center">

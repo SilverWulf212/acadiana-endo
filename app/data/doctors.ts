@@ -18,7 +18,7 @@ export const doctors: Doctor[] = [
       "Acadiana District Dental Association",
       "LSU School of Dentistry Clinical Faculty",
     ],
-    imageUrl: "",
+    imageUrl: "/images/doctors/dr-fowler.jpg",
   },
   {
     name: "Dr. James Reaves",
@@ -36,6 +36,6 @@ export const doctors: Doctor[] = [
       "Louisiana Dental Association",
       "Acadiana District Dental Association",
     ],
-    imageUrl: "",
+    imageUrl: "/images/doctors/dr-reaves.jpg",
   },
 ];

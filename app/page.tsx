@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import dynamic from "next/dynamic";
 
 import HeroCarousel from "@/app/components/HeroCarousel";
@@ -120,66 +121,93 @@ export default function HomePage() {
             </div>
           </ScrollReveal>
 
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
-            {/* Problem side */}
-            <ScrollReveal animation="slide-in-left" delay={100}>
-              <div className="relative rounded-2xl bg-gray-50 p-8 lg:p-10">
-                {/* Red accent */}
-                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-red-50">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-7 w-7 text-red-400" aria-hidden="true">
-                    <path fillRule="evenodd" d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z" clipRule="evenodd" />
-                  </svg>
+          {/* Two-column: Image + Problem/Solution cards */}
+          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
+            {/* Image column — Dr. Fowler at microscope */}
+            <ScrollReveal animation="slide-in-left" delay={100} className="lg:col-span-5">
+              <div className="relative overflow-hidden rounded-2xl shadow-xl">
+                <Image
+                  src="/images/office/treatment-room.jpg"
+                  alt="Dr. Fowler performing a procedure using a dental microscope in a modern treatment room"
+                  width={1097}
+                  height={800}
+                  sizes="(max-width: 1024px) 100vw, 42vw"
+                  className="h-auto w-full object-cover"
+                />
+                {/* Caption overlay */}
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy-900/80 to-transparent px-6 pb-5 pt-12">
+                  <p className="font-heading text-sm font-semibold text-white">
+                    Precision Under the Microscope
+                  </p>
+                  <p className="mt-1 text-xs text-navy-200">
+                    Our specialists use advanced surgical microscopes for every procedure
+                  </p>
                 </div>
-                <h3 className="heading-subsection mb-4 !text-navy-800">
-                  The Problem with General Treatment
-                </h3>
-                <ul className="space-y-3">
-                  {[
-                    "Dental anxiety prevents millions from seeking needed care",
-                    "General dentists perform root canals occasionally — specialists perform them daily",
-                    "Outdated equipment can miss hidden canals and complex anatomy",
-                    "Delayed treatment leads to tooth loss, infection, and higher costs",
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 text-gray-600">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="mt-0.5 h-5 w-5 shrink-0 text-red-300" aria-hidden="true">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clipRule="evenodd" />
-                      </svg>
-                      <span className="text-sm leading-relaxed">{item}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
             </ScrollReveal>
 
-            {/* Solution side */}
-            <ScrollReveal animation="slide-in-right" delay={200}>
-              <div className="relative rounded-2xl border-2 border-gold-200 bg-gold-50/50 p-8 lg:p-10">
-                {/* Gold accent */}
-                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-gold-100">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-7 w-7 text-gold-600" aria-hidden="true">
-                    <path fillRule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307z" clipRule="evenodd" />
-                  </svg>
+            {/* Problem / Solution cards column */}
+            <div className="space-y-8 lg:col-span-7">
+              {/* Problem side */}
+              <ScrollReveal animation="slide-in-right" delay={200}>
+                <div className="relative rounded-2xl bg-gray-50 p-8 lg:p-10">
+                  {/* Red accent */}
+                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-red-50">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-7 w-7 text-red-400" aria-hidden="true">
+                      <path fillRule="evenodd" d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <h3 className="heading-subsection mb-4 !text-navy-800">
+                    The Problem with General Treatment
+                  </h3>
+                  <ul className="space-y-3">
+                    {[
+                      "Dental anxiety prevents millions from seeking needed care",
+                      "General dentists perform root canals occasionally — specialists perform them daily",
+                      "Outdated equipment can miss hidden canals and complex anatomy",
+                      "Delayed treatment leads to tooth loss, infection, and higher costs",
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-3 text-gray-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="mt-0.5 h-5 w-5 shrink-0 text-red-300" aria-hidden="true">
+                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-sm leading-relaxed">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <h3 className="heading-subsection mb-4 !text-navy-800">
-                  The Acadiana Endodontics Difference
-                </h3>
-                <ul className="space-y-3">
-                  {[
-                    "Board-certified specialists who focus exclusively on saving teeth",
-                    "Advanced CBCT 3D imaging reveals what standard X-rays miss",
-                    "Gentle approach with modern anesthesia — most patients feel no pain",
-                    "Two convenient locations serving Lafayette and New Iberia",
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 text-navy-700">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="mt-0.5 h-5 w-5 shrink-0 text-gold-500" aria-hidden="true">
-                        <path fillRule="evenodd" d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
-                      </svg>
-                      <span className="text-sm leading-relaxed">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </ScrollReveal>
+              </ScrollReveal>
+
+              {/* Solution side */}
+              <ScrollReveal animation="slide-in-right" delay={300}>
+                <div className="relative rounded-2xl border-2 border-gold-200 bg-gold-50/50 p-8 lg:p-10">
+                  {/* Gold accent */}
+                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-gold-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-7 w-7 text-gold-600" aria-hidden="true">
+                      <path fillRule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <h3 className="heading-subsection mb-4 !text-navy-800">
+                    The Acadiana Endodontics Difference
+                  </h3>
+                  <ul className="space-y-3">
+                    {[
+                      "Board-certified specialists who focus exclusively on saving teeth",
+                      "Advanced CBCT 3D imaging reveals what standard X-rays miss",
+                      "Gentle approach with modern anesthesia — most patients feel no pain",
+                      "Two convenient locations serving Lafayette and New Iberia",
+                    ].map((item, i) => (
+                      <li key={i} className="flex items-start gap-3 text-navy-700">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="mt-0.5 h-5 w-5 shrink-0 text-gold-500" aria-hidden="true">
+                          <path fillRule="evenodd" d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
+                        </svg>
+                        <span className="text-sm leading-relaxed">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </ScrollReveal>
+            </div>
           </div>
         </div>
       </section>
@@ -221,6 +249,50 @@ export default function HomePage() {
               >
                 View All Services
               </Link>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* ════════════════════════════════════════════════════════════════════════
+          4b. PARALLAX IMAGE BREAK — Spanish Moss Road
+          ════════════════════════════════════════════════════════════════════════ */}
+      <section className="relative h-[420px] overflow-hidden lg:h-[500px]">
+        {/* Background image with parallax-style fixed attachment */}
+        <Image
+          src="/images/general/moss-road.jpg"
+          alt="A beautiful Southern road lined with live oak trees draped in Spanish moss"
+          fill
+          sizes="100vw"
+          className="object-cover"
+          style={{ objectPosition: "center 40%" }}
+        />
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-navy-900/65" />
+        {/* Content */}
+        <div className="container relative flex h-full flex-col items-center justify-center text-center">
+          <ScrollReveal>
+            <div className="mx-auto max-w-3xl">
+              <div className="mx-auto mb-6 h-1 w-16 rounded-full bg-gold-400" />
+              <blockquote className="font-heading text-2xl font-bold leading-snug text-white md:text-3xl lg:text-4xl">
+                &ldquo;Nothing looks, feels, or functions like your natural tooth. Our mission is to help you keep it.&rdquo;
+              </blockquote>
+              <div className="mt-8 flex flex-wrap items-center justify-center gap-8 text-sm font-medium text-gold-300 lg:gap-12">
+                <div className="flex flex-col items-center">
+                  <span className="font-heading text-3xl font-bold text-white">98%</span>
+                  <span className="mt-1">Success Rate</span>
+                </div>
+                <div className="hidden h-8 w-px bg-gold-400/30 sm:block" />
+                <div className="flex flex-col items-center">
+                  <span className="font-heading text-3xl font-bold text-white">25+</span>
+                  <span className="mt-1">Years of Experience</span>
+                </div>
+                <div className="hidden h-8 w-px bg-gold-400/30 sm:block" />
+                <div className="flex flex-col items-center">
+                  <span className="font-heading text-3xl font-bold text-white">50K+</span>
+                  <span className="mt-1">Teeth Saved</span>
+                </div>
+              </div>
             </div>
           </ScrollReveal>
         </div>
@@ -316,34 +388,36 @@ export default function HomePage() {
               </div>
             </ScrollReveal>
 
-            {/* Image placeholder column */}
+            {/* Image column — treatment room with modern equipment */}
             <ScrollReveal animation="slide-in-right" delay={150}>
               <div className="relative">
                 {/* Decorative frame */}
                 <div className="absolute -inset-4 rounded-2xl border-2 border-dashed border-gold-200/60" />
-                <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-navy-100 via-navy-50 to-steel-100 p-12 lg:p-16">
-                  <div className="flex flex-col items-center justify-center text-center">
-                    {/* CBCT icon */}
-                    <div className="mb-6 flex h-24 w-24 items-center justify-center rounded-2xl bg-white/80 shadow-sm">
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-12 w-12 text-navy-600" aria-hidden="true">
-                        <path d="M3 3h5v2H5v3H3V3Zm13 0h5v5h-2V5h-3V3ZM3 16h2v3h3v2H3v-5Zm16 0h2v5h-5v-2h3v-3ZM7 7h10v10H7V7Zm2 2v6h6V9H9Z" />
-                      </svg>
-                    </div>
-                    <p className="font-heading text-lg font-semibold text-navy-700">
-                      CBCT 3D Imaging
-                    </p>
-                    <p className="mt-2 text-sm text-gray-500">
-                      Advanced cone beam computed tomography
-                    </p>
-                    {/* Decorative scanning lines */}
-                    <div className="mt-8 w-full space-y-2">
-                      {Array.from({ length: 5 }, (_, i) => (
-                        <div
-                          key={i}
-                          className="mx-auto h-0.5 rounded-full bg-navy-200/60"
-                          style={{ width: `${80 - i * 12}%` }}
-                        />
-                      ))}
+                <div className="relative overflow-hidden rounded-2xl shadow-xl">
+                  <Image
+                    src="/images/services/treatment-room.jpg"
+                    alt="Modern endodontic treatment room equipped with advanced technology and patient comfort amenities"
+                    width={1280}
+                    height={1920}
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="h-auto w-full object-cover"
+                  />
+                  {/* Floating badge overlay */}
+                  <div className="absolute bottom-6 left-6 right-6 rounded-xl bg-white/90 p-4 shadow-lg backdrop-blur-sm">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-navy-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 text-navy-600" aria-hidden="true">
+                          <path d="M3 3h5v2H5v3H3V3Zm13 0h5v5h-2V5h-3V3ZM3 16h2v3h3v2H3v-5Zm16 0h2v5h-5v-2h3v-3ZM7 7h10v10H7V7Zm2 2v6h6V9H9Z" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="font-heading text-sm font-semibold text-navy-800">
+                          CBCT 3D Imaging On-Site
+                        </p>
+                        <p className="text-xs text-gray-500">
+                          Advanced cone beam computed tomography
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -379,8 +453,18 @@ export default function HomePage() {
           8. FOR REFERRING DOCTORS
           ════════════════════════════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden bg-navy-800 py-16 lg:py-24">
-        {/* Background decoration */}
-        <div className="absolute inset-0 bg-gradient-to-br from-navy-900/80 via-transparent to-navy-700/40" />
+        {/* Background photo — office exterior at sunset */}
+        <Image
+          src="/images/office/lafayette-exterior.jpg"
+          alt="Acadiana Endodontics Lafayette office exterior at sunset"
+          fill
+          sizes="100vw"
+          className="object-cover"
+          style={{ objectPosition: "center 60%" }}
+        />
+        {/* Dark overlay to keep text legible */}
+        <div className="absolute inset-0 bg-navy-900/80" />
+        <div className="absolute inset-0 bg-gradient-to-br from-navy-900/40 via-transparent to-navy-700/30" />
         <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-gold-400/5" />
         <div className="absolute -bottom-16 -left-16 h-64 w-64 rounded-full bg-gold-400/5" />
 

@@ -18,7 +18,7 @@ export function LocalBusinessSchema() {
     url: PRACTICE_WEBSITE,
     telephone: PHONE_LAFAYETTE,
     email: PRACTICE_EMAIL,
-    image: `${PRACTICE_WEBSITE}/images/practice.jpg`,
+    image: `${PRACTICE_WEBSITE}/images/office/lafayette-exterior.jpg`,
     priceRange: "$$",
     medicalSpecialty: "Endodontics",
     address: [
