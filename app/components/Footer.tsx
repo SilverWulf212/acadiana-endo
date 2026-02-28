@@ -15,6 +15,7 @@ const quickLinks = [
   { label: "Patient Information", href: "/patient-information" },
   { label: "Referring Doctors", href: "/referring-doctors" },
   { label: "Contact", href: "/contact" },
+  { label: "FAQ", href: "/faq" },
 ];
 
 function formatAddress(loc: typeof LOCATION_LAFAYETTE) {

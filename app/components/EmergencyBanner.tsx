@@ -2,7 +2,7 @@ import { PHONE_LAFAYETTE } from "@/app/lib/constants";
 
 export default function EmergencyBanner() {
   return (
-    <div className="bg-navy-950 py-2">
+    <div className="bg-navy-900 py-2">
       <div className="container flex items-center justify-center gap-2 text-center">
         <p className="text-xs font-medium uppercase tracking-widest text-white/90">
           Dental emergency?{" "}
