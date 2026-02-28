@@ -140,20 +140,37 @@ export default function HeroCarousel() {
                   )}
                 />
 
-                {/* Heading */}
-                <h1
-                  className={cn(
-                    "mb-6 font-heading text-4xl font-extrabold leading-[1.1] tracking-tight text-white transition-all duration-700 delay-100 sm:text-5xl lg:text-6xl xl:text-7xl",
-                    index === current
-                      ? "translate-y-0 opacity-100"
-                      : "translate-y-6 opacity-0"
-                  )}
-                  style={{
-                    textShadow: "0 2px 12px rgba(0, 0, 0, 0.3)",
-                  }}
-                >
-                  {slide.heading}
-                </h1>
+                {/* Heading — only the first slide gets the H1 for SEO */}
+                {index === 0 ? (
+                  <h1
+                    className={cn(
+                      "mb-6 font-heading text-4xl font-extrabold leading-[1.1] tracking-tight text-white transition-all duration-700 delay-100 sm:text-5xl lg:text-6xl xl:text-7xl",
+                      index === current
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-6 opacity-0"
+                    )}
+                    style={{
+                      textShadow: "0 2px 12px rgba(0, 0, 0, 0.3)",
+                    }}
+                  >
+                    {slide.heading}
+                  </h1>
+                ) : (
+                  <p
+                    className={cn(
+                      "mb-6 font-heading text-4xl font-extrabold leading-[1.1] tracking-tight text-white transition-all duration-700 delay-100 sm:text-5xl lg:text-6xl xl:text-7xl",
+                      index === current
+                        ? "translate-y-0 opacity-100"
+                        : "translate-y-6 opacity-0"
+                    )}
+                    style={{
+                      textShadow: "0 2px 12px rgba(0, 0, 0, 0.3)",
+                    }}
+                    aria-hidden={index !== current}
+                  >
+                    {slide.heading}
+                  </p>
+                )}
 
                 {/* Subtitle */}
                 <p

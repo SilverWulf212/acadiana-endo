@@ -240,7 +240,7 @@ export default function ReferralForm() {
   // ─── Form ──────────────────────────────────────────────────────────────────
 
   const inputBaseClasses =
-    "w-full rounded-lg border bg-white px-4 py-3 text-sm text-navy-900 placeholder:text-gray-400 transition-colors duration-200 focus:border-navy-400 focus:outline-none focus:ring-2 focus:ring-navy-400/20";
+    "w-full rounded-lg border bg-white px-4 py-3 text-base text-navy-900 placeholder:text-gray-400 transition-colors duration-200 focus:border-navy-400 focus:outline-none focus:ring-2 focus:ring-navy-400/20";
   const inputErrorClasses = "border-red-300 focus:border-red-400 focus:ring-red-400/20";
   const inputDefaultClasses = "border-steel-200 hover:border-steel-300";
 
