@@ -352,4 +352,15 @@ body {
   border-radius: 9999px;
 }
 
+/* ─── Scrollbar Hide ─────────────────────────────────────────────────────── */
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 } /* end @layer components */
