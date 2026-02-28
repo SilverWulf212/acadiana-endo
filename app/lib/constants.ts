@@ -53,13 +53,24 @@ export const LOCATION_NEW_IBERIA: Location = {
 
 export const LOCATIONS: Location[] = [LOCATION_LAFAYETTE, LOCATION_NEW_IBERIA];
 
+// ─── Service Sub-Navigation ─────────────────────────────────────────────────
+
+export const SERVICE_LINKS = [
+  { label: "Root Canal Therapy", href: "/services/root-canal" },
+  { label: "Endodontic Retreatment", href: "/services/retreatment" },
+  { label: "Apicoectomy", href: "/services/apicoectomy" },
+  { label: "Cracked Teeth", href: "/services/cracked-teeth" },
+  { label: "Dental Trauma", href: "/services/dental-trauma" },
+  { label: "CBCT 3D Imaging", href: "/services/cbct-imaging" },
+] as const;
+
 // ─── Navigation ──────────────────────────────────────────────────────────────
 
 export const NAV_LINKS = [
   { label: "Home", href: "/" },
-  { label: "Services", href: "/services" },
   { label: "About", href: "/about" },
-  { label: "Patient Info", href: "/patient-info" },
+  { label: "Services", href: "/services" },
+  { label: "Patient Info", href: "/patient-information" },
   { label: "Referring Doctors", href: "/referring-doctors" },
   { label: "Contact", href: "/contact" },
 ] as const;

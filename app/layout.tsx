@@ -2,6 +2,11 @@ import type { Metadata } from "next";
 import { Figtree, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
 
+import Header from "@/app/components/Header";
+import Footer from "@/app/components/Footer";
+import EmergencyBanner from "@/app/components/EmergencyBanner";
+import ClickToCall from "@/app/components/ClickToCall";
+
 const figtree = Figtree({
   variable: "--font-figtree",
   subsets: ["latin"],
@@ -16,7 +21,8 @@ const sourceSans3 = Source_Sans_3({
 
 export const metadata: Metadata = {
   title: {
-    default: "Acadiana Endodontics | Root Canal Specialists in Lafayette & New Iberia, LA",
+    default:
+      "Acadiana Endodontics | Expert Root Canal Treatment in Lafayette, LA",
     template: "%s | Acadiana Endodontics",
   },
   description:
@@ -36,7 +42,19 @@ export default function RootLayout({
       <body
         className={`${figtree.variable} ${sourceSans3.variable} antialiased`}
       >
-        {children}
+        {/* Skip to main content — visible on keyboard focus */}
+        <a
+          href="#main-content"
+          className="fixed left-4 top-4 z-[100] -translate-y-20 rounded-lg bg-gold-400 px-5 py-3 font-heading text-sm font-semibold text-navy-900 shadow-lg transition-transform duration-200 focus:translate-y-0"
+        >
+          Skip to main content
+        </a>
+
+        <EmergencyBanner />
+        <Header />
+        <main id="main-content">{children}</main>
+        <Footer />
+        <ClickToCall />
       </body>
     </html>
   );
