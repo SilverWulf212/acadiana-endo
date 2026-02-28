@@ -1,10 +1,14 @@
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import type { Service } from "@/app/lib/types";
 import PageHero from "@/app/components/PageHero";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 import CTASection from "@/app/components/CTASection";
 import ScrollReveal from "@/app/components/ScrollReveal";
-import FAQAccordion from "@/app/components/FAQAccordion";
+
+const FAQAccordion = dynamic(
+  () => import("@/app/components/FAQAccordion")
+);
 import { PHONE_LAFAYETTE } from "@/app/lib/constants";
 
 interface ServicePageLayoutProps {

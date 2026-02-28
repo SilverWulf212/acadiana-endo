@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 
 import HeroCarousel from "@/app/components/HeroCarousel";
 import StatsStrip from "@/app/components/StatsStrip";
 import ScrollReveal from "@/app/components/ScrollReveal";
 import ServiceCard from "@/app/components/ServiceCard";
 import DoctorCard from "@/app/components/DoctorCard";
-import TestimonialCarousel from "@/app/components/TestimonialCarousel";
 import CTASection from "@/app/components/CTASection";
+
+const TestimonialCarousel = dynamic(
+  () => import("@/app/components/TestimonialCarousel")
+);
 import { testimonials } from "@/app/data/testimonials";
 import { PHONE_LAFAYETTE } from "@/app/lib/constants";
 

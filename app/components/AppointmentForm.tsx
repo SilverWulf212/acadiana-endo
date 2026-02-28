@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent, type ChangeEvent } from "react";
 import { cn } from "@/app/lib/utils";
+import { PRACTICE_EMAIL } from "@/app/lib/constants";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -122,19 +123,55 @@ export default function AppointmentForm() {
 
     if (!validate()) return;
 
+    // Honeypot — silently succeed for bots
+    if (formData.website) {
+      setStatus("success");
+      return;
+    }
+
     setStatus("submitting");
 
+    const timeLabel =
+      TIME_OPTIONS.find((t) => t.value === formData.preferredTime)?.label ??
+      "No Preference";
+    const reasonLabel =
+      REASON_OPTIONS.find((r) => r.value === formData.reason)?.label ??
+      "Not specified";
+    const isEmergency = formData.reason === "emergency";
+
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `https://formsubmit.co/ajax/${PRACTICE_EMAIL}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            _subject: `${isEmergency ? "[EMERGENCY] " : ""}Appointment Request: ${formData.fullName}`,
+            _replyto: formData.email,
+            _template: "table",
+            _captcha: "false",
+            "Full Name": formData.fullName,
+            Phone: formData.phone,
+            Email: formData.email,
+            "Preferred Date": formData.preferredDate || "Not specified",
+            "Preferred Time": timeLabel,
+            "Reason for Visit": reasonLabel,
+            "Referring Dentist": formData.referringDentist || "Not provided",
+            Insurance: formData.insurance || "Not provided",
+            Message: formData.message || "None",
+          }),
+        }
+      );
 
       const data = await res.json();
 
-      if (!res.ok) {
-        throw new Error(data.error || "Something went wrong. Please try again.");
+      if (!res.ok || data.success !== "true") {
+        throw new Error(
+          "Something went wrong. Please try again or call us directly."
+        );
       }
 
       setStatus("success");

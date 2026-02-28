@@ -1,12 +1,16 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 
 import PageHero from "@/app/components/PageHero";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 import ScrollReveal from "@/app/components/ScrollReveal";
 import CTASection from "@/app/components/CTASection";
-import AppointmentForm from "@/app/components/AppointmentForm";
 import ContactInfo from "@/app/components/ContactInfo";
-import GoogleMap from "@/app/components/GoogleMap";
+
+const AppointmentForm = dynamic(
+  () => import("@/app/components/AppointmentForm")
+);
+const GoogleMap = dynamic(() => import("@/app/components/GoogleMap"));
 import {
   PRACTICE_NAME,
   PRACTICE_EMAIL,

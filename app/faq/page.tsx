@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 
 import PageHero from "@/app/components/PageHero";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 import ScrollReveal from "@/app/components/ScrollReveal";
-import FAQAccordion from "@/app/components/FAQAccordion";
+
+const FAQAccordion = dynamic(
+  () => import("@/app/components/FAQAccordion")
+);
 import { faqs, faqCategories } from "@/app/data/faqs";
 import { PRACTICE_NAME, PHONE_LAFAYETTE } from "@/app/lib/constants";
 

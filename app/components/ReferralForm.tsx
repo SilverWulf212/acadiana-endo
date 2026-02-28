@@ -2,6 +2,7 @@
 
 import { useState, type FormEvent, type ChangeEvent } from "react";
 import { cn } from "@/app/lib/utils";
+import { PRACTICE_EMAIL } from "@/app/lib/constants";
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -131,19 +132,58 @@ export default function ReferralForm() {
 
     if (!validate()) return;
 
+    // Honeypot — silently succeed for bots
+    if (formData.website) {
+      setStatus("success");
+      return;
+    }
+
     setStatus("submitting");
 
+    const reasonLabel =
+      REFERRAL_REASONS.find((r) => r.value === formData.reason)?.label ??
+      formData.reason;
+    const urgencyLabel =
+      formData.urgency === "emergency"
+        ? "EMERGENCY"
+        : formData.urgency === "urgent"
+          ? "URGENT"
+          : "Routine";
+
     try {
-      const res = await fetch("/api/referral", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `https://formsubmit.co/ajax/${PRACTICE_EMAIL}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify({
+            _subject: `${urgencyLabel !== "Routine" ? `[${urgencyLabel}] ` : ""}Referral: ${formData.patientName} from ${formData.doctorName}`,
+            _replyto: formData.doctorEmail,
+            _template: "table",
+            _captcha: "false",
+            "Referring Doctor": formData.doctorName,
+            "Practice Name": formData.practiceName || "Not provided",
+            "Doctor Phone": formData.doctorPhone,
+            "Doctor Email": formData.doctorEmail,
+            "Patient Name": formData.patientName,
+            "Patient Phone": formData.patientPhone || "Not provided",
+            "Patient DOB": formData.patientDob || "Not provided",
+            "Reason for Referral": reasonLabel,
+            Urgency: urgencyLabel,
+            Notes: formData.notes || "None",
+          }),
+        }
+      );
 
       const data = await res.json();
 
-      if (!res.ok) {
-        throw new Error(data.error || "Something went wrong. Please try again.");
+      if (!res.ok || data.success !== "true") {
+        throw new Error(
+          "Something went wrong. Please try again or call us directly."
+        );
       }
 
       setStatus("success");

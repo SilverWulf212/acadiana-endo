@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 
 import PageHero from "@/app/components/PageHero";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 import ScrollReveal from "@/app/components/ScrollReveal";
 import CTASection from "@/app/components/CTASection";
-import ReferralForm from "@/app/components/ReferralForm";
+
+const ReferralForm = dynamic(
+  () => import("@/app/components/ReferralForm")
+);
 import {
   PRACTICE_NAME,
   PRACTICE_EMAIL,
