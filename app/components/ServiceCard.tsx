@@ -6,6 +6,7 @@ interface ServiceCardProps {
   shortDescription: string;
   slug: string;
   icon: string;
+  backgroundImage?: string;  // URL to background image
   className?: string;
 }
 
@@ -78,17 +79,27 @@ export default function ServiceCard({
   shortDescription,
   slug,
   icon,
+  backgroundImage,
   className,
 }: ServiceCardProps) {
   return (
     <Link
       href={`/services/${slug}`}
       className={cn(
-        "group flex flex-col items-start rounded-xl border border-steel-200 bg-white p-6 transition-all duration-300 lg:p-8",
+        "group relative flex flex-col items-start overflow-hidden rounded-xl border border-steel-200 bg-white p-6 transition-all duration-300 lg:p-8",
         "hover:-translate-y-1 hover:border-gold-300 hover:shadow-lg hover:shadow-navy-800/5",
         className
       )}
     >
+      {/* Background image reveal on hover */}
+      {backgroundImage && (
+        <div
+          className="absolute inset-0 rounded-xl bg-cover bg-center opacity-0 transition-opacity duration-500 group-hover:opacity-[0.07]"
+          style={{ backgroundImage: `url(${backgroundImage})` }}
+          aria-hidden="true"
+        />
+      )}
+
       {/* Icon */}
       <div className="mb-4 inline-flex rounded-lg bg-navy-50 p-3 text-navy-600 transition-colors duration-300 group-hover:bg-gold-50 group-hover:text-gold-600">
         <ServiceIcon icon={icon} />

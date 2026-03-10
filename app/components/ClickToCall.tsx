@@ -7,8 +7,13 @@ export default function ClickToCall() {
     <a
       href={`tel:${PHONE_LAFAYETTE.replace(/[^\d+]/g, "")}`}
       aria-label={`Call ${PRACTICE_NAME}`}
-      className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gold-400 text-white shadow-lg transition-transform duration-200 hover:scale-110 hover:bg-gold-500 md:hidden animate-pulse-subtle"
+      className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-gold-400 text-white shadow-lg transition-transform duration-200 hover:scale-110 hover:bg-gold-500 md:hidden"
     >
+      {/* Ping ring */}
+      <span
+        className="absolute inset-0 rounded-full bg-gold-400 animate-ping-ring"
+        aria-hidden="true"
+      />
       {/* Phone icon */}
       <svg
         xmlns="http://www.w3.org/2000/svg"

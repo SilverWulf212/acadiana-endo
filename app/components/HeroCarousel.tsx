@@ -33,8 +33,8 @@ const slides: HeroSlide[] = [
       href: "/services/cbct-imaging",
     },
     secondaryCTA: { label: "Meet Our Doctors", href: "/about" },
-    image: "/images/hero/bayou-moss-2.jpg",
-    alt: "Tranquil water surrounded by Spanish moss trees in Acadiana",
+    image: "/images/office/hero-dentist-patient.webp",
+    alt: "Dentist and patient discussing treatment plan in a modern office",
   },
   {
     heading: "Saving Natural Teeth is Our Passion",
@@ -42,8 +42,8 @@ const slides: HeroSlide[] = [
       "Over 20 years of specialized experience serving Acadiana",
     primaryCTA: { label: "Patient Information", href: "/patient-information" },
     secondaryCTA: { label: "Referring Doctors", href: "/referring-doctors" },
-    image: "/images/hero/bayou-water-3.jpg",
-    alt: "Trees standing in calm swamp waters of the Louisiana bayou",
+    image: "/images/office/hero-consultation.webp",
+    alt: "Endodontist consulting with a patient about treatment options",
   },
 ];
 

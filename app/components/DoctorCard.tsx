@@ -24,13 +24,6 @@ function getInitials(name: string): string {
     .toUpperCase();
 }
 
-/** Truncate text to approximately maxLength characters at a word boundary */
-function truncateBio(text: string, maxLength = 150): string {
-  if (text.length <= maxLength) return text;
-  const truncated = text.slice(0, maxLength);
-  const lastSpace = truncated.lastIndexOf(" ");
-  return (lastSpace > 0 ? truncated.slice(0, lastSpace) : truncated) + "\u2026";
-}
 
 export default function DoctorCard({
   name,
@@ -55,17 +48,17 @@ export default function DoctorCard({
       {/* Photo / Initials Avatar */}
       <div className="mb-6">
         {hasImage ? (
-          <div className="relative h-36 w-36 overflow-hidden rounded-full ring-4 ring-navy-100 transition-all duration-300 group-hover:ring-gold-200">
+          <div className="relative h-36 w-36 overflow-hidden rounded-full ring-4 ring-navy-100 transition-all duration-300 group-hover:ring-gold-300 group-hover:shadow-[0_0_15px_rgba(200,169,110,0.4)]">
             <Image
               src={imageUrl}
               alt={`${name}, ${credentials}`}
               width={288}
               height={288}
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
           </div>
         ) : (
-          <div className="flex h-36 w-36 items-center justify-center rounded-full bg-gradient-to-br from-navy-100 to-navy-200 ring-4 ring-navy-100 transition-all duration-300 group-hover:ring-gold-200">
+          <div className="flex h-36 w-36 items-center justify-center rounded-full bg-gradient-to-br from-navy-100 to-navy-200 ring-4 ring-navy-100 transition-all duration-300 group-hover:ring-gold-300 group-hover:shadow-[0_0_15px_rgba(200,169,110,0.4)]">
             <span className="font-heading text-3xl font-bold text-navy-400">
               {initials}
             </span>
@@ -92,10 +85,13 @@ export default function DoctorCard({
         aria-hidden="true"
       />
 
-      {/* Bio excerpt */}
-      <p className="mt-4 text-sm leading-relaxed text-gray-600">
-        {truncateBio(bio)}
-      </p>
+      {/* Bio excerpt — reveals more text on hover with gradient fade */}
+      <div className="relative mt-4 max-h-[4.5em] overflow-hidden transition-all duration-500 group-hover:max-h-[10em]">
+        <p className="text-sm leading-relaxed text-gray-600">
+          {bio.split("\n\n")[0]}
+        </p>
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-white to-transparent transition-opacity duration-300 group-hover:opacity-0" />
+      </div>
 
       {/* Education (optional) */}
       {education && education.length > 0 && (

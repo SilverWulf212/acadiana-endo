@@ -8,6 +8,14 @@ interface TestimonialCarouselProps {
   testimonials: Testimonial[];
 }
 
+function nameToHue(name: string): number {
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) {
+    hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return Math.abs(hash) % 360;
+}
+
 function StarRating({ rating }: { rating: number }) {
   return (
     <div className="flex gap-1" aria-label={`${rating} out of 5 stars`}>
@@ -96,14 +104,25 @@ export default function TestimonialCarousel({
             className={cn(
               "absolute inset-0 flex flex-col items-center text-center transition-all duration-500 ease-in-out",
               index === current
-                ? "z-10 translate-y-0 opacity-100"
-                : "z-0 translate-y-4 opacity-0"
+                ? "z-10 translate-y-0 opacity-100 scale-[1.02] shadow-lg"
+                : "z-0 translate-y-4 opacity-0 scale-100"
             )}
             role="group"
             aria-roledescription="slide"
             aria-label={`Testimonial ${index + 1} of ${testimonials.length}`}
             aria-hidden={index !== current}
           >
+            {/* Quote watermark */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              className="pointer-events-none absolute right-0 top-0 h-24 w-24 text-navy-700 opacity-[0.04]"
+              aria-hidden="true"
+            >
+              <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311C9.591 11.71 11 13.264 11 15.152 11 16.122 10.631 17.051 9.956 17.73c-.67.68-1.584 1.06-2.537 1.06-.992 0-1.91-.414-2.836-1.47ZM14.583 17.321C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311C19.591 11.71 21 13.264 21 15.152c0 .97-.369 1.899-1.044 2.578-.67.68-1.584 1.06-2.537 1.06-.992 0-1.91-.414-2.836-1.47Z" />
+            </svg>
+
             {/* Stars */}
             <div className="mb-6">
               <StarRating rating={testimonial.rating} />
@@ -116,9 +135,20 @@ export default function TestimonialCarousel({
 
             {/* Attribution */}
             <div className="flex flex-col items-center gap-2">
-              <p className="font-heading text-sm font-semibold text-navy-800">
-                {testimonial.author}
-              </p>
+              <div className="flex items-center gap-2">
+                <span
+                  className="flex h-8 w-8 items-center justify-center rounded-full text-sm font-bold text-white"
+                  style={{
+                    backgroundColor: `hsl(${nameToHue(testimonial.author)}, 45%, 65%)`,
+                  }}
+                  aria-hidden="true"
+                >
+                  {testimonial.author.charAt(0).toUpperCase()}
+                </span>
+                <p className="font-heading text-sm font-semibold text-navy-800">
+                  {testimonial.author}
+                </p>
+              </div>
               {testimonial.source && (
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-gold-50 px-3 py-1 text-xs font-medium text-gold-700">
                   <svg

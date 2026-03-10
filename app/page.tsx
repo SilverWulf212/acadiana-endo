@@ -9,11 +9,13 @@ import ScrollReveal from "@/app/components/ScrollReveal";
 import ServiceCard from "@/app/components/ServiceCard";
 import DoctorCard from "@/app/components/DoctorCard";
 import CTASection from "@/app/components/CTASection";
+import ParallaxStats from "@/app/components/ParallaxStats";
 
 const TestimonialCarousel = dynamic(
   () => import("@/app/components/TestimonialCarousel")
 );
 import { testimonials } from "@/app/data/testimonials";
+import { doctors } from "@/app/data/doctors";
 import { PHONE_LAFAYETTE } from "@/app/lib/constants";
 
 // ─── Metadata ─────────────────────────────────────────────────────────────────
@@ -31,6 +33,7 @@ const services = [
     title: "Root Canal Therapy",
     slug: "root-canal",
     icon: "tooth",
+    backgroundImage: "/images/general/dental-exam.jpg",
     shortDescription:
       "Gentle, precise root canal treatment that saves your natural tooth and eliminates pain — often completed in a single visit.",
   },
@@ -38,6 +41,7 @@ const services = [
     title: "Endodontic Retreatment",
     slug: "retreatment",
     icon: "retreatment",
+    backgroundImage: "/images/services/dental-xray.jpg",
     shortDescription:
       "When a previous root canal needs attention, our specialists can retreat and restore the tooth to full health.",
   },
@@ -45,6 +49,7 @@ const services = [
     title: "Apicoectomy",
     slug: "apicoectomy",
     icon: "apicoectomy",
+    backgroundImage: "/images/services/dental-chair.jpg",
     shortDescription:
       "A microsurgical procedure to treat persistent infection at the root tip when conventional treatment isn't enough.",
   },
@@ -52,6 +57,7 @@ const services = [
     title: "Cracked Teeth",
     slug: "cracked-teeth",
     icon: "cracked",
+    backgroundImage: "/images/services/dental-xray.jpg",
     shortDescription:
       "Expert diagnosis and treatment for cracked, fractured, or damaged teeth using advanced imaging technology.",
   },
@@ -59,6 +65,7 @@ const services = [
     title: "Dental Trauma",
     slug: "dental-trauma",
     icon: "trauma",
+    backgroundImage: "/images/general/dental-exam.jpg",
     shortDescription:
       "Emergency endodontic care for knocked-out, displaced, or injured teeth. Time-sensitive treatment when you need it most.",
   },
@@ -66,27 +73,9 @@ const services = [
     title: "CBCT 3D Imaging",
     slug: "cbct-imaging",
     icon: "cbct",
+    backgroundImage: "/images/services/dental-chair.jpg",
     shortDescription:
       "State-of-the-art cone beam CT scanning provides detailed 3D images with up to 90% less radiation than medical CT scans.",
-  },
-];
-
-// ─── Doctor Preview Data ──────────────────────────────────────────────────────
-
-const doctors = [
-  {
-    name: "Dr. Robert Fowler",
-    credentials: "DDS",
-    title: "Board-Certified Endodontist",
-    bio: "Dr. Fowler is a board-certified endodontist with extensive experience in advanced root canal therapy and microsurgery. A graduate of LSU School of Dentistry, he is dedicated to providing the highest standard of care with a gentle approach.",
-    imageUrl: "",
-  },
-  {
-    name: "Dr. James Reaves",
-    credentials: "DDS",
-    title: "Board-Certified Endodontist",
-    bio: "Dr. Reaves brings years of specialized training and a passion for saving natural teeth. His expertise in complex endodontic cases and emergency treatment ensures patients receive exceptional care when they need it most.",
-    imageUrl: "",
   },
 ];
 
@@ -127,8 +116,8 @@ export default function HomePage() {
             <ScrollReveal animation="slide-in-left" delay={100} className="lg:col-span-5">
               <div className="relative overflow-hidden rounded-2xl shadow-xl">
                 <Image
-                  src="/images/office/treatment-room.jpg"
-                  alt="Dr. Fowler performing a procedure using a dental microscope in a modern treatment room"
+                  src="/images/general/dental-exam.jpg"
+                  alt="Endodontist performing a thorough dental examination with modern equipment"
                   width={1097}
                   height={800}
                   sizes="(max-width: 1024px) 100vw, 42vw"
@@ -236,6 +225,7 @@ export default function HomePage() {
                   shortDescription={service.shortDescription}
                   slug={service.slug}
                   icon={service.icon}
+                  backgroundImage={service.backgroundImage}
                 />
               </ScrollReveal>
             ))}
@@ -255,13 +245,13 @@ export default function HomePage() {
       </section>
 
       {/* ════════════════════════════════════════════════════════════════════════
-          4b. PARALLAX IMAGE BREAK — Spanish Moss Road
+          4b. PARALLAX IMAGE BREAK — Confident Smile
           ════════════════════════════════════════════════════════════════════════ */}
       <section className="relative h-[420px] overflow-hidden lg:h-[500px]">
         {/* Background image with parallax-style fixed attachment */}
         <Image
-          src="/images/general/moss-road.jpg"
-          alt="A beautiful Southern road lined with live oak trees draped in Spanish moss"
+          src="/images/general/happy-patient.jpg"
+          alt="A beautiful confident smile — the goal of every endodontic treatment"
           fill
           sizes="100vw"
           className="object-cover"
@@ -277,21 +267,30 @@ export default function HomePage() {
               <blockquote className="font-heading text-2xl font-bold leading-snug text-white md:text-3xl lg:text-4xl">
                 &ldquo;Nothing looks, feels, or functions like your natural tooth. Our mission is to help you keep it.&rdquo;
               </blockquote>
-              <div className="mt-8 flex flex-wrap items-center justify-center gap-8 text-sm font-medium text-gold-300 lg:gap-12">
-                <div className="flex flex-col items-center">
-                  <span className="font-heading text-3xl font-bold text-white">98%</span>
-                  <span className="mt-1">Success Rate</span>
+              <ParallaxStats />
+              {/* Staff photo row */}
+              <div className="mt-8 flex items-center justify-center">
+                <div className="flex -space-x-3">
+                  {[
+                    { src: "/images/doctors/dr-fowler.jpg", alt: "Dr. Fowler" },
+                    { src: "/images/doctors/dr-reaves.jpg", alt: "Dr. Reaves" },
+                    { src: "/images/office/dentist-female.png", alt: "Team member" },
+                    { src: "/images/office/assistant-male.png", alt: "Team member" },
+                    { src: "/images/office/hygienist-smiling.png", alt: "Team member" },
+                    { src: "/images/office/hygienist-teal.png", alt: "Team member" },
+                  ].map((person, i) => (
+                    <div key={i} className="relative h-10 w-10 overflow-hidden rounded-full border-2 border-white/80 shadow-sm">
+                      <Image
+                        src={person.src}
+                        alt={person.alt}
+                        width={80}
+                        height={80}
+                        className="h-full w-full object-cover"
+                      />
+                    </div>
+                  ))}
                 </div>
-                <div className="hidden h-8 w-px bg-gold-400/30 sm:block" />
-                <div className="flex flex-col items-center">
-                  <span className="font-heading text-3xl font-bold text-white">25+</span>
-                  <span className="mt-1">Years of Experience</span>
-                </div>
-                <div className="hidden h-8 w-px bg-gold-400/30 sm:block" />
-                <div className="flex flex-col items-center">
-                  <span className="font-heading text-3xl font-bold text-white">50K+</span>
-                  <span className="mt-1">Teeth Saved</span>
-                </div>
+                <p className="ml-4 text-sm font-medium text-gold-300">Your dedicated care team</p>
               </div>
             </div>
           </ScrollReveal>
@@ -395,8 +394,8 @@ export default function HomePage() {
                 <div className="absolute -inset-4 rounded-2xl border-2 border-dashed border-gold-200/60" />
                 <div className="relative overflow-hidden rounded-2xl shadow-xl">
                   <Image
-                    src="/images/services/treatment-room.jpg"
-                    alt="Modern endodontic treatment room equipped with advanced technology and patient comfort amenities"
+                    src="/images/services/dental-chair.jpg"
+                    alt="Modern dental treatment chair with advanced endodontic equipment"
                     width={1280}
                     height={1920}
                     sizes="(max-width: 1024px) 100vw, 50vw"
@@ -558,20 +557,22 @@ export default function HomePage() {
                 </p>
               </div>
 
-              {/* Insurance logos placeholder */}
+              {/* Insurance brand marks */}
               <div className="flex flex-wrap items-center justify-center gap-6 lg:gap-8">
                 {[
-                  "Delta Dental",
-                  "Cigna",
-                  "Aetna",
-                  "MetLife",
-                  "CareCredit",
-                ].map((name) => (
+                  { name: "Delta Dental", color: "#0077C8" },
+                  { name: "Cigna", color: "#F37021" },
+                  { name: "Aetna", color: "#7D3F98" },
+                  { name: "MetLife", color: "#00A94F" },
+                  { name: "CareCredit", color: "#00BFA5" },
+                ].map((ins) => (
                   <div
-                    key={name}
-                    className="flex h-12 items-center justify-center rounded-lg border border-steel-200 bg-white px-4 text-xs font-medium text-gray-500 shadow-sm"
+                    key={ins.name}
+                    className="flex h-14 items-center justify-center rounded-lg bg-white px-6 shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-md"
                   >
-                    {name}
+                    <span className="text-base font-bold tracking-tight" style={{ color: ins.color }}>
+                      {ins.name}
+                    </span>
                   </div>
                 ))}
               </div>

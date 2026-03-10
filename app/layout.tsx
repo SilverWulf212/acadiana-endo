@@ -6,6 +6,7 @@ import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
 import EmergencyBanner from "@/app/components/EmergencyBanner";
 import ClickToCall from "@/app/components/ClickToCall";
+import ScrollProgress from "@/app/components/ScrollProgress";
 import {
   LocalBusinessSchema,
   WebSiteSchema,
@@ -71,6 +72,8 @@ export default function RootLayout({
       <body
         className={`${figtree.variable} ${sourceSans3.variable} antialiased`}
       >
+        <ScrollProgress />
+
         {/* Skip to main content — visible on keyboard focus */}
         <a
           href="#main-content"
