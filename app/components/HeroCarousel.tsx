@@ -21,8 +21,8 @@ const slides: HeroSlide[] = [
       "Board-certified specialists providing gentle, precise root canal treatment",
     primaryCTA: { label: "Request Appointment", href: "/contact" },
     secondaryCTA: { label: "Our Services", href: "/services" },
-    image: "/images/hero/bayou-cypress-1.jpg",
-    alt: "Cypress trees draped with Spanish moss in a Louisiana bayou",
+    image: "/images/office/hero-consultation.webp",
+    alt: "Endodontic specialist providing expert care in a modern treatment room",
   },
   {
     heading: "Advanced Technology, Better Outcomes",
@@ -42,8 +42,8 @@ const slides: HeroSlide[] = [
       "Over 20 years of specialized experience serving Acadiana",
     primaryCTA: { label: "Patient Information", href: "/patient-information" },
     secondaryCTA: { label: "Referring Doctors", href: "/referring-doctors" },
-    image: "/images/office/hero-consultation.webp",
-    alt: "Endodontist consulting with a patient about treatment options",
+    image: "/images/general/happy-patient.jpg",
+    alt: "A confident, healthy smile — the result of expert endodontic care",
   },
 ];
 
