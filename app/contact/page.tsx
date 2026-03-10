@@ -23,10 +23,16 @@ import {
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "Contact Us",
-  description: `Contact ${PRACTICE_NAME} to request an appointment or ask a question. Two convenient locations in Lafayette and New Iberia, LA. Call (337) 981-0144.`,
+  title: "Contact Us | Endodontist in Lafayette & New Iberia, LA",
+  description:
+    "Request an appointment at Acadiana Endodontics. Two locations in Lafayette and New Iberia, LA. Same-day emergency root canal available. Call (337) 981-0144.",
   alternates: {
     canonical: "/contact",
+  },
+  openGraph: {
+    title: "Contact Acadiana Endodontics | Lafayette & New Iberia, LA",
+    description:
+      "Request an appointment at Acadiana Endodontics. Two locations in Lafayette and New Iberia, LA. Same-day emergency root canal available.",
   },
 };
 
@@ -41,6 +47,7 @@ export default function ContactPage() {
       {/* ── Hero ──────────────────────────────────────────────────────────── */}
       <PageHero
         title="Contact Us"
+        backgroundImage="/images/office/hero-consultation.webp"
         description="We're here to help. Request an appointment or reach out with any questions."
         breadcrumbs={
           <Breadcrumbs

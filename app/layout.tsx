@@ -45,12 +45,21 @@ export const metadata: Metadata = {
     title: "Acadiana Endodontics | Expert Root Canal Treatment in Lafayette, LA",
     description:
       "Board-certified endodontists in Lafayette & New Iberia, LA. Gentle root canal therapy, retreatment, apicoectomy & emergency dental care.",
+    images: [
+      {
+        url: "/images/office/lafayette-exterior.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Acadiana Endodontics office in Lafayette, Louisiana",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Acadiana Endodontics | Expert Root Canal Treatment",
     description:
       "Board-certified endodontists in Lafayette & New Iberia, LA. Gentle, advanced treatment you can trust.",
+    images: ["/images/office/lafayette-exterior.jpg"],
   },
   alternates: {
     canonical: "/",

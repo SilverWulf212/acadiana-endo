@@ -19,10 +19,16 @@ import { cn } from "@/app/lib/utils";
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "For Referring Doctors",
-  description: `Streamlined referral process for dentists referring patients to ${PRACTICE_NAME}. Submit referrals online, by fax, or by phone. Same-day emergency appointments, detailed treatment reports, and direct doctor-to-doctor communication.`,
+  title: "Refer a Patient | Endodontist Referrals in Lafayette, LA",
+  description:
+    "Refer patients to Acadiana Endodontics online, by fax, or phone. Same-day emergency appointments and detailed treatment reports. Lafayette, LA.",
   alternates: {
     canonical: "/referring-doctors",
+  },
+  openGraph: {
+    title: "For Referring Doctors | Acadiana Endodontics",
+    description:
+      "Streamlined referral process for dentists in Acadiana. Same-day emergency appointments, CBCT imaging, and detailed treatment reports.",
   },
 };
 
@@ -186,6 +192,7 @@ export default function ReferringDoctorsPage() {
           ════════════════════════════════════════════════════════════════════════ */}
       <PageHero
         title="For Referring Doctors"
+        backgroundImage="/images/office/lafayette-exterior.jpg"
         description="We value our partnership with referring dentists. Our streamlined process ensures your patients receive expert endodontic care with complete communication back to your office."
         breadcrumbs={
           <Breadcrumbs

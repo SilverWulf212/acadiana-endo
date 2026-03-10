@@ -10,6 +10,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `/services/${service.slug}`,
   },
+  openGraph: {
+    title: service.metaTitle,
+    description: service.metaDescription,
+  },
 };
 
 const whatToExpect = [
@@ -36,5 +40,5 @@ const whatToExpect = [
 ];
 
 export default function RetreamentPage() {
-  return <ServicePageLayout service={service} whatToExpect={whatToExpect} />;
+  return <ServicePageLayout service={service} whatToExpect={whatToExpect} heroImage="/images/services/dental-chair.jpg" />;
 }

@@ -21,8 +21,17 @@ import { PHONE_LAFAYETTE } from "@/app/lib/constants";
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
+  title:
+    "Acadiana Endodontics | Expert Root Canal Treatment in Lafayette, LA",
+  description:
+    "Board-certified endodontists in Lafayette, LA. Gentle root canal therapy, retreatment, apicoectomy & emergency care with CBCT 3D imaging. Call (337) 981-0144.",
   alternates: {
     canonical: "/",
+  },
+  openGraph: {
+    title: "Acadiana Endodontics | Root Canal Specialist in Lafayette, LA",
+    description:
+      "Board-certified endodontists in Lafayette, LA. Gentle root canal therapy, retreatment, apicoectomy & emergency care with CBCT 3D imaging.",
   },
 };
 
@@ -117,7 +126,7 @@ export default function HomePage() {
               <div className="relative overflow-hidden rounded-2xl shadow-xl">
                 <Image
                   src="/images/general/dental-exam.jpg"
-                  alt="Endodontist performing a thorough dental examination with modern equipment"
+                  alt="Board-certified endodontist in Lafayette LA performing a thorough dental examination with advanced microscope equipment"
                   width={1097}
                   height={800}
                   sizes="(max-width: 1024px) 100vw, 42vw"
@@ -251,7 +260,7 @@ export default function HomePage() {
         {/* Background image with parallax-style fixed attachment */}
         <Image
           src="/images/general/happy-patient.jpg"
-          alt="A beautiful confident smile — the goal of every endodontic treatment"
+          alt="Patient with a confident, healthy smile after root canal treatment at Acadiana Endodontics in Lafayette LA"
           fill
           sizes="100vw"
           className="object-cover"
@@ -272,12 +281,12 @@ export default function HomePage() {
               <div className="mt-8 flex items-center justify-center">
                 <div className="flex -space-x-3">
                   {[
-                    { src: "/images/doctors/dr-fowler.jpg", alt: "Dr. Fowler" },
-                    { src: "/images/doctors/dr-reaves.jpg", alt: "Dr. Reaves" },
-                    { src: "/images/office/dentist-female.png", alt: "Team member" },
-                    { src: "/images/office/assistant-male.png", alt: "Team member" },
-                    { src: "/images/office/hygienist-smiling.png", alt: "Team member" },
-                    { src: "/images/office/hygienist-teal.png", alt: "Team member" },
+                    { src: "/images/doctors/dr-fowler.jpg", alt: "Dr. Robert Fowler, board-certified endodontist in Lafayette LA" },
+                    { src: "/images/doctors/dr-reaves.jpg", alt: "Dr. James Reaves, root canal specialist at Acadiana Endodontics" },
+                    { src: "/images/office/dentist-female.png", alt: "Acadiana Endodontics dental team member" },
+                    { src: "/images/office/assistant-male.png", alt: "Acadiana Endodontics dental assistant" },
+                    { src: "/images/office/hygienist-smiling.png", alt: "Acadiana Endodontics hygienist" },
+                    { src: "/images/office/hygienist-teal.png", alt: "Acadiana Endodontics clinical staff member" },
                   ].map((person, i) => (
                     <div key={i} className="relative h-10 w-10 overflow-hidden rounded-full border-2 border-white/80 shadow-sm">
                       <Image
@@ -395,7 +404,7 @@ export default function HomePage() {
                 <div className="relative overflow-hidden rounded-2xl shadow-xl">
                   <Image
                     src="/images/services/dental-chair.jpg"
-                    alt="Modern dental treatment chair with advanced endodontic equipment"
+                    alt="Modern endodontic treatment room with CBCT 3D imaging and advanced dental equipment at Acadiana Endodontics Lafayette"
                     width={1280}
                     height={1920}
                     sizes="(max-width: 1024px) 100vw, 50vw"
@@ -455,7 +464,7 @@ export default function HomePage() {
         {/* Background photo — office exterior at sunset */}
         <Image
           src="/images/office/lafayette-exterior.jpg"
-          alt="Acadiana Endodontics Lafayette office exterior at sunset"
+          alt="Acadiana Endodontics office exterior in Lafayette LA — endodontist and root canal specialist serving Acadiana"
           fill
           sizes="100vw"
           className="object-cover"

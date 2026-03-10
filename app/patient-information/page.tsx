@@ -15,10 +15,16 @@ import { cn } from "@/app/lib/utils";
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "Patient Information",
-  description: `Everything you need to know before your visit to ${PRACTICE_NAME}. Learn about what to expect, accepted insurance plans, payment options, and pre- and post-operative care instructions.`,
+  title: "Patient Information | Acadiana Endodontics Lafayette, LA",
+  description:
+    "Prepare for your visit to Acadiana Endodontics. Insurance plans accepted, payment options, and pre- and post-op care instructions. Lafayette, LA.",
   alternates: {
     canonical: "/patient-information",
+  },
+  openGraph: {
+    title: "Patient Information | Acadiana Endodontics",
+    description:
+      "Prepare for your visit to Acadiana Endodontics. Insurance plans accepted, payment options, and pre- and post-op care instructions. Lafayette, LA.",
   },
 };
 
@@ -197,6 +203,7 @@ export default function PatientInformationPage() {
           ════════════════════════════════════════════════════════════════════════ */}
       <PageHero
         title="Patient Information"
+        backgroundImage="/images/general/happy-patient.jpg"
         description="Everything you need to know to prepare for your visit. We're committed to making your experience as comfortable and seamless as possible."
         breadcrumbs={
           <Breadcrumbs

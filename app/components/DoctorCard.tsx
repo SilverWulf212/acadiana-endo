@@ -51,7 +51,7 @@ export default function DoctorCard({
           <div className="relative h-36 w-36 overflow-hidden rounded-full ring-4 ring-navy-100 transition-all duration-300 group-hover:ring-gold-300 group-hover:shadow-[0_0_15px_rgba(200,169,110,0.4)]">
             <Image
               src={imageUrl}
-              alt={`${name}, ${credentials}`}
+              alt={`${name}, ${credentials} — board-certified endodontist at Acadiana Endodontics Lafayette LA`}
               width={288}
               height={288}
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"

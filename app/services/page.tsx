@@ -9,11 +9,16 @@ import { services } from "@/app/data/services";
 import { PHONE_LAFAYETTE } from "@/app/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Our Endodontic Services",
+  title: "Endodontic Services in Lafayette, LA",
   description:
-    "Comprehensive endodontic services in Lafayette & New Iberia, LA. Root canals, retreatment, apicoectomy, cracked teeth, dental trauma, and CBCT 3D imaging. Call (337) 981-0144.",
+    "Root canals, retreatment, apicoectomy, cracked teeth, dental trauma, and CBCT 3D imaging in Lafayette, LA. Board-certified specialists. Call (337) 981-0144.",
   alternates: {
     canonical: "/services",
+  },
+  openGraph: {
+    title: "Our Endodontic Services | Acadiana Endodontics",
+    description:
+      "Comprehensive endodontic care in Lafayette & New Iberia, LA. Root canals, retreatment, apicoectomy, dental trauma, and CBCT 3D imaging.",
   },
 };
 
@@ -23,6 +28,7 @@ export default function ServicesPage() {
       {/* ─── Hero ─────────────────────────────────────────────────────────── */}
       <PageHero
         title="Our Services"
+        backgroundImage="/images/services/dental-chair.jpg"
         description="Comprehensive endodontic care using advanced technology, delivered with precision and compassion by board-certified specialists."
         breadcrumbs={
           <Breadcrumbs

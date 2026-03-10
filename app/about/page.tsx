@@ -12,10 +12,16 @@ import { cn } from "@/app/lib/utils";
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "About Our Endodontists",
-  description: `Meet the board-certified endodontists at ${PRACTICE_NAME}. Dr. Robert Fowler and Dr. James Reaves provide expert root canal therapy, microsurgery, and advanced endodontic care in Lafayette and New Iberia, LA.`,
+  title: "About Our Endodontists in Lafayette, LA",
+  description:
+    "Meet Dr. Fowler and Dr. Reaves, board-certified endodontists at Acadiana Endodontics. Advanced root canal care and microsurgery in Lafayette, LA.",
   alternates: {
     canonical: "/about",
+  },
+  openGraph: {
+    title: "About Our Endodontists | Acadiana Endodontics",
+    description:
+      "Meet Dr. Fowler and Dr. Reaves, board-certified endodontists at Acadiana Endodontics. Advanced root canal care and microsurgery in Lafayette, LA.",
   },
 };
 
@@ -176,9 +182,10 @@ export default function AboutPage() {
             <div className="mx-auto mt-12 max-w-5xl overflow-hidden rounded-2xl shadow-xl shadow-navy-800/10">
               <Image
                 src="/images/office/lafayette-exterior.jpg"
-                alt="Acadiana Endodontics office in Lafayette, Louisiana"
+                alt="Acadiana Endodontics office building in Lafayette, Louisiana — home of board-certified endodontists serving Acadiana"
                 width={1100}
                 height={589}
+                sizes="(max-width: 1280px) 100vw, 1100px"
                 className="h-auto w-full object-cover"
                 priority
               />
@@ -262,7 +269,7 @@ export default function AboutPage() {
                           <div className="relative h-52 w-52 overflow-hidden rounded-full ring-4 ring-white lg:h-64 lg:w-64">
                             <Image
                               src={doctor.imageUrl}
-                              alt={`${doctor.name}, ${doctor.credentials}`}
+                              alt={`${doctor.name}, ${doctor.credentials} — board-certified endodontist at Acadiana Endodontics Lafayette LA`}
                               width={512}
                               height={512}
                               className="h-full w-full object-cover"
@@ -417,9 +424,10 @@ export default function AboutPage() {
               <div className="overflow-hidden rounded-2xl shadow-xl shadow-navy-800/10">
                 <Image
                   src="/images/office/treatment-room.jpg"
-                  alt="Dr. Fowler performing endodontic treatment using a surgical microscope at Acadiana Endodontics"
+                  alt="Root canal specialist performing endodontic treatment using a surgical microscope at Acadiana Endodontics in Lafayette LA"
                   width={1097}
                   height={800}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="h-auto w-full object-cover"
                 />
               </div>

@@ -3,11 +3,13 @@ import {
   PRACTICE_EMAIL,
   PRACTICE_WEBSITE,
   PHONE_LAFAYETTE,
+  PHONE_NEW_IBERIA,
   LOCATION_LAFAYETTE,
   LOCATION_NEW_IBERIA,
 } from "@/app/lib/constants";
 
 export function LocalBusinessSchema() {
+  // Primary location (Lafayette) as main entity, with New Iberia as a department
   const schema = {
     "@context": "https://schema.org",
     "@type": ["Dentist", "MedicalBusiness"],
@@ -19,31 +21,37 @@ export function LocalBusinessSchema() {
     telephone: PHONE_LAFAYETTE,
     email: PRACTICE_EMAIL,
     image: `${PRACTICE_WEBSITE}/images/office/lafayette-exterior.jpg`,
+    logo: `${PRACTICE_WEBSITE}/favicon.svg`,
     priceRange: "$$",
     medicalSpecialty: "Endodontics",
-    address: [
+    currenciesAccepted: "USD",
+    paymentAccepted: "Cash, Check, Credit Card, CareCredit",
+    areaServed: [
       {
-        "@type": "PostalAddress",
-        streetAddress: LOCATION_LAFAYETTE.address,
-        addressLocality: LOCATION_LAFAYETTE.city,
-        addressRegion: LOCATION_LAFAYETTE.state,
-        postalCode: LOCATION_LAFAYETTE.zip,
-        addressCountry: "US",
+        "@type": "City",
+        name: "Lafayette",
+        sameAs: "https://en.wikipedia.org/wiki/Lafayette,_Louisiana",
       },
       {
-        "@type": "PostalAddress",
-        streetAddress: LOCATION_NEW_IBERIA.address,
-        addressLocality: LOCATION_NEW_IBERIA.city,
-        addressRegion: LOCATION_NEW_IBERIA.state,
-        postalCode: LOCATION_NEW_IBERIA.zip,
-        addressCountry: "US",
+        "@type": "City",
+        name: "New Iberia",
+        sameAs: "https://en.wikipedia.org/wiki/New_Iberia,_Louisiana",
       },
     ],
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: LOCATION_LAFAYETTE.address,
+      addressLocality: LOCATION_LAFAYETTE.city,
+      addressRegion: LOCATION_LAFAYETTE.state,
+      postalCode: LOCATION_LAFAYETTE.zip,
+      addressCountry: "US",
+    },
     geo: {
       "@type": "GeoCoordinates",
       latitude: LOCATION_LAFAYETTE.coordinates.lat,
       longitude: LOCATION_LAFAYETTE.coordinates.lng,
     },
+    hasMap: `https://www.google.com/maps/search/?api=1&query=${LOCATION_LAFAYETTE.coordinates.lat},${LOCATION_LAFAYETTE.coordinates.lng}`,
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
@@ -52,7 +60,34 @@ export function LocalBusinessSchema() {
         closes: "16:00",
       },
     ],
-    sameAs: [],
+    department: {
+      "@type": ["Dentist", "MedicalBusiness"],
+      "@id": `${PRACTICE_WEBSITE}/#new-iberia-location`,
+      name: `${PRACTICE_NAME} - New Iberia`,
+      telephone: PHONE_NEW_IBERIA,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: LOCATION_NEW_IBERIA.address,
+        addressLocality: LOCATION_NEW_IBERIA.city,
+        addressRegion: LOCATION_NEW_IBERIA.state,
+        postalCode: LOCATION_NEW_IBERIA.zip,
+        addressCountry: "US",
+      },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: LOCATION_NEW_IBERIA.coordinates.lat,
+        longitude: LOCATION_NEW_IBERIA.coordinates.lng,
+      },
+      hasMap: `https://www.google.com/maps/search/?api=1&query=${LOCATION_NEW_IBERIA.coordinates.lat},${LOCATION_NEW_IBERIA.coordinates.lng}`,
+      openingHoursSpecification: [
+        {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Wednesday"],
+          opens: "08:00",
+          closes: "16:00",
+        },
+      ],
+    },
   };
 
   // JSON-LD structured data uses dangerouslySetInnerHTML by design.
@@ -72,16 +107,9 @@ export function WebSiteSchema() {
     "@id": `${PRACTICE_WEBSITE}/#website`,
     name: PRACTICE_NAME,
     url: PRACTICE_WEBSITE,
+    inLanguage: "en-US",
     publisher: {
       "@id": `${PRACTICE_WEBSITE}/#organization`,
-    },
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${PRACTICE_WEBSITE}/services/{search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
     },
   };
 
@@ -102,6 +130,9 @@ export function MedicalOrganizationSchema() {
     url: PRACTICE_WEBSITE,
     telephone: PHONE_LAFAYETTE,
     email: PRACTICE_EMAIL,
+    isPartOf: {
+      "@id": `${PRACTICE_WEBSITE}/#organization`,
+    },
     medicalSpecialty: {
       "@type": "MedicalSpecialty",
       name: "Endodontics",
@@ -111,30 +142,91 @@ export function MedicalOrganizationSchema() {
         "@type": "MedicalProcedure",
         name: "Root Canal Therapy",
         procedureType: "https://schema.org/NoninvasiveProcedure",
+        url: `${PRACTICE_WEBSITE}/services/root-canal`,
       },
       {
         "@type": "MedicalProcedure",
         name: "Endodontic Retreatment",
         procedureType: "https://schema.org/NoninvasiveProcedure",
+        url: `${PRACTICE_WEBSITE}/services/retreatment`,
       },
       {
         "@type": "MedicalProcedure",
         name: "Apicoectomy",
         procedureType: "https://schema.org/SurgicalProcedure",
+        url: `${PRACTICE_WEBSITE}/services/apicoectomy`,
       },
       {
         "@type": "MedicalProcedure",
         name: "Cracked Tooth Treatment",
+        url: `${PRACTICE_WEBSITE}/services/cracked-teeth`,
       },
       {
         "@type": "MedicalProcedure",
         name: "Dental Trauma Care",
+        url: `${PRACTICE_WEBSITE}/services/dental-trauma`,
       },
       {
         "@type": "MedicalTherapy",
         name: "CBCT 3D Imaging",
+        url: `${PRACTICE_WEBSITE}/services/cbct-imaging`,
       },
     ],
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+// ─── Service Page Schema ──────────────────────────────────────────────────────
+// Use on individual service pages for rich results
+
+interface ServiceSchemaProps {
+  name: string;
+  description: string;
+  slug: string;
+  procedureType?: "NoninvasiveProcedure" | "SurgicalProcedure";
+}
+
+export function ServiceSchema({
+  name,
+  description,
+  slug,
+  procedureType,
+}: ServiceSchemaProps) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "MedicalWebPage",
+    name,
+    description,
+    url: `${PRACTICE_WEBSITE}/services/${slug}`,
+    isPartOf: {
+      "@id": `${PRACTICE_WEBSITE}/#website`,
+    },
+    about: {
+      "@type": "MedicalProcedure",
+      name,
+      description,
+      ...(procedureType
+        ? { procedureType: `https://schema.org/${procedureType}` }
+        : {}),
+      body: {
+        "@type": "AnatomicalStructure",
+        name: "Tooth",
+      },
+    },
+    mainEntity: {
+      "@type": "MedicalBusiness",
+      "@id": `${PRACTICE_WEBSITE}/#organization`,
+    },
+    specialty: {
+      "@type": "MedicalSpecialty",
+      name: "Endodontics",
+    },
   };
 
   return (

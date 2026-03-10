@@ -15,10 +15,16 @@ import { PRACTICE_NAME, PHONE_LAFAYETTE } from "@/app/lib/constants";
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
 export const metadata: Metadata = {
-  title: "Frequently Asked Questions",
-  description: `Find answers to common questions about root canal treatment, insurance, payment options, and what to expect at ${PRACTICE_NAME}. Can't find what you're looking for? Call (337) 981-0144.`,
+  title: "Root Canal FAQ | Endodontist in Lafayette, LA",
+  description:
+    "Answers to common questions about root canal treatment, costs, insurance, and recovery at Acadiana Endodontics in Lafayette, LA. Call (337) 981-0144.",
   alternates: {
     canonical: "/faq",
+  },
+  openGraph: {
+    title: "Frequently Asked Questions | Acadiana Endodontics",
+    description:
+      "Answers to common questions about root canal treatment, costs, insurance, and recovery at Acadiana Endodontics in Lafayette, LA.",
   },
 };
 
@@ -131,6 +137,7 @@ export default function FAQPage() {
           ════════════════════════════════════════════════════════════════════════ */}
       <PageHero
         title="Frequently Asked Questions"
+        backgroundImage="/images/office/hero-dentist-patient.webp"
         description="Find answers to common questions about endodontic treatment, insurance, and what to expect at our office"
         breadcrumbs={
           <Breadcrumbs

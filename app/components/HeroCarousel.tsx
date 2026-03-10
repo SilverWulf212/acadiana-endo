@@ -22,7 +22,7 @@ const slides: HeroSlide[] = [
     primaryCTA: { label: "Request Appointment", href: "/contact" },
     secondaryCTA: { label: "Our Services", href: "/services" },
     image: "/images/office/hero-consultation.webp",
-    alt: "Endodontic specialist providing expert care in a modern treatment room",
+    alt: "Board-certified endodontist providing expert root canal care in a modern treatment room in Lafayette LA",
   },
   {
     heading: "Advanced Technology, Better Outcomes",
@@ -34,7 +34,7 @@ const slides: HeroSlide[] = [
     },
     secondaryCTA: { label: "Meet Our Doctors", href: "/about" },
     image: "/images/office/hero-dentist-patient.webp",
-    alt: "Dentist and patient discussing treatment plan in a modern office",
+    alt: "Endodontist and patient discussing root canal treatment plan at Acadiana Endodontics Lafayette",
   },
   {
     heading: "Saving Natural Teeth is Our Passion",
@@ -43,7 +43,7 @@ const slides: HeroSlide[] = [
     primaryCTA: { label: "Patient Information", href: "/patient-information" },
     secondaryCTA: { label: "Referring Doctors", href: "/referring-doctors" },
     image: "/images/general/happy-patient.jpg",
-    alt: "A confident, healthy smile — the result of expert endodontic care",
+    alt: "A confident, healthy smile after expert endodontic care from a root canal specialist in Acadiana",
   },
 ];
 
@@ -128,12 +128,19 @@ export default function HeroCarousel() {
             <div className="absolute left-0 right-0 top-0 z-10 h-px bg-gradient-to-r from-transparent via-gold-400/30 to-transparent" />
 
             {/* Content */}
-            <div className="container relative z-10 flex h-full min-h-[600px] items-center lg:min-h-[700px]">
-              <div className="max-w-3xl py-20 lg:py-28">
+            <div className={cn(
+              "container relative z-10 flex h-full min-h-[600px] items-center lg:min-h-[700px]",
+              index === 0 ? "justify-end" : "justify-start"
+            )}>
+              <div className={cn(
+                "py-20 lg:py-28",
+                index === 0 ? "max-w-2xl text-right lg:max-w-3xl" : "max-w-3xl"
+              )}>
                 {/* Gold accent bar */}
                 <div
                   className={cn(
                     "mb-6 h-1 w-16 rounded-full bg-gold-400 transition-all duration-700 delay-200",
+                    index === 0 && "ml-auto",
                     index === current
                       ? "translate-x-0 opacity-100"
                       : "-translate-x-4 opacity-0"
@@ -176,6 +183,7 @@ export default function HeroCarousel() {
                 <p
                   className={cn(
                     "mb-10 max-w-xl text-lg leading-relaxed text-navy-200 transition-all duration-700 delay-200 sm:text-xl",
+                    index === 0 && "ml-auto",
                     index === current
                       ? "translate-y-0 opacity-100"
                       : "translate-y-6 opacity-0"
@@ -191,6 +199,7 @@ export default function HeroCarousel() {
                 <div
                   className={cn(
                     "flex flex-col gap-4 transition-all duration-700 delay-300 sm:flex-row",
+                    index === 0 && "sm:justify-end",
                     index === current
                       ? "translate-y-0 opacity-100"
                       : "translate-y-6 opacity-0"

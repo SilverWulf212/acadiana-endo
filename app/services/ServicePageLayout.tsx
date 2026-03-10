@@ -5,20 +5,33 @@ import PageHero from "@/app/components/PageHero";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 import CTASection from "@/app/components/CTASection";
 import ScrollReveal from "@/app/components/ScrollReveal";
+import { ServiceSchema } from "@/app/components/SchemaMarkup";
 
 const FAQAccordion = dynamic(
   () => import("@/app/components/FAQAccordion")
 );
 import { PHONE_LAFAYETTE } from "@/app/lib/constants";
 
+// Map service slugs to their schema.org procedureType
+const PROCEDURE_TYPES: Record<
+  string,
+  "NoninvasiveProcedure" | "SurgicalProcedure" | undefined
+> = {
+  "root-canal": "NoninvasiveProcedure",
+  retreatment: "NoninvasiveProcedure",
+  apicoectomy: "SurgicalProcedure",
+};
+
 interface ServicePageLayoutProps {
   service: Service;
   whatToExpect: { step: string; description: string }[];
+  heroImage?: string;
 }
 
 export default function ServicePageLayout({
   service,
   whatToExpect,
+  heroImage,
 }: ServicePageLayoutProps) {
   // Split the fullDescription into paragraphs
   const paragraphs = service.fullDescription
@@ -27,10 +40,19 @@ export default function ServicePageLayout({
 
   return (
     <>
+      {/* ─── Service Schema ─────────────────────────────────────────────── */}
+      <ServiceSchema
+        name={service.title}
+        description={service.shortDescription}
+        slug={service.slug}
+        procedureType={PROCEDURE_TYPES[service.slug]}
+      />
+
       {/* ─── Hero ─────────────────────────────────────────────────────────── */}
       <PageHero
         title={service.title}
         description={service.shortDescription}
+        backgroundImage={heroImage}
         breadcrumbs={
           <Breadcrumbs
             items={[

@@ -68,7 +68,7 @@ export const services: Service[] = [
     ],
     metaTitle: "Endodontic Retreatment in Lafayette, LA",
     metaDescription:
-      "Expert endodontic retreatment when a previous root canal needs attention. Board-certified specialists in Lafayette, LA. Call (337) 981-0144.",
+      "Failed root canal? Expert endodontic retreatment by board-certified specialists in Lafayette, LA. Advanced CBCT imaging finds missed canals. Call (337) 981-0144.",
   },
   {
     slug: "apicoectomy",
@@ -98,9 +98,9 @@ export const services: Service[] = [
           "Most patients return to normal activities the next day. Swelling and mild discomfort typically subside within a few days. Complete healing of the bone around the root tip takes several months.",
       },
     ],
-    metaTitle: "Apicoectomy (Root-End Surgery) in Lafayette, LA",
+    metaTitle: "Apicoectomy Specialist in Lafayette, LA",
     metaDescription:
-      "Expert apicoectomy and endodontic microsurgery in Lafayette, LA. Minimally invasive root-end surgery to save your tooth. Call (337) 981-0144.",
+      "Apicoectomy and endodontic microsurgery by board-certified specialists in Lafayette, LA. Minimally invasive root-end surgery. Call (337) 981-0144.",
   },
   {
     slug: "cracked-teeth",
@@ -194,9 +194,9 @@ export const services: Service[] = [
           "Traditional X-rays show only a flat, 2D image that can hide important details. CBCT provides a complete 3D view, revealing hidden canals, fractures, and infections that would otherwise be missed. This leads to more accurate diagnoses and better treatment outcomes.",
       },
     ],
-    metaTitle: "CBCT 3D Imaging in Lafayette, LA",
+    metaTitle: "CBCT 3D Imaging | Endodontist in Lafayette, LA",
     metaDescription:
-      "Advanced CBCT 3D cone beam imaging with 90% less radiation in Lafayette, LA. Precise endodontic diagnosis by board-certified specialists. Call (337) 981-0144.",
+      "CBCT 3D cone beam imaging with up to 90% less radiation at Acadiana Endodontics in Lafayette, LA. Precise diagnosis for root canals. Call (337) 981-0144.",
   },
 ];
 
