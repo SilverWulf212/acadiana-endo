@@ -166,7 +166,7 @@ export default function FAQPage() {
               >
                 <CategoryIcon
                   icon={category.icon}
-                  className="h-4 w-4 text-navy-400 transition-colors duration-200 group-hover:text-gold-500"
+                  className="h-4 w-4 text-navy-500 transition-colors duration-200 group-hover:text-gold-600"
                 />
                 {category.label}
               </a>
@@ -255,11 +255,11 @@ export default function FAQPage() {
                 </Link>
               </div>
 
-              <p className="mt-6 text-sm text-gray-500">
+              <p className="mt-6 text-sm text-gray-600">
                 You can also visit our{" "}
                 <Link
                   href="/patient-information"
-                  className="font-medium text-gold-600 underline decoration-gold-300 underline-offset-2 transition-colors hover:text-gold-700"
+                  className="font-medium text-gold-700 underline decoration-gold-400 underline-offset-2 transition-colors hover:text-gold-800"
                 >
                   Patient Information
                 </Link>{" "}

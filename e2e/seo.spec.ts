@@ -93,4 +93,85 @@ test.describe("SEO & Meta", () => {
       ).toBe(1);
     }
   });
+
+  test("every page has a meta description", async ({ page }) => {
+    const routes = [
+      "/",
+      "/about",
+      "/services",
+      "/contact",
+      "/faq",
+      "/patient-information",
+      "/referring-doctors",
+      "/services/root-canal",
+      "/services/retreatment",
+      "/services/apicoectomy",
+      "/services/cracked-teeth",
+      "/services/dental-trauma",
+      "/services/cbct-imaging",
+    ];
+
+    for (const route of routes) {
+      await page.goto(route);
+      const description = page.locator('meta[name="description"]');
+      await expect(description).toBeAttached();
+      const content = await description.getAttribute("content");
+      expect(
+        content && content.length > 20,
+        `${route} has missing or too-short meta description`
+      ).toBeTruthy();
+    }
+  });
+
+  test("every page has a canonical URL", async ({ page }) => {
+    const routes = [
+      "/",
+      "/about",
+      "/services",
+      "/contact",
+      "/faq",
+      "/patient-information",
+      "/referring-doctors",
+    ];
+
+    for (const route of routes) {
+      await page.goto(route);
+      const canonical = page.locator('link[rel="canonical"]');
+      await expect(canonical).toBeAttached();
+      const href = await canonical.getAttribute("href");
+      expect(href, `${route} has no canonical href`).toBeTruthy();
+    }
+  });
+
+  test("every page has OpenGraph tags", async ({ page }) => {
+    const routes = [
+      "/",
+      "/about",
+      "/services",
+      "/contact",
+      "/faq",
+      "/patient-information",
+      "/referring-doctors",
+    ];
+
+    for (const route of routes) {
+      await page.goto(route);
+
+      const ogTitle = page.locator('meta[property="og:title"]');
+      await expect(ogTitle).toBeAttached();
+      const titleContent = await ogTitle.getAttribute("content");
+      expect(
+        titleContent && titleContent.length > 0,
+        `${route} has empty og:title`
+      ).toBeTruthy();
+
+      const ogDescription = page.locator('meta[property="og:description"]');
+      await expect(ogDescription).toBeAttached();
+      const descContent = await ogDescription.getAttribute("content");
+      expect(
+        descContent && descContent.length > 0,
+        `${route} has empty og:description`
+      ).toBeTruthy();
+    }
+  });
 });

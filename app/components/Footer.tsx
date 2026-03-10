@@ -46,7 +46,7 @@ export default function Footer() {
       {/* Decorative top accent */}
       <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-gold-400 via-gold-300 to-gold-400" />
 
-      <div className="container pt-16 pb-8">
+      <div className="container pt-16 pb-20 sm:pb-8">
         {/* Columns */}
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {/* Column 1: About */}
@@ -90,12 +90,12 @@ export default function Footer() {
             <h3 className="mb-5 font-heading text-sm font-semibold uppercase tracking-widest text-gold-400">
               Quick Links
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-1">
               {quickLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-navy-200 transition-colors duration-200 hover:text-gold-400"
+                    className="inline-block py-1.5 text-sm text-navy-200 transition-colors duration-200 hover:text-gold-400"
                   >
                     {link.label}
                   </Link>
@@ -109,12 +109,12 @@ export default function Footer() {
             <h3 className="mb-5 font-heading text-sm font-semibold uppercase tracking-widest text-gold-400">
               Services
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-1">
               {SERVICE_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-navy-200 transition-colors duration-200 hover:text-gold-400"
+                    className="inline-block py-1.5 text-sm text-navy-200 transition-colors duration-200 hover:text-gold-400"
                   >
                     {link.label}
                   </Link>
@@ -139,11 +139,11 @@ export default function Footer() {
               </p>
               <a
                 href={`tel:${PHONE_LAFAYETTE.replace(/[^\d+]/g, "")}`}
-                className="text-sm text-navy-200 transition-colors duration-200 hover:text-gold-400"
+                className="inline-block py-1 text-sm text-navy-200 transition-colors duration-200 hover:text-gold-400"
               >
                 {PHONE_LAFAYETTE}
               </a>
-              <p className="mt-1 text-xs text-navy-300">
+              <p className="mt-1 text-xs text-navy-200">
                 {getHoursSummary(LOCATION_LAFAYETTE)}
               </p>
             </div>
@@ -158,11 +158,11 @@ export default function Footer() {
               </p>
               <a
                 href={`tel:${PHONE_NEW_IBERIA.replace(/[^\d+]/g, "")}`}
-                className="text-sm text-navy-200 transition-colors duration-200 hover:text-gold-400"
+                className="inline-block py-1 text-sm text-navy-200 transition-colors duration-200 hover:text-gold-400"
               >
                 {PHONE_NEW_IBERIA}
               </a>
-              <p className="mt-1 text-xs text-navy-300">
+              <p className="mt-1 text-xs text-navy-200">
                 {getHoursSummary(LOCATION_NEW_IBERIA)}
               </p>
             </div>
@@ -170,7 +170,7 @@ export default function Footer() {
             {/* Email */}
             <a
               href={`mailto:${PRACTICE_EMAIL}`}
-              className="text-sm text-navy-200 transition-colors duration-200 hover:text-gold-400"
+              className="inline-block py-1 text-sm text-navy-200 transition-colors duration-200 hover:text-gold-400"
             >
               {PRACTICE_EMAIL}
             </a>
@@ -180,10 +180,10 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 border-t border-navy-700/50 pt-8">
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-            <p className="text-xs text-navy-300">
+            <p className="text-xs text-navy-200">
               &copy; {currentYear} {PRACTICE_NAME}. All rights reserved.
             </p>
-            <p className="text-xs font-medium tracking-wide text-navy-400">
+            <p className="text-xs font-medium tracking-wide text-navy-200">
               Proudly Serving Acadiana
             </p>
           </div>

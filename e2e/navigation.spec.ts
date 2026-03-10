@@ -80,4 +80,41 @@ test.describe("Navigation", () => {
     const skipLink = page.locator('a[href="#main-content"]');
     await expect(skipLink).toBeAttached();
   });
+
+  test("logo links to homepage", async ({ page }) => {
+    await page.goto("/about");
+
+    // The logo is typically a link in the header with href="/"
+    const logoLink = page.locator('header a[href="/"]').first();
+    await expect(logoLink).toBeVisible();
+    await logoLink.click();
+    await expect(page).toHaveURL("/");
+  });
+
+  test("mobile hamburger menu opens and closes", async ({ page }) => {
+    await page.goto("/");
+
+    const viewportWidth = page.viewportSize()?.width ?? 1280;
+    if (viewportWidth >= 1024) {
+      // Skip on desktop — hamburger is not visible
+      return;
+    }
+
+    const hamburger = page.locator('button[aria-label*="menu" i]').first();
+    await expect(hamburger).toBeVisible();
+
+    // Open mobile menu
+    await hamburger.click();
+    const mobileMenu = page
+      .locator('[role="dialog"], [data-mobile-menu]')
+      .first();
+    await expect(mobileMenu).toBeVisible({ timeout: 2000 });
+
+    // Close mobile menu (click the close button inside the dialog)
+    const closeButton = mobileMenu.locator('button[aria-label*="close" i], button[aria-label*="menu" i]').first();
+    if (await closeButton.isVisible()) {
+      await closeButton.click();
+      await expect(mobileMenu).not.toBeVisible({ timeout: 2000 });
+    }
+  });
 });

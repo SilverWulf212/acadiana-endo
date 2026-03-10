@@ -11,7 +11,7 @@ const stats = [
 
 export default function ParallaxStats() {
   return (
-    <div className="mt-8 flex flex-wrap items-center justify-center gap-8 text-sm font-medium text-gold-300 lg:gap-12">
+    <div className="mt-8 flex flex-wrap items-center justify-center gap-8 text-sm font-medium text-gold-200 lg:gap-12">
       {stats.map((stat, i) => (
         <React.Fragment key={stat.label}>
           {i > 0 && (

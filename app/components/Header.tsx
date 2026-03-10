@@ -174,7 +174,7 @@ export default function Header() {
           <span className="font-heading text-xl font-bold tracking-tight text-navy-800 transition-colors duration-200 group-hover:text-navy-700 lg:text-2xl">
             Acadiana
           </span>
-          <span className="font-heading text-xl font-light tracking-tight text-gold-500 transition-colors duration-200 group-hover:text-gold-400 lg:text-2xl">
+          <span className="font-heading text-xl font-light tracking-tight text-gold-700 transition-colors duration-200 group-hover:text-gold-600 lg:text-2xl">
             Endodontics
           </span>
         </Link>
@@ -453,10 +453,10 @@ export default function Header() {
                         : "max-h-0 opacity-0"
                     )}
                   >
-                    <div className="ml-4 mt-1 space-y-1 border-l-2 border-gold-200 pl-4">
+                    <div className="ml-4 mt-1 space-y-0.5 border-l-2 border-gold-200 pl-4">
                       <Link
                         href="/services"
-                        className="block rounded-md px-3 py-2 text-sm font-semibold text-navy-800 transition-colors duration-150 hover:bg-gold-50"
+                        className="block rounded-md px-3 py-2.5 text-sm font-semibold text-navy-800 transition-colors duration-150 hover:bg-gold-50"
                       >
                         All Services
                       </Link>
@@ -465,7 +465,7 @@ export default function Header() {
                           key={service.href}
                           href={service.href}
                           className={cn(
-                            "block rounded-md px-3 py-2 text-sm transition-colors duration-150 hover:bg-gold-50",
+                            "block rounded-md px-3 py-2.5 text-sm transition-colors duration-150 hover:bg-gold-50",
                             pathname === service.href
                               ? "font-medium text-navy-800"
                               : "text-navy-600"

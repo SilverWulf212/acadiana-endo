@@ -40,7 +40,7 @@ export default function DoctorCard({
   return (
     <div
       className={cn(
-        "group flex flex-col items-center rounded-xl border border-steel-200 bg-white p-8 text-center transition-all duration-300 lg:p-10",
+        "group flex flex-col items-center rounded-xl border border-steel-200 bg-white p-5 text-center transition-all duration-300 sm:p-8 lg:p-10",
         "hover:-translate-y-1 hover:shadow-lg hover:shadow-navy-800/5",
         className
       )}
@@ -96,15 +96,15 @@ export default function DoctorCard({
       {/* Education (optional) */}
       {education && education.length > 0 && (
         <div className="mt-5 w-full border-t border-steel-100 pt-4">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-navy-500">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-navy-600">
             Education
           </p>
           <ul className="space-y-1">
             {education.slice(0, 3).map((edu, index) => (
-              <li key={index} className="text-xs text-gray-500">
+              <li key={index} className="text-xs text-gray-600">
                 {edu.degree} &mdash; {edu.institution}
                 {edu.year && (
-                  <span className="text-gray-400"> ({edu.year})</span>
+                  <span className="text-gray-500"> ({edu.year})</span>
                 )}
               </li>
             ))}
@@ -115,7 +115,7 @@ export default function DoctorCard({
       {/* View full bio link */}
       <Link
         href="/about"
-        className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-navy-700 transition-all duration-200 hover:text-gold-600"
+        className="mt-6 inline-flex items-center gap-1.5 py-2 text-sm font-medium text-navy-700 transition-all duration-200 hover:text-gold-600"
       >
         View full bio
         <svg

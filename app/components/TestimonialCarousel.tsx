@@ -77,7 +77,7 @@ export default function TestimonialCarousel({
 
   return (
     <div
-      className="relative mx-auto max-w-3xl"
+      className="relative mx-auto max-w-3xl px-10 sm:px-12 lg:px-0"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       aria-roledescription="carousel"
@@ -175,7 +175,7 @@ export default function TestimonialCarousel({
       {/* Navigation arrows */}
       <button
         onClick={goPrev}
-        className="absolute left-0 top-1/2 z-20 -translate-x-2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full border border-steel-200 bg-white text-navy-600 shadow-sm transition-all duration-200 hover:border-gold-300 hover:text-gold-600 hover:shadow-md sm:-translate-x-6 lg:-translate-x-14"
+        className="absolute -left-1 top-1/2 z-20 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full border border-steel-200 bg-white text-navy-600 shadow-sm transition-all duration-200 hover:border-gold-300 hover:text-gold-600 hover:shadow-md sm:-left-3 sm:-translate-x-6 lg:-translate-x-14"
         aria-label="Previous testimonial"
       >
         <svg
@@ -194,7 +194,7 @@ export default function TestimonialCarousel({
       </button>
       <button
         onClick={goNext}
-        className="absolute right-0 top-1/2 z-20 -translate-y-1/2 translate-x-2 flex h-10 w-10 items-center justify-center rounded-full border border-steel-200 bg-white text-navy-600 shadow-sm transition-all duration-200 hover:border-gold-300 hover:text-gold-600 hover:shadow-md sm:translate-x-6 lg:translate-x-14"
+        className="absolute -right-1 top-1/2 z-20 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full border border-steel-200 bg-white text-navy-600 shadow-sm transition-all duration-200 hover:border-gold-300 hover:text-gold-600 hover:shadow-md sm:-right-3 sm:translate-x-6 lg:translate-x-14"
         aria-label="Next testimonial"
       >
         <svg
@@ -213,20 +213,24 @@ export default function TestimonialCarousel({
       </button>
 
       {/* Dot indicators */}
-      <div className="mt-8 flex justify-center gap-2.5">
+      <div className="mt-8 flex justify-center gap-1.5 sm:gap-2.5">
         {testimonials.map((_, index) => (
           <button
             key={index}
             onClick={() => goTo(index)}
-            className={cn(
-              "h-2 rounded-full transition-all duration-300",
-              index === current
-                ? "w-8 bg-gold-400"
-                : "w-2 bg-navy-200 hover:bg-navy-400"
-            )}
+            className="relative flex items-center justify-center py-3"
             aria-label={`Go to testimonial ${index + 1}`}
             aria-current={index === current ? "true" : undefined}
-          />
+          >
+            <span
+              className={cn(
+                "block h-2 rounded-full transition-all duration-300",
+                index === current
+                  ? "w-8 bg-gold-400"
+                  : "w-2 bg-navy-200 hover:bg-navy-400"
+              )}
+            />
+          </button>
         ))}
       </div>
     </div>

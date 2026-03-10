@@ -227,7 +227,7 @@ export default function AppointmentForm() {
   // ─── Form ───────────────────────────────────────────────────────────────────
 
   const inputBaseClasses =
-    "w-full rounded-lg border bg-white px-4 py-3 text-base text-navy-900 placeholder:text-gray-400 transition-colors duration-200 focus:border-navy-400 focus:outline-none focus:ring-2 focus:ring-navy-400/20";
+    "w-full rounded-lg border bg-white px-4 py-3 text-base text-navy-900 placeholder:text-gray-500 transition-colors duration-200 focus:border-navy-400 focus:outline-none focus:ring-2 focus:ring-navy-400/20";
   const inputErrorClasses = "border-red-300 focus:border-red-400 focus:ring-red-400/20";
   const inputDefaultClasses = "border-steel-200 hover:border-steel-300";
 
@@ -240,9 +240,9 @@ export default function AppointmentForm() {
       {/* Form Header */}
       <div>
         <h2 className="heading-subsection">Request an Appointment</h2>
-        <p className="mt-2 text-sm leading-relaxed text-gray-500">
+        <p className="mt-2 text-sm leading-relaxed text-gray-600">
           Fill out the form below and our team will call you to confirm your
-          appointment. Fields marked with <span className="text-red-400">*</span> are required.
+          appointment. Fields marked with <span className="text-red-500">*</span> are required.
         </p>
       </div>
 
@@ -264,7 +264,7 @@ export default function AppointmentForm() {
               htmlFor="fullName"
               className="mb-1.5 block text-sm font-semibold text-navy-700"
             >
-              Full Name <span className="text-red-400">*</span>
+              Full Name <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -290,7 +290,7 @@ export default function AppointmentForm() {
               htmlFor="phone"
               className="mb-1.5 block text-sm font-semibold text-navy-700"
             >
-              Phone Number <span className="text-red-400">*</span>
+              Phone Number <span className="text-red-500">*</span>
             </label>
             <input
               type="tel"
@@ -316,7 +316,7 @@ export default function AppointmentForm() {
               htmlFor="email"
               className="mb-1.5 block text-sm font-semibold text-navy-700"
             >
-              Email Address <span className="text-red-400">*</span>
+              Email Address <span className="text-red-500">*</span>
             </label>
             <input
               type="email"
@@ -385,7 +385,7 @@ export default function AppointmentForm() {
               className={cn(
                 inputBaseClasses,
                 inputDefaultClasses,
-                !formData.preferredTime && "text-gray-400"
+                !formData.preferredTime && "text-gray-500"
               )}
             >
               {TIME_OPTIONS.map((t) => (
@@ -412,7 +412,7 @@ export default function AppointmentForm() {
               className={cn(
                 inputBaseClasses,
                 inputDefaultClasses,
-                !formData.reason && "text-gray-400"
+                !formData.reason && "text-gray-500"
               )}
             >
               {REASON_OPTIONS.map((r) => (
@@ -516,7 +516,7 @@ export default function AppointmentForm() {
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
-          className="mt-0.5 h-5 w-5 shrink-0 text-navy-400"
+          className="mt-0.5 h-5 w-5 shrink-0 text-navy-500"
           aria-hidden="true"
         >
           <path

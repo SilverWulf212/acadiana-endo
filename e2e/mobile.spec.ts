@@ -128,3 +128,67 @@ test.describe("Tablet Responsiveness", () => {
     await expect(serviceCards).toBeVisible();
   });
 });
+
+test.describe("Mobile 375x667 Viewport", () => {
+  test.use({ viewport: { width: 375, height: 667 } });
+
+  test("navigation collapses to hamburger at 375px", async ({ page }) => {
+    await page.goto("/");
+
+    // Hamburger should be visible
+    const hamburger = page.locator('button[aria-label*="menu" i]').first();
+    await expect(hamburger).toBeVisible();
+  });
+
+  test("no horizontal overflow at 375px on any page", async ({ page }) => {
+    const routes = ["/", "/about", "/services", "/contact", "/faq"];
+
+    for (const route of routes) {
+      await page.goto(route);
+      const scrollWidth = await page.evaluate(
+        () => document.documentElement.scrollWidth
+      );
+      const clientWidth = await page.evaluate(
+        () => document.documentElement.clientWidth
+      );
+      expect(
+        scrollWidth,
+        `Horizontal overflow at 375px on ${route}: scrollWidth=${scrollWidth} > clientWidth=${clientWidth}`
+      ).toBeLessThanOrEqual(clientWidth + 1);
+    }
+  });
+
+  test("CTAs stack vertically at 375px", async ({ page }) => {
+    await page.goto("/");
+
+    // Find the final CTA section with two buttons (appointment + phone)
+    const ctaSection = page.locator("text=Ready to Save Your Smile?").locator("..");
+    if (await ctaSection.isVisible()) {
+      // Get the CTA buttons inside the section area
+      const buttons = page.locator('a:has-text("Request Appointment"), a:has-text("Call (337)")');
+      const count = await buttons.count();
+
+      if (count >= 2) {
+        const firstBox = await buttons.nth(count - 2).boundingBox();
+        const secondBox = await buttons.nth(count - 1).boundingBox();
+
+        if (firstBox && secondBox) {
+          // On mobile, buttons should be stacked: second button below first
+          expect(
+            secondBox.y,
+            "CTA buttons should stack vertically on mobile"
+          ).toBeGreaterThan(firstBox.y);
+        }
+      }
+    }
+  });
+
+  test("floating click-to-call button is visible at 375px", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    // ClickToCall is md:hidden, so it should be visible at 375px
+    const callButton = page.locator('a[aria-label*="Call"]').first();
+    await expect(callButton).toBeVisible();
+  });
+});

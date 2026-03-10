@@ -148,7 +148,7 @@ export default function HomePage() {
             <div className="space-y-8 lg:col-span-7">
               {/* Problem side */}
               <ScrollReveal animation="slide-in-right" delay={200}>
-                <div className="relative rounded-2xl bg-gray-50 p-8 lg:p-10">
+                <div className="relative rounded-2xl bg-gray-50 p-5 sm:p-8 lg:p-10">
                   {/* Red accent */}
                   <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-red-50">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-7 w-7 text-red-400" aria-hidden="true">
@@ -178,7 +178,7 @@ export default function HomePage() {
 
               {/* Solution side */}
               <ScrollReveal animation="slide-in-right" delay={300}>
-                <div className="relative rounded-2xl border-2 border-gold-200 bg-gold-50/50 p-8 lg:p-10">
+                <div className="relative rounded-2xl border-2 border-gold-200 bg-gold-50/50 p-5 sm:p-8 lg:p-10">
                   {/* Gold accent */}
                   <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-gold-100">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-7 w-7 text-gold-600" aria-hidden="true">
@@ -256,7 +256,7 @@ export default function HomePage() {
       {/* ════════════════════════════════════════════════════════════════════════
           4b. PARALLAX IMAGE BREAK — Confident Smile
           ════════════════════════════════════════════════════════════════════════ */}
-      <section className="relative h-[420px] overflow-hidden lg:h-[500px]">
+      <section className="relative overflow-hidden py-16 sm:py-0 sm:h-[420px] lg:h-[500px]">
         {/* Background image with parallax-style fixed attachment */}
         <Image
           src="/images/general/happy-patient.jpg"
@@ -273,12 +273,12 @@ export default function HomePage() {
           <ScrollReveal>
             <div className="mx-auto max-w-3xl">
               <div className="mx-auto mb-6 h-1 w-16 rounded-full bg-gold-400" />
-              <blockquote className="font-heading text-2xl font-bold leading-snug text-white md:text-3xl lg:text-4xl">
+              <blockquote className="font-heading text-xl font-bold leading-snug text-white sm:text-2xl md:text-3xl lg:text-4xl">
                 &ldquo;Nothing looks, feels, or functions like your natural tooth. Our mission is to help you keep it.&rdquo;
               </blockquote>
               <ParallaxStats />
               {/* Staff photo row */}
-              <div className="mt-8 flex items-center justify-center">
+              <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:mt-8 sm:flex-row">
                 <div className="flex -space-x-3">
                   {[
                     { src: "/images/doctors/dr-fowler.jpg", alt: "Dr. Robert Fowler, board-certified endodontist in Lafayette LA" },
@@ -288,7 +288,7 @@ export default function HomePage() {
                     { src: "/images/office/hygienist-smiling.png", alt: "Acadiana Endodontics hygienist" },
                     { src: "/images/office/hygienist-teal.png", alt: "Acadiana Endodontics clinical staff member" },
                   ].map((person, i) => (
-                    <div key={i} className="relative h-10 w-10 overflow-hidden rounded-full border-2 border-white/80 shadow-sm">
+                    <div key={i} className="relative h-9 w-9 overflow-hidden rounded-full border-2 border-white/80 shadow-sm sm:h-10 sm:w-10">
                       <Image
                         src={person.src}
                         alt={person.alt}
@@ -299,7 +299,7 @@ export default function HomePage() {
                     </div>
                   ))}
                 </div>
-                <p className="ml-4 text-sm font-medium text-gold-300">Your dedicated care team</p>
+                <p className="text-sm font-medium text-gold-200">Your dedicated care team</p>
               </div>
             </div>
           </ScrollReveal>
@@ -422,7 +422,7 @@ export default function HomePage() {
                         <p className="font-heading text-sm font-semibold text-navy-800">
                           CBCT 3D Imaging On-Site
                         </p>
-                        <p className="text-xs text-gray-500">
+                        <p className="text-xs text-gray-600">
                           Advanced cone beam computed tomography
                         </p>
                       </div>
@@ -513,7 +513,7 @@ export default function HomePage() {
 
             {/* CTA card */}
             <ScrollReveal animation="slide-in-right" delay={150}>
-              <div className="rounded-2xl border border-navy-600/50 bg-navy-700/50 p-8 text-center backdrop-blur-sm lg:p-10">
+              <div className="rounded-2xl border border-navy-600/50 bg-navy-700/50 p-5 text-center backdrop-blur-sm sm:p-8 lg:p-10">
                 <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gold-400/10">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-8 w-8 text-gold-400" aria-hidden="true">
                     <path d="M7.5 3.375c0-1.036.84-1.875 1.875-1.875h.375a3.75 3.75 0 013.75 3.75v1.875C13.5 8.161 14.34 9 15.375 9h1.875A3.75 3.75 0 0121 12.75v3.375C21 17.16 20.16 18 19.125 18h-9.75A1.875 1.875 0 017.5 16.125V3.375z" />
@@ -567,19 +567,19 @@ export default function HomePage() {
               </div>
 
               {/* Insurance brand marks */}
-              <div className="flex flex-wrap items-center justify-center gap-6 lg:gap-8">
+              <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 lg:gap-8">
                 {[
-                  { name: "Delta Dental", color: "#0077C8" },
-                  { name: "Cigna", color: "#F37021" },
-                  { name: "Aetna", color: "#7D3F98" },
-                  { name: "MetLife", color: "#00A94F" },
-                  { name: "CareCredit", color: "#00BFA5" },
+                  { name: "Delta Dental", color: "#005A9C" },
+                  { name: "Cigna", color: "#C85A18" },
+                  { name: "Aetna", color: "#6A3580" },
+                  { name: "MetLife", color: "#007A3A" },
+                  { name: "CareCredit", color: "#008573" },
                 ].map((ins) => (
                   <div
                     key={ins.name}
-                    className="flex h-14 items-center justify-center rounded-lg bg-white px-6 shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-md"
+                    className="flex h-11 items-center justify-center rounded-lg bg-white px-4 shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-md sm:h-14 sm:px-6"
                   >
-                    <span className="text-base font-bold tracking-tight" style={{ color: ins.color }}>
+                    <span className="text-sm font-bold tracking-tight sm:text-base" style={{ color: ins.color }}>
                       {ins.name}
                     </span>
                   </div>

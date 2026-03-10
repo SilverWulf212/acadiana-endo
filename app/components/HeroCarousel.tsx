@@ -72,7 +72,7 @@ export default function HeroCarousel() {
 
   return (
     <section
-      className="relative min-h-[600px] overflow-hidden lg:min-h-[700px]"
+      className="relative min-h-[480px] overflow-hidden sm:min-h-[600px] lg:min-h-[700px]"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
       aria-roledescription="carousel"
@@ -129,11 +129,11 @@ export default function HeroCarousel() {
 
             {/* Content */}
             <div className={cn(
-              "container relative z-10 flex h-full min-h-[600px] items-center lg:min-h-[700px]",
+              "container relative z-10 flex h-full min-h-[480px] items-center sm:min-h-[600px] lg:min-h-[700px]",
               index === 0 ? "justify-end" : "justify-start"
             )}>
               <div className={cn(
-                "py-20 lg:py-28",
+                "py-14 sm:py-20 lg:py-28",
                 index === 0 ? "max-w-2xl text-right lg:max-w-3xl" : "max-w-3xl"
               )}>
                 {/* Gold accent bar */}
@@ -151,7 +151,7 @@ export default function HeroCarousel() {
                 {index === 0 ? (
                   <h1
                     className={cn(
-                      "mb-6 font-heading text-4xl font-extrabold leading-[1.1] tracking-tight text-white transition-all duration-700 delay-100 sm:text-5xl lg:text-6xl xl:text-7xl",
+                      "mb-6 font-heading text-3xl font-extrabold leading-[1.1] tracking-tight text-white transition-all duration-700 delay-100 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl",
                       index === current
                         ? "translate-y-0 opacity-100"
                         : "translate-y-6 opacity-0"
@@ -165,7 +165,7 @@ export default function HeroCarousel() {
                 ) : (
                   <p
                     className={cn(
-                      "mb-6 font-heading text-4xl font-extrabold leading-[1.1] tracking-tight text-white transition-all duration-700 delay-100 sm:text-5xl lg:text-6xl xl:text-7xl",
+                      "mb-6 font-heading text-3xl font-extrabold leading-[1.1] tracking-tight text-white transition-all duration-700 delay-100 sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl",
                       index === current
                         ? "translate-y-0 opacity-100"
                         : "translate-y-6 opacity-0"
@@ -182,7 +182,7 @@ export default function HeroCarousel() {
                 {/* Subtitle */}
                 <p
                   className={cn(
-                    "mb-10 max-w-xl text-lg leading-relaxed text-navy-200 transition-all duration-700 delay-200 sm:text-xl",
+                    "mb-8 max-w-xl text-base leading-relaxed text-navy-200 transition-all duration-700 delay-200 sm:mb-10 sm:text-lg md:text-xl",
                     index === 0 && "ml-auto",
                     index === current
                       ? "translate-y-0 opacity-100"
@@ -229,34 +229,38 @@ export default function HeroCarousel() {
       </div>
 
       {/* Dot indicators */}
-      <div className="absolute bottom-8 left-0 right-0 z-20 flex justify-center gap-3">
+      <div className="absolute bottom-6 left-0 right-0 z-20 flex justify-center gap-2 sm:bottom-8 sm:gap-3">
         {slides.map((_, index) => (
           <button
             key={index}
             onClick={() => goTo(index)}
-            className={cn(
-              "h-2.5 rounded-full transition-all duration-300",
-              index === current
-                ? "w-10 bg-gold-400"
-                : "w-2.5 bg-white/40 hover:bg-white/70"
-            )}
+            className="relative flex items-center justify-center py-3"
             aria-label={`Go to slide ${index + 1}`}
             aria-current={index === current ? "true" : undefined}
-          />
+          >
+            <span
+              className={cn(
+                "block h-2.5 rounded-full transition-all duration-300",
+                index === current
+                  ? "w-10 bg-gold-400"
+                  : "w-2.5 bg-white/40 hover:bg-white/70"
+              )}
+            />
+          </button>
         ))}
       </div>
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 right-8 z-20 hidden animate-float lg:block">
         <div className="flex flex-col items-center gap-2">
-          <span className="text-xs font-medium uppercase tracking-widest text-white/50">
+          <span className="text-xs font-medium uppercase tracking-widest text-white/70">
             Scroll
           </span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
             fill="currentColor"
-            className="h-5 w-5 text-white/50"
+            className="h-5 w-5 text-white/70"
             aria-hidden="true"
           >
             <path

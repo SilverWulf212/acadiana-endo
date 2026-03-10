@@ -358,7 +358,7 @@ export default function AboutPage() {
                                   <p className="text-sm font-semibold text-navy-800">
                                     {edu.degree}
                                   </p>
-                                  <p className="text-xs text-gray-500">
+                                  <p className="text-xs text-gray-600">
                                     {edu.institution}
                                   </p>
                                 </div>

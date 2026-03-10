@@ -240,7 +240,7 @@ export default function ReferralForm() {
   // ─── Form ──────────────────────────────────────────────────────────────────
 
   const inputBaseClasses =
-    "w-full rounded-lg border bg-white px-4 py-3 text-base text-navy-900 placeholder:text-gray-400 transition-colors duration-200 focus:border-navy-400 focus:outline-none focus:ring-2 focus:ring-navy-400/20";
+    "w-full rounded-lg border bg-white px-4 py-3 text-base text-navy-900 placeholder:text-gray-500 transition-colors duration-200 focus:border-navy-400 focus:outline-none focus:ring-2 focus:ring-navy-400/20";
   const inputErrorClasses = "border-red-300 focus:border-red-400 focus:ring-red-400/20";
   const inputDefaultClasses = "border-steel-200 hover:border-steel-300";
 
@@ -268,7 +268,7 @@ export default function ReferralForm() {
               htmlFor="doctorName"
               className="mb-1.5 block text-sm font-semibold text-navy-700"
             >
-              Doctor Name <span className="text-red-400">*</span>
+              Doctor Name <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -314,7 +314,7 @@ export default function ReferralForm() {
               htmlFor="doctorPhone"
               className="mb-1.5 block text-sm font-semibold text-navy-700"
             >
-              Phone <span className="text-red-400">*</span>
+              Phone <span className="text-red-500">*</span>
             </label>
             <input
               type="tel"
@@ -340,7 +340,7 @@ export default function ReferralForm() {
               htmlFor="doctorEmail"
               className="mb-1.5 block text-sm font-semibold text-navy-700"
             >
-              Email <span className="text-red-400">*</span>
+              Email <span className="text-red-500">*</span>
             </label>
             <input
               type="email"
@@ -380,7 +380,7 @@ export default function ReferralForm() {
               htmlFor="patientName"
               className="mb-1.5 block text-sm font-semibold text-navy-700"
             >
-              Patient Name <span className="text-red-400">*</span>
+              Patient Name <span className="text-red-500">*</span>
             </label>
             <input
               type="text"
@@ -462,7 +462,7 @@ export default function ReferralForm() {
               htmlFor="reason"
               className="mb-1.5 block text-sm font-semibold text-navy-700"
             >
-              Reason for Referral <span className="text-red-400">*</span>
+              Reason for Referral <span className="text-red-500">*</span>
             </label>
             <select
               id="reason"
@@ -472,7 +472,7 @@ export default function ReferralForm() {
               className={cn(
                 inputBaseClasses,
                 fieldErrors.reason ? inputErrorClasses : inputDefaultClasses,
-                !formData.reason && "text-gray-400"
+                !formData.reason && "text-gray-500"
               )}
             >
               {REFERRAL_REASONS.map((r) => (

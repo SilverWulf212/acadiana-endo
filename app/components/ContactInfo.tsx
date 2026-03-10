@@ -130,7 +130,7 @@ export default function ContactInfo({ location, className }: ContactInfoProps) {
                     className={cn(
                       "py-0.5 text-right",
                       h.hours === "Closed"
-                        ? "text-gray-400"
+                        ? "text-gray-500"
                         : "text-navy-700"
                     )}
                   >
