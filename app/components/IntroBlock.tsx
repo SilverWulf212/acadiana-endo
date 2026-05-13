@@ -19,7 +19,7 @@ export default function IntroBlock({
   return (
     <section className="section">
       <div className="container">
-        <div className="intro-block">
+        <div className="intro-block animate-fade-up">
           {eyebrow && <p className="eyebrow">{eyebrow}</p>}
           {heading && (
             <h2 className={cn("heading-section", eyebrow && "mt-3")}>

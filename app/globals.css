@@ -168,6 +168,10 @@
 
 /* ─── Stagger Delay Utilities ─────────────────────────────────────────────── */
 
+.delay-80   { animation-delay:  80ms; }
+.delay-120  { animation-delay: 120ms; }
+.delay-160  { animation-delay: 160ms; }
+.delay-240  { animation-delay: 240ms; }
 .delay-1 { animation-delay: 100ms; }
 .delay-2 { animation-delay: 200ms; }
 .delay-3 { animation-delay: 300ms; }
@@ -281,7 +285,8 @@ body {
 }
 
 .btn-primary:active {
-  transform: scale(0.98);
+  transform: scale(0.98) translateY(1px);
+  transition: transform 100ms ease-out;
   background-color: var(--color-navy-900);
 }
 
@@ -297,7 +302,8 @@ body {
 }
 
 .btn-secondary:active {
-  transform: scale(0.98);
+  transform: scale(0.98) translateY(1px);
+  transition: transform 100ms ease-out;
   background-color: var(--color-gold-600);
 }
 
@@ -313,7 +319,8 @@ body {
 }
 
 .btn-outline:active {
-  transform: scale(0.98);
+  transform: scale(0.98) translateY(1px);
+  transition: transform 100ms ease-out;
 }
 
 .btn-ghost {
@@ -324,6 +331,11 @@ body {
 
 .btn-ghost:hover {
   background-color: var(--color-gray-50);
+}
+
+.btn-ghost:active {
+  transform: scale(0.98) translateY(1px);
+  transition: transform 100ms ease-out;
 }
 
 .btn-sm {
@@ -347,7 +359,7 @@ body {
 }
 
 .card:hover {
-  box-shadow: 0 4px 20px color-mix(in oklch, var(--color-navy-800) 8%, transparent);
+  box-shadow: var(--shadow-card-lift);
   transform: translateY(-2px);
 }
 

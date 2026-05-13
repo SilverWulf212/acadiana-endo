@@ -81,17 +81,22 @@ export default function Banner({
               <p className="eyebrow eyebrow-on-dark">{eyebrow}</p>
             )}
 
-            <h1 id={headingId} className="heading-display text-white">
+            <h1
+              id={headingId}
+              className="heading-display animate-fade-up text-white"
+            >
               {heading}
             </h1>
 
             {tagline && (
-              <p className="text-lead text-white/85">{tagline}</p>
+              <p className="text-lead animate-fade-up delay-120 text-white/85">
+                {tagline}
+              </p>
             )}
 
             <div
               className={cn(
-                "mt-2 flex flex-wrap gap-4",
+                "mt-2 flex flex-wrap gap-4 animate-fade-up delay-240",
                 align === "center" && "justify-center"
               )}
             >

@@ -97,8 +97,9 @@ export default function FeaturedCardRow({
                 <Link
                   key={`${item.title}-${index}`}
                   href={item.href}
+                  style={{ animationDelay: `${index * 80}ms` }}
                   className={cn(
-                    "featured-card group",
+                    "featured-card group animate-fade-up",
                     "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-400"
                   )}
                 >
@@ -118,7 +119,8 @@ export default function FeaturedCardRow({
             return (
               <article
                 key={`${item.title}-${index}`}
-                className="featured-card"
+                style={{ animationDelay: `${index * 80}ms` }}
+                className="featured-card animate-fade-up"
               >
                 <div className="featured-card-image">
                   <Image
