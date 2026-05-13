@@ -146,10 +146,10 @@ export default function HomePage() {
 
       {/* 7. FINAL CTA (existing component; quieted further in Task 6) ──────── */}
       <CTASection
-        title="Ready to Save Your Smile?"
-        description="Our specialists are here to help. Schedule your appointment today or call us for immediate assistance."
-        primaryCTA={{ label: "Request Appointment", href: "/contact" }}
-        secondaryCTA={{ label: "Call (337) 981-0144", href: "tel:3379810144" }}
+        title="Ready to save your tooth?"
+        description="Request an appointment online, or call us during business hours."
+        primaryCTA={{ label: "Request an Appointment", href: "/contact" }}
+        secondaryCTA={{ label: "Call (337) 981-0144", href: "tel:+13379810144" }}
       />
     </>
   );
