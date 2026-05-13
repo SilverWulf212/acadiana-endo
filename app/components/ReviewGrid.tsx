@@ -53,6 +53,8 @@ export default function ReviewGrid({
   testimonials,
   columns = 2,
 }: ReviewGridProps) {
+  if (testimonials.length === 0) return null;
+
   const gridCols =
     columns === 3
       ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
@@ -72,11 +74,11 @@ export default function ReviewGrid({
 
       <div className="container">
         <div className={gridCols}>
-          {testimonials.map((t) => {
+          {testimonials.map((t, idx) => {
             const displayName = t.name ?? t.author;
             return (
               <figure
-                key={`${t.author}-${t.text.slice(0, 32)}`}
+                key={t.id ?? `${idx}-${t.author}`}
                 className="review-card"
               >
                 <StarRow rating={t.rating} />

@@ -9,7 +9,7 @@ type FeaturedCardItemBase = {
   description?: string;
 };
 
-type FeaturedCardItem =
+export type FeaturedCardItem =
   | (FeaturedCardItemBase & { mode: "link"; href: string; ctaLabel?: string })
   | (FeaturedCardItemBase & { mode: "info" });
 

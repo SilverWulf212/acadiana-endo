@@ -8,29 +8,54 @@ import LocationsBlock from "@/app/components/LocationsBlock";
 import CTASection from "@/app/components/CTASection";
 
 import { testimonials } from "@/app/data/testimonials";
+import {
+  homeEntryPoints,
+  homeProcedureSpotlights,
+} from "@/app/data/homeFeatured";
+import { PHONE_LAFAYETTE } from "@/app/lib/constants";
 
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
+const pageTitle =
+  "Acadiana Endodontics — Specialist Root Canal Care in Lafayette & New Iberia, LA";
+const pageDescription =
+  "Board-certified endodontists in Lafayette and New Iberia, LA. Gentle root canal therapy, retreatment, apicoectomy, and microsurgery. Request an appointment online.";
+const ogImage = "/images/office/hero-dentist-patient.webp";
+
 export const metadata: Metadata = {
-  title:
-    "Acadiana Endodontics — Specialist Root Canal Care in Lafayette & New Iberia, LA",
-  description:
-    "Board-certified endodontists in Lafayette and New Iberia, LA. Gentle root canal therapy, retreatment, apicoectomy, and microsurgery. Request an appointment online.",
+  title: pageTitle,
+  description: pageDescription,
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title:
-      "Acadiana Endodontics — Specialist Root Canal Care in Lafayette & New Iberia, LA",
-    description:
-      "Board-certified endodontists in Lafayette and New Iberia, LA. Gentle root canal therapy, retreatment, apicoectomy, and microsurgery. Request an appointment online.",
+    type: "website",
+    locale: "en_US",
+    url: "/",
+    siteName: "Acadiana Endodontics",
+    title: pageTitle,
+    description: pageDescription,
     images: [
       {
-        url: "/images/office/hero-dentist-patient.webp",
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: "Acadiana Endodontics — Dr. Fowler with a patient in the treatment room",
       },
     ],
   },
+  twitter: {
+    card: "summary_large_image",
+    title: pageTitle,
+    description: pageDescription,
+    images: [ogImage],
+  },
 };
+
+// ─── Phone helpers ───────────────────────────────────────────────────────────
+
+const phoneTelHref = `tel:+1${PHONE_LAFAYETTE.replace(/\D/g, "")}`;
+const phoneCtaLabel = `Call ${PHONE_LAFAYETTE}`;
 
 // ─── Homepage ─────────────────────────────────────────────────────────────────
 
@@ -47,8 +72,8 @@ export default function HomePage() {
           href: "/contact",
         }}
         secondaryCta={{
-          label: "Call (337) 981-0144",
-          href: "tel:+13379810144",
+          label: phoneCtaLabel,
+          href: phoneTelHref,
         }}
         image="/images/office/hero-dentist-patient.webp"
         imageAlt="Dr. Fowler with a patient in the treatment room"
@@ -58,75 +83,27 @@ export default function HomePage() {
       />
 
       {/* 2. INTRO BLOCK ─────────────────────────────────────────────────────── */}
-      <section className="section">
-        <div className="container">
-          <IntroBlock eyebrow="BOARD-CERTIFIED ENDODONTISTS">
-            <p className="text-lead text-gray-700">
-              Dr. Robert Fowler and Dr. James Reaves are members of the American
-              Association of Endodontists, serving Acadiana with advanced root
-              canal therapy, retreatment, and microsurgery. Two convenient
-              locations, focused exclusively on saving your natural teeth.
-            </p>
-          </IntroBlock>
-        </div>
-      </section>
+      <IntroBlock eyebrow="BOARD-CERTIFIED ENDODONTISTS">
+        <p className="text-lead text-gray-700">
+          Dr. Robert Fowler and Dr. James Reaves are members of the American
+          Association of Endodontists, serving Acadiana with advanced root
+          canal therapy, retreatment, and microsurgery. Two convenient
+          locations, focused exclusively on saving your natural teeth.
+        </p>
+      </IntroBlock>
 
       {/* 3. ENTRY POINTS — What to expect ──────────────────────────────────── */}
       <FeaturedCardRow
         eyebrow="GETTING STARTED"
         heading="What to expect"
-        items={[
-          {
-            mode: "link",
-            title: "Your First Visit",
-            href: "/patient-information",
-            image: "/images/office/hero-consultation.webp",
-            imageAlt: "Welcoming consultation room at Acadiana Endodontics",
-          },
-          {
-            mode: "link",
-            title: "Advanced Technology",
-            href: "/services/cbct-imaging",
-            image: "/images/services/dental-chair.jpg",
-            imageAlt: "Modern dental chair and imaging equipment",
-          },
-          {
-            mode: "link",
-            title: "Meet Our Doctors",
-            href: "/about",
-            image: "/images/office/hero-dentist-patient.webp",
-            imageAlt: "Dr. Fowler with a patient",
-          },
-        ]}
+        items={homeEntryPoints}
       />
 
       {/* 4. PROCEDURE SPOTLIGHTS — Treatments we provide ───────────────────── */}
       <FeaturedCardRow
         eyebrow="OUR SPECIALTIES"
         heading="Treatments we provide"
-        items={[
-          {
-            mode: "link",
-            title: "Root Canal Therapy",
-            href: "/services/root-canal",
-            image: "/images/general/dental-exam.jpg",
-            imageAlt: "Endodontist examining a patient",
-          },
-          {
-            mode: "link",
-            title: "Cracked Teeth",
-            href: "/services/cracked-teeth",
-            image: "/images/services/dental-xray.jpg",
-            imageAlt: "Dental X-ray showing a cracked tooth",
-          },
-          {
-            mode: "link",
-            title: "Apicoectomy",
-            href: "/services/apicoectomy",
-            image: "/images/services/treatment-room.jpg",
-            imageAlt: "Surgical treatment room",
-          },
-        ]}
+        items={homeProcedureSpotlights}
       />
 
       {/* 5. PATIENT REVIEWS ─────────────────────────────────────────────────── */}
@@ -149,7 +126,7 @@ export default function HomePage() {
         title="Ready to save your tooth?"
         description="Request an appointment online, or call us during business hours."
         primaryCTA={{ label: "Request an Appointment", href: "/contact" }}
-        secondaryCTA={{ label: "Call (337) 981-0144", href: "tel:+13379810144" }}
+        secondaryCTA={{ label: phoneCtaLabel, href: phoneTelHref }}
       />
     </>
   );

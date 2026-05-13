@@ -17,14 +17,18 @@ export default function IntroBlock({
   children,
 }: IntroBlockProps) {
   return (
-    <div className="intro-block">
-      {eyebrow && <p className="eyebrow">{eyebrow}</p>}
-      {heading && (
-        <h2 className={cn("heading-section", eyebrow && "mt-3")}>
-          {heading}
-        </h2>
-      )}
-      <div className={cn((eyebrow || heading) && "mt-5")}>{children}</div>
-    </div>
+    <section className="section">
+      <div className="container">
+        <div className="intro-block">
+          {eyebrow && <p className="eyebrow">{eyebrow}</p>}
+          {heading && (
+            <h2 className={cn("heading-section", eyebrow && "mt-3")}>
+              {heading}
+            </h2>
+          )}
+          <div className={cn((eyebrow || heading) && "mt-5")}>{children}</div>
+        </div>
+      </div>
+    </section>
   );
 }

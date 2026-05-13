@@ -27,6 +27,7 @@ export interface Doctor {
 }
 
 export interface Testimonial {
+  id?: string;
   text: string;
   author: string;
   name?: string;
