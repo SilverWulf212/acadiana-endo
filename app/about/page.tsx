@@ -81,12 +81,45 @@ export default function AboutPage() {
         </p>
       </IntroBlock>
 
-      {/* 3. DOCTOR ZIG-ZAG ROWS ───────────────────────────────────────────── */}
+      {/* 3. WHY SEE A SPECIALIST ──────────────────────────────────────────── */}
+      <section className="section">
+        <div className="container">
+          <div className="mx-auto max-w-3xl">
+            <p className="eyebrow text-center">A SPECIALIST&apos;S APPROACH</p>
+            <h2 className="heading-section mt-3 text-center">
+              Why see an endodontist
+            </h2>
+            <div className="mt-8 space-y-5 text-lead text-gray-700">
+              <p>
+                Endodontists are dental specialists with two to three years of
+                additional training beyond dental school, focused exclusively
+                on saving natural teeth. We perform an average of 25 root canal
+                treatments each week — most general dentists perform around
+                two.
+              </p>
+              <p>
+                That depth of focus translates to faster, more comfortable
+                visits and better outcomes for complex cases. We use
+                surgical-grade microscopes, 3D cone-beam imaging, and the
+                gentlest anesthesia techniques to make treatment routine rather
+                than memorable.
+              </p>
+              <p>
+                When your general dentist refers you to us, it&apos;s because
+                they want your tooth saved by the practitioner most equipped to
+                do it well.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. DOCTOR ZIG-ZAG ROWS ───────────────────────────────────────────── */}
       {/* TODO(Task 6 / §12): emit Person schema per doctor */}
       {drFowler && <DoctorCard doctor={drFowler} align="image-left" />}
       {drReaves && <DoctorCard doctor={drReaves} align="image-right" />}
 
-      {/* 4. LOCATIONS ─────────────────────────────────────────────────────── */}
+      {/* 5. LOCATIONS ─────────────────────────────────────────────────────── */}
       <LocationsBlock
         eyebrow="VISIT US"
         heading="Two locations across Acadiana"

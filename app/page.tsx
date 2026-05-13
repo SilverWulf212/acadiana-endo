@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import Banner from "@/app/components/Banner";
 import IntroBlock from "@/app/components/IntroBlock";
@@ -12,7 +13,7 @@ import {
   homeEntryPoints,
   homeProcedureSpotlights,
 } from "@/app/data/homeFeatured";
-import { PHONE_LAFAYETTE } from "@/app/lib/constants";
+import { PHONE_LAFAYETTE, PHONE_NEW_IBERIA } from "@/app/lib/constants";
 
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
@@ -57,6 +58,19 @@ export const metadata: Metadata = {
 const phoneTelHref = `tel:+1${PHONE_LAFAYETTE.replace(/\D/g, "")}`;
 const phoneCtaLabel = `Call ${PHONE_LAFAYETTE}`;
 
+const homeBannerPhones = [
+  {
+    location: "Lafayette",
+    phone: PHONE_LAFAYETTE,
+    tel: `tel:+1${PHONE_LAFAYETTE.replace(/\D/g, "")}`,
+  },
+  {
+    location: "New Iberia",
+    phone: PHONE_NEW_IBERIA,
+    tel: `tel:+1${PHONE_NEW_IBERIA.replace(/\D/g, "")}`,
+  },
+];
+
 // ─── Homepage ─────────────────────────────────────────────────────────────────
 
 export default function HomePage() {
@@ -71,10 +85,7 @@ export default function HomePage() {
           label: "Request an Appointment",
           href: "/contact",
         }}
-        secondaryCta={{
-          label: phoneCtaLabel,
-          href: phoneTelHref,
-        }}
+        phones={homeBannerPhones}
         image="/images/office/hero-dentist-patient.webp"
         imageAlt="Dr. Fowler with a patient in the treatment room"
         overlay="left-soft"
@@ -82,6 +93,27 @@ export default function HomePage() {
         height="full"
         credentials="MEMBER · AMERICAN ASSOCIATION OF ENDODONTISTS"
       />
+
+      {/* Pre-visit forms callout */}
+      <section className="section-cream py-6">
+        <div className="container">
+          <div className="mx-auto flex max-w-2xl flex-col items-center justify-center gap-3 text-center sm:flex-row sm:gap-4">
+            <p className="text-sm text-navy-700">
+              <span className="eyebrow text-navy-600">Save time</span>
+              <span className="ml-3">Fill out new-patient forms before your visit.</span>
+            </p>
+            <Link
+              href="/patient-information#forms"
+              className="link-underline inline-flex items-center gap-1 text-sm font-heading font-semibold text-gold-700 hover:text-gold-800"
+            >
+              New Patient Forms
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4" aria-hidden="true">
+                <path fillRule="evenodd" d="M5 10a.75.75 0 01.75-.75h6.638L10.23 7.29a.75.75 0 111.04-1.08l3.5 3.25a.75.75 0 010 1.08l-3.5 3.25a.75.75 0 11-1.04-1.08l2.158-1.96H5.75A.75.75 0 015 10z" clipRule="evenodd" />
+              </svg>
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* 2. INTRO BLOCK ─────────────────────────────────────────────────────── */}
       <IntroBlock eyebrow="BOARD-CERTIFIED ENDODONTISTS">

@@ -15,6 +15,7 @@ const quickLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Patient Information", href: "/patient-information" },
+  { label: "New Patient Forms", href: "/patient-information#forms" },
   { label: "Referring Doctors", href: "/referring-doctors" },
   { label: "Contact", href: "/contact" },
   { label: "FAQ", href: "/faq" },
@@ -165,9 +166,17 @@ export default function Footer() {
             <p className="text-xs text-navy-500">
               &copy; {currentYear} {PRACTICE_NAME}. All rights reserved.
             </p>
-            <p className="text-xs font-medium tracking-wide text-navy-500">
-              Proudly Serving Acadiana
-            </p>
+            <div className="flex items-center gap-4 text-xs text-navy-500">
+              <Link
+                href="/privacy"
+                className="transition-colors duration-200 hover:text-navy-700"
+              >
+                Privacy Notice
+              </Link>
+              <span className="font-medium tracking-wide">
+                Proudly Serving Acadiana
+              </span>
+            </div>
           </div>
 
           {/* Built by SilverWulf */}

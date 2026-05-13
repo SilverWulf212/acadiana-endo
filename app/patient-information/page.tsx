@@ -163,6 +163,8 @@ export default function PatientInformationPage() {
       />
 
       {/* 4a. BEFORE ─────────────────────────────────────────────────────────── */}
+      {/* Anchor target for /#forms callout on the home page. */}
+      <div id="forms" className="scroll-mt-24" />
       <AnchorRow
         id="before"
         heading="Before your visit"
@@ -170,16 +172,25 @@ export default function PatientInformationPage() {
         imageAlt="Doctor speaking with a patient before treatment"
       >
         <p>
-          Please bring a photo ID and your dental insurance card. To save time
-          in the office, you can complete the new-patient forms online ahead of
-          your visit — head to our{" "}
+          Please bring a photo ID, your dental insurance card, a list of any
+          medications you currently take, and any X-rays or referral paperwork
+          your general dentist provided. Having these on hand lets us focus your
+          first appointment on diagnosis and treatment rather than paperwork.
+        </p>
+        <p>
+          {/* TODO(practice): host fillable PDF forms or a secure patient portal
+              and replace this paragraph with a direct download/registration
+              link. For now we direct patients to the contact page. */}
+          To save time in the office, you can complete new-patient forms ahead
+          of your visit — head to our{" "}
           <Link
             href="/contact"
             className="font-medium text-navy-800 underline decoration-gold-400 underline-offset-2 transition-colors hover:text-gold-700"
           >
             contact page
           </Link>{" "}
-          to get started.
+          to get started, or call our office and we&apos;ll email the forms to
+          you directly.
         </p>
         <p>
           We recommend arriving about 10 minutes early so our team can verify

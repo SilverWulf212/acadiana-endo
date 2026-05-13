@@ -11,7 +11,17 @@ type BannerProps = {
   heading: string;
   tagline?: string;
   primaryCta: { label: string; href: string };
+  /**
+   * Optional secondary CTA. Kept for backwards compatibility with non-home Banner
+   * consumers. Prefer `phones` for multi-location callouts.
+   */
   secondaryCta?: { label: string; href: string };
+  /**
+   * Optional list of location-labeled phone numbers. When present, renders a
+   * compact row of tel: chips below the CTA row. Used on the home page to
+   * surface both Lafayette and New Iberia numbers above the fold.
+   */
+  phones?: { location: string; phone: string; tel: string }[];
   align?: "left" | "center";
   overlay?: "left" | "left-soft" | "bottom";
   height?: "full" | "tall";
@@ -32,6 +42,7 @@ export default function Banner({
   tagline,
   primaryCta,
   secondaryCta,
+  phones,
   align = "left",
   overlay = "left",
   height = "full",
@@ -112,7 +123,7 @@ export default function Banner({
                 href={primaryCta.href}
                 label={primaryCta.label}
               />
-              {secondaryCta && (
+              {secondaryCta && !phones && (
                 <Link
                   href={secondaryCta.href}
                   className="inline-flex items-center gap-2 px-2 py-3 font-heading text-base font-semibold text-white underline underline-offset-4 transition-colors hover:text-gold-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
@@ -121,6 +132,28 @@ export default function Banner({
                 </Link>
               )}
             </div>
+
+            {phones && phones.length > 0 && (
+              <div
+                className={cn(
+                  "mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/90",
+                  align === "center" && "justify-center"
+                )}
+              >
+                {phones.map((p) => (
+                  <a
+                    key={p.tel}
+                    href={p.tel}
+                    className="link-underline inline-flex items-baseline gap-2 transition-colors hover:text-gold-300"
+                  >
+                    <span className="font-heading font-semibold text-[11px] uppercase tracking-wider text-white/60">
+                      {p.location}
+                    </span>
+                    <span className="font-medium">{p.phone}</span>
+                  </a>
+                ))}
+              </div>
+            )}
 
             {credentials && (
               <p className="mt-6 inline-flex items-center gap-2 self-start rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-[11px] font-heading font-semibold uppercase tracking-[0.18em] text-white/85 backdrop-blur-sm">
