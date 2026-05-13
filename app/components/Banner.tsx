@@ -56,9 +56,12 @@ export default function Banner({
         alt={imageAlt}
         fill
         priority={priority}
+        fetchPriority={priority ? "high" : undefined}
         loading={priority ? "eager" : undefined}
         sizes="100vw"
         className="object-cover"
+        // TODO(perf): add blurDataURL once a build-time generator is wired up.
+        // priority + sizes="100vw" already make this an LCP-friendly image.
       />
 
       <div

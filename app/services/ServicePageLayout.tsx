@@ -5,7 +5,7 @@ import PageHero from "@/app/components/PageHero";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 import CTASection from "@/app/components/CTASection";
 import FeaturedCardRow from "@/app/components/FeaturedCardRow";
-import { ServiceSchema } from "@/app/components/SchemaMarkup";
+import { ServiceSchema, FAQPageSchema } from "@/app/components/SchemaMarkup";
 import { services, servicesAsFeaturedCards } from "@/app/data/services";
 import { PHONE_LAFAYETTE } from "@/app/lib/constants";
 
@@ -25,10 +25,13 @@ interface ServicePageLayoutProps {
   service: Service;
 }
 
-// TODO (Task 6): Upgrade SchemaMarkup to emit MedicalProcedure + BreadcrumbList
-// + FAQPage on each service detail page (plan §12). Current ServiceSchema only
-// emits MedicalWebPage/about=MedicalProcedure; FAQPage and BreadcrumbList are
-// emitted separately by their respective components.
+// SchemaMarkup wiring per plan §12:
+// - BreadcrumbList → emitted by <Breadcrumbs> below
+// - MedicalWebPage + about=MedicalProcedure → emitted by <ServiceSchema> below
+// - FAQPage → emitted by <FAQPageSchema> below (only when service.faqs.length > 0)
+// TODO(§12): consider promoting the inner `about` block to a standalone
+// MedicalProcedure entity with @id once we have per-procedure detail data
+// (sameAs medical refs, expectedPrognosis, etc.).
 
 function CheckIcon() {
   return (
@@ -69,6 +72,9 @@ export default function ServicePageLayout({ service }: ServicePageLayoutProps) {
         slug={service.slug}
         procedureType={PROCEDURE_TYPES[service.slug]}
       />
+
+      {/* ─── FAQ Page Schema (only if this service has FAQs) ─────────────── */}
+      <FAQPageSchema faqs={service.faqs} />
 
       {/* 1. PAGE HERO ─────────────────────────────────────────────────────── */}
       <PageHero
