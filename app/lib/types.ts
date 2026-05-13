@@ -29,8 +29,11 @@ export interface Doctor {
 export interface Testimonial {
   text: string;
   author: string;
-  rating: number;
+  name?: string;
+  rating: number;       // keep number; visual layer clamps
   source?: string;
+  reply?: string;
+  date?: string;
 }
 
 export interface Location {

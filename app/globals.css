@@ -63,6 +63,20 @@
   --color-background: #ffffff;
   --color-foreground: var(--color-navy-900);
 
+  /* ── Gradient & Shadow Tokens (Highland-style) ────────────────────────── */
+  --gradient-overlay-left:   linear-gradient(to right,
+                                oklch(0.28 0.06 252 / 0.78) 0%,
+                                oklch(0.28 0.06 252 / 0.40) 55%,
+                                oklch(0.28 0.06 252 / 0.10) 100%);
+  --gradient-overlay-bottom: linear-gradient(to top,
+                                oklch(0.28 0.06 252 / 0.85) 0%,
+                                oklch(0.28 0.06 252 / 0.25) 60%,
+                                oklch(0.28 0.06 252 / 0.00) 100%);
+  --shadow-card-soft: 0 1px 2px oklch(0.28 0.06 252 / 0.04),
+                      0 8px 24px oklch(0.28 0.06 252 / 0.06);
+  --shadow-card-lift: 0 4px 12px oklch(0.28 0.06 252 / 0.08),
+                      0 20px 40px oklch(0.28 0.06 252 / 0.10);
+
   /* ── Fonts ────────────────────────────────────────────────────────────── */
   --font-heading: var(--font-figtree);
   --font-body: var(--font-source-sans-3);
@@ -378,6 +392,163 @@ body {
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+/* ─── Highland-Style Primitives ───────────────────────────────────────────── */
+
+.banner {
+  position: relative;
+  min-height: 100svh;
+  isolation: isolate;
+}
+
+@media (min-width: 768px) {
+  .banner {
+    min-height: 88svh;
+  }
+}
+
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.banner-overlay-left {
+  background: var(--gradient-overlay-left);
+}
+
+.banner-overlay-bottom {
+  background: var(--gradient-overlay-bottom);
+}
+
+.featured-card {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  border-radius: 0.75rem;
+  isolation: isolate;
+  box-shadow: var(--shadow-card-soft);
+}
+
+.featured-card-image {
+  position: absolute;
+  inset: 0;
+}
+
+.featured-card-image img {
+  object-fit: cover;
+  transition: transform 700ms ease-out;
+  transform-origin: center;
+}
+
+.featured-card:hover .featured-card-image img {
+  transform: scale(1.05);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featured-card:hover .featured-card-image img {
+    transform: none;
+  }
+}
+
+.featured-card-body {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  padding: 1.5rem 1.75rem;
+  color: #ffffff;
+}
+
+.featured-card-body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-overlay-bottom);
+  z-index: -1;
+}
+
+.featured-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--color-gold-300);
+}
+
+.review-card {
+  background-color: #ffffff;
+  border: 1px solid var(--color-steel-200);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  box-shadow: var(--shadow-card-soft);
+}
+
+@media (min-width: 640px) {
+  .review-card {
+    padding: 2rem;
+  }
+}
+
+.review-reply {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-steel-100);
+}
+
+.office-info {
+  background-color: var(--color-gray-50);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .office-info {
+    padding: 2rem;
+  }
+}
+
+.intro-block {
+  margin-inline: auto;
+  max-width: 65ch;
+  text-align: center;
+}
+
+.intro-block > p {
+  font-size: clamp(1.0625rem, 1.5vw + 0.25rem, 1.25rem);
+  line-height: 1.65;
+  color: var(--color-gray-700);
+}
+
+.component-row {
+  display: grid;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .component-row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 4rem;
+    align-items: center;
+  }
+  .component-row.reverse > :first-child {
+    order: 2;
+  }
+}
+
+.eyebrow {
+  font-family: var(--font-heading), system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-gold-600);
+}
+
+.eyebrow-on-dark {
+  color: var(--color-gold-300);
 }
 
 } /* end @layer components */
