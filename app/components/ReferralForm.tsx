@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent, type ChangeEvent } from "react";
+import { useState, type FormEvent, type ChangeEvent, type ReactNode } from "react";
 import { cn } from "@/app/lib/utils";
 import { PRACTICE_EMAIL } from "@/app/lib/constants";
 
@@ -68,6 +68,36 @@ function formatPhoneDisplay(value: string): string {
   if (digits.length <= 3) return digits;
   if (digits.length <= 6) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
   return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6, 10)}`;
+}
+
+// ─── Reserved-slot helper text ───────────────────────────────────────────────
+// Always rendered with min-height so layout doesn't shift when errors toggle.
+
+function FieldSlot({
+  id,
+  error,
+  helper,
+}: {
+  id: string;
+  error?: string;
+  helper?: ReactNode;
+}) {
+  if (error) {
+    return (
+      <p
+        id={id}
+        role="alert"
+        className="text-sm text-red-700 mt-1 min-h-[1.25rem]"
+      >
+        {error}
+      </p>
+    );
+  }
+  return (
+    <p id={id} className="text-sm text-gray-500 mt-1 min-h-[1.25rem]">
+      {helper ?? null}
+    </p>
+  );
 }
 
 // ─── Component ───────────────────────────────────────────────────────────────
@@ -197,41 +227,23 @@ export default function ReferralForm() {
     }
   }
 
-  // ─── Success State ─────────────────────────────────────────────────────────
+  // ─── Success State (calm, text-first) ──────────────────────────────────────
 
   if (status === "success") {
     return (
-      <div className="rounded-2xl border border-green-200 bg-green-50 p-10 text-center lg:p-14">
-        {/* Checkmark icon */}
-        <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            className="h-8 w-8 text-green-600"
-            aria-hidden="true"
-          >
-            <path
-              fillRule="evenodd"
-              d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12zm13.36-1.814a.75.75 0 10-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 00-1.06 1.06l2.25 2.25a.75.75 0 001.14-.094l3.75-5.25z"
-              clipRule="evenodd"
-            />
-          </svg>
-        </div>
-        <h3 className="mb-3 font-heading text-2xl font-bold text-green-800">
-          Referral Received
-        </h3>
-        <p className="mx-auto max-w-md text-base leading-relaxed text-green-700">
-          Thank you for your referral. Our team will contact the patient within
-          1-2 business days to schedule their appointment. A confirmation will
-          be sent to your email.
+      <div className="mx-auto max-w-xl rounded-2xl border border-steel-200 bg-white p-10 text-center lg:p-14">
+        <p className="eyebrow mb-4">Referral received</p>
+        <h3 className="heading-section mb-4">Thank you — we have the referral.</h3>
+        <p className="mx-auto max-w-md text-base leading-relaxed text-gray-600">
+          Our team will contact the patient within one to two business days to
+          schedule their appointment. A confirmation will be sent to your email.
         </p>
         <button
           type="button"
           onClick={() => setStatus("idle")}
-          className="btn btn-primary mt-8"
+          className="btn btn-ghost mt-8"
         >
-          Submit Another Referral
+          Send another
         </button>
       </div>
     );
@@ -241,13 +253,17 @@ export default function ReferralForm() {
 
   const inputBaseClasses =
     "w-full rounded-lg border bg-white px-4 py-3 text-base text-navy-900 placeholder:text-gray-500 transition-colors duration-200 focus:border-navy-400 focus:outline-none focus:ring-2 focus:ring-navy-400/20";
-  const inputErrorClasses = "border-red-300 focus:border-red-400 focus:ring-red-400/20";
+  const inputErrorClasses =
+    "border-red-400 focus:border-red-500 focus:ring-red-500/20";
   const inputDefaultClasses = "border-steel-200 hover:border-steel-300";
+
+  const isSubmitting = status === "submitting";
 
   return (
     <form
       onSubmit={handleSubmit}
       noValidate
+      aria-busy={isSubmitting}
       className="space-y-10"
     >
       {/* ── Referring Doctor Information ───────────────────────────────────── */}
@@ -278,14 +294,14 @@ export default function ReferralForm() {
               onChange={handleChange}
               placeholder="Dr. John Smith"
               autoComplete="name"
+              aria-invalid={Boolean(fieldErrors.doctorName) || undefined}
+              aria-describedby="doctorName-slot"
               className={cn(
                 inputBaseClasses,
                 fieldErrors.doctorName ? inputErrorClasses : inputDefaultClasses
               )}
             />
-            {fieldErrors.doctorName && (
-              <p className="mt-1 text-xs text-red-500">{fieldErrors.doctorName}</p>
-            )}
+            <FieldSlot id="doctorName-slot" error={fieldErrors.doctorName} />
           </div>
 
           {/* Practice Name */}
@@ -324,14 +340,14 @@ export default function ReferralForm() {
               onChange={handleChange}
               placeholder="(337) 555-0100"
               autoComplete="tel"
+              aria-invalid={Boolean(fieldErrors.doctorPhone) || undefined}
+              aria-describedby="doctorPhone-slot"
               className={cn(
                 inputBaseClasses,
                 fieldErrors.doctorPhone ? inputErrorClasses : inputDefaultClasses
               )}
             />
-            {fieldErrors.doctorPhone && (
-              <p className="mt-1 text-xs text-red-500">{fieldErrors.doctorPhone}</p>
-            )}
+            <FieldSlot id="doctorPhone-slot" error={fieldErrors.doctorPhone} />
           </div>
 
           {/* Doctor Email */}
@@ -350,14 +366,14 @@ export default function ReferralForm() {
               onChange={handleChange}
               placeholder="doctor@practice.com"
               autoComplete="email"
+              aria-invalid={Boolean(fieldErrors.doctorEmail) || undefined}
+              aria-describedby="doctorEmail-slot"
               className={cn(
                 inputBaseClasses,
                 fieldErrors.doctorEmail ? inputErrorClasses : inputDefaultClasses
               )}
             />
-            {fieldErrors.doctorEmail && (
-              <p className="mt-1 text-xs text-red-500">{fieldErrors.doctorEmail}</p>
-            )}
+            <FieldSlot id="doctorEmail-slot" error={fieldErrors.doctorEmail} />
           </div>
         </div>
       </fieldset>
@@ -389,14 +405,14 @@ export default function ReferralForm() {
               value={formData.patientName}
               onChange={handleChange}
               placeholder="Jane Doe"
+              aria-invalid={Boolean(fieldErrors.patientName) || undefined}
+              aria-describedby="patientName-slot"
               className={cn(
                 inputBaseClasses,
                 fieldErrors.patientName ? inputErrorClasses : inputDefaultClasses
               )}
             />
-            {fieldErrors.patientName && (
-              <p className="mt-1 text-xs text-red-500">{fieldErrors.patientName}</p>
-            )}
+            <FieldSlot id="patientName-slot" error={fieldErrors.patientName} />
           </div>
 
           {/* Patient Phone */}
@@ -414,14 +430,14 @@ export default function ReferralForm() {
               value={formData.patientPhone}
               onChange={handleChange}
               placeholder="(337) 555-0200"
+              aria-invalid={Boolean(fieldErrors.patientPhone) || undefined}
+              aria-describedby="patientPhone-slot"
               className={cn(
                 inputBaseClasses,
                 fieldErrors.patientPhone ? inputErrorClasses : inputDefaultClasses
               )}
             />
-            {fieldErrors.patientPhone && (
-              <p className="mt-1 text-xs text-red-500">{fieldErrors.patientPhone}</p>
-            )}
+            <FieldSlot id="patientPhone-slot" error={fieldErrors.patientPhone} />
           </div>
 
           {/* Date of Birth */}
@@ -469,6 +485,8 @@ export default function ReferralForm() {
               name="reason"
               value={formData.reason}
               onChange={handleChange}
+              aria-invalid={Boolean(fieldErrors.reason) || undefined}
+              aria-describedby="reason-slot"
               className={cn(
                 inputBaseClasses,
                 fieldErrors.reason ? inputErrorClasses : inputDefaultClasses,
@@ -481,9 +499,7 @@ export default function ReferralForm() {
                 </option>
               ))}
             </select>
-            {fieldErrors.reason && (
-              <p className="mt-1 text-xs text-red-500">{fieldErrors.reason}</p>
-            )}
+            <FieldSlot id="reason-slot" error={fieldErrors.reason} />
           </div>
 
           {/* Urgency Level */}
@@ -564,7 +580,10 @@ export default function ReferralForm() {
 
       {/* ── Error Message ─────────────────────────────────────────────────── */}
       {status === "error" && errorMessage && (
-        <div className="flex items-start gap-3 rounded-lg border border-red-200 bg-red-50 p-4">
+        <div
+          role="alert"
+          className="flex items-start gap-3 rounded-lg border border-red-200 bg-red-50 p-4"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 20 20"
@@ -586,38 +605,18 @@ export default function ReferralForm() {
       <div className="pt-2">
         <button
           type="submit"
-          disabled={status === "submitting"}
+          disabled={isSubmitting}
+          aria-label={isSubmitting ? "Submitting referral" : undefined}
           className={cn(
-            "btn btn-lg w-full bg-gold-400 text-navy-900 hover:bg-gold-500 hover:shadow-lg hover:shadow-gold-400/25 sm:w-auto",
-            status === "submitting" && "cursor-not-allowed opacity-70"
+            "btn btn-secondary btn-lg w-full sm:w-auto",
+            isSubmitting && "cursor-not-allowed opacity-80"
           )}
         >
-          {status === "submitting" ? (
-            <>
-              {/* Spinner */}
-              <svg
-                className="h-5 w-5 animate-spin"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                aria-hidden="true"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                />
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                />
-              </svg>
-              Submitting Referral...
-            </>
+          {isSubmitting ? (
+            <span
+              className="skeleton inline-block h-4 w-32"
+              aria-hidden="true"
+            />
           ) : (
             "Submit Referral"
           )}

@@ -1,10 +1,13 @@
 import type { Service } from "@/app/lib/types";
+import type { FeaturedCardItem } from "@/app/components/FeaturedCardRow";
 
 export const services: Service[] = [
   {
     slug: "root-canal",
     title: "Root Canal Therapy",
     icon: "tooth",
+    image: "/images/general/dental-exam.jpg",
+    imageAlt: "Endodontist examining a patient",
     shortDescription:
       "Gentle, precise root canal treatment that saves your natural tooth and eliminates pain — often completed in a single visit.",
     fullDescription:
@@ -42,6 +45,8 @@ export const services: Service[] = [
     slug: "retreatment",
     title: "Endodontic Retreatment",
     icon: "retreatment",
+    image: "/images/services/dental-xray.jpg",
+    imageAlt: "Dental X-ray for endodontic retreatment",
     shortDescription:
       "When a previous root canal needs attention, our specialists can retreat and restore the tooth to full health.",
     fullDescription:
@@ -74,6 +79,8 @@ export const services: Service[] = [
     slug: "apicoectomy",
     title: "Apicoectomy",
     icon: "apicoectomy",
+    image: "/images/services/treatment-room.jpg",
+    imageAlt: "Surgical treatment room",
     shortDescription:
       "A microsurgical procedure to treat persistent infection at the root tip when conventional treatment isn't enough.",
     fullDescription:
@@ -106,6 +113,8 @@ export const services: Service[] = [
     slug: "cracked-teeth",
     title: "Cracked Teeth",
     icon: "cracked",
+    image: "/images/services/dental-xray.jpg",
+    imageAlt: "Dental X-ray showing a cracked tooth",
     shortDescription:
       "Expert diagnosis and treatment for cracked, fractured, or damaged teeth using advanced imaging technology.",
     fullDescription:
@@ -134,10 +143,13 @@ export const services: Service[] = [
     metaDescription:
       "Expert cracked tooth diagnosis and treatment in Lafayette, LA. Advanced CBCT 3D imaging and microscope technology. Call (337) 981-0144.",
   },
+  // FALLBACK: no trauma-specific photo in the library; using exam photo (see plan §8).
   {
     slug: "dental-trauma",
     title: "Dental Trauma",
     icon: "trauma",
+    image: "/images/general/dental-exam.jpg",
+    imageAlt: "Emergency endodontic exam",
     shortDescription:
       "Emergency endodontic care for knocked-out, displaced, or injured teeth. Time-sensitive treatment when you need it most.",
     fullDescription:
@@ -170,6 +182,8 @@ export const services: Service[] = [
     slug: "cbct-imaging",
     title: "CBCT 3D Imaging",
     icon: "cbct",
+    image: "/images/services/dental-chair.jpg",
+    imageAlt: "Modern dental chair with imaging equipment",
     shortDescription:
       "State-of-the-art cone beam CT scanning provides detailed 3D images with up to 90% less radiation than medical CT scans.",
     fullDescription:
@@ -202,6 +216,22 @@ export const services: Service[] = [
 
 export function getServiceBySlug(slug: string): Service | undefined {
   return services.find((s) => s.slug === slug);
+}
+
+/**
+ * Project each service into a Highland-style photo-led card item.
+ * Used by both the /services index and the related-services row on each detail page.
+ */
+export function servicesAsFeaturedCards(
+  source: Service[] = services
+): FeaturedCardItem[] {
+  return source.map((s) => ({
+    mode: "link",
+    title: s.title,
+    href: `/services/${s.slug}`,
+    image: s.image,
+    imageAlt: s.imageAlt,
+  }));
 }
 
 export default services;

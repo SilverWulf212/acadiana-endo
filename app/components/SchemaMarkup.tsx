@@ -7,6 +7,7 @@ import {
   LOCATION_LAFAYETTE,
   LOCATION_NEW_IBERIA,
 } from "@/app/lib/constants";
+import type { FAQ } from "@/app/lib/types";
 
 export function LocalBusinessSchema() {
   // Primary location (Lafayette) as main entity, with New Iberia as a department
@@ -227,6 +228,38 @@ export function ServiceSchema({
       "@type": "MedicalSpecialty",
       name: "Endodontics",
     },
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+    />
+  );
+}
+
+// ─── FAQ Page Schema ──────────────────────────────────────────────────────────
+// Emits a FAQPage block for use on service detail pages (plan §12). Reusable
+// anywhere a list of Q/A pairs is rendered visually.
+
+interface FAQPageSchemaProps {
+  faqs: FAQ[];
+}
+
+export function FAQPageSchema({ faqs }: FAQPageSchemaProps) {
+  if (!faqs || faqs.length === 0) return null;
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
   };
 
   return (

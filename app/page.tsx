@@ -1,603 +1,132 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import Image from "next/image";
-import dynamic from "next/dynamic";
 
-import HeroCarousel from "@/app/components/HeroCarousel";
-import StatsStrip from "@/app/components/StatsStrip";
-import ScrollReveal from "@/app/components/ScrollReveal";
-import ServiceCard from "@/app/components/ServiceCard";
-import DoctorCard from "@/app/components/DoctorCard";
+import Banner from "@/app/components/Banner";
+import IntroBlock from "@/app/components/IntroBlock";
+import FeaturedCardRow from "@/app/components/FeaturedCardRow";
+import ReviewGrid from "@/app/components/ReviewGrid";
+import LocationsBlock from "@/app/components/LocationsBlock";
 import CTASection from "@/app/components/CTASection";
-import ParallaxStats from "@/app/components/ParallaxStats";
 
-const TestimonialCarousel = dynamic(
-  () => import("@/app/components/TestimonialCarousel")
-);
 import { testimonials } from "@/app/data/testimonials";
-import { doctors } from "@/app/data/doctors";
+import {
+  homeEntryPoints,
+  homeProcedureSpotlights,
+} from "@/app/data/homeFeatured";
 import { PHONE_LAFAYETTE } from "@/app/lib/constants";
 
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
+const pageTitle =
+  "Acadiana Endodontics — Specialist Root Canal Care in Lafayette & New Iberia, LA";
+const pageDescription =
+  "Board-certified endodontists in Lafayette and New Iberia, LA. Gentle root canal therapy, retreatment, apicoectomy, and microsurgery. Request an appointment online.";
+const ogImage = "/images/office/hero-dentist-patient.webp";
+
 export const metadata: Metadata = {
-  title:
-    "Acadiana Endodontics | Expert Root Canal Treatment in Lafayette, LA",
-  description:
-    "Board-certified endodontists in Lafayette, LA. Gentle root canal therapy, retreatment, apicoectomy & emergency care with CBCT 3D imaging. Call (337) 981-0144.",
+  title: pageTitle,
+  description: pageDescription,
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: "Acadiana Endodontics | Root Canal Specialist in Lafayette, LA",
-    description:
-      "Board-certified endodontists in Lafayette, LA. Gentle root canal therapy, retreatment, apicoectomy & emergency care with CBCT 3D imaging.",
+    type: "website",
+    locale: "en_US",
+    url: "/",
+    siteName: "Acadiana Endodontics",
+    title: pageTitle,
+    description: pageDescription,
+    images: [
+      {
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: "Acadiana Endodontics — Dr. Fowler with a patient in the treatment room",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: pageTitle,
+    description: pageDescription,
+    images: [ogImage],
   },
 };
 
-// ─── Service Data (inline; will move to data file in Task 5) ──────────────────
+// ─── Phone helpers ───────────────────────────────────────────────────────────
 
-const services = [
-  {
-    title: "Root Canal Therapy",
-    slug: "root-canal",
-    icon: "tooth",
-    backgroundImage: "/images/general/dental-exam.jpg",
-    shortDescription:
-      "Gentle, precise root canal treatment that saves your natural tooth and eliminates pain — often completed in a single visit.",
-  },
-  {
-    title: "Endodontic Retreatment",
-    slug: "retreatment",
-    icon: "retreatment",
-    backgroundImage: "/images/services/dental-xray.jpg",
-    shortDescription:
-      "When a previous root canal needs attention, our specialists can retreat and restore the tooth to full health.",
-  },
-  {
-    title: "Apicoectomy",
-    slug: "apicoectomy",
-    icon: "apicoectomy",
-    backgroundImage: "/images/services/dental-chair.jpg",
-    shortDescription:
-      "A microsurgical procedure to treat persistent infection at the root tip when conventional treatment isn't enough.",
-  },
-  {
-    title: "Cracked Teeth",
-    slug: "cracked-teeth",
-    icon: "cracked",
-    backgroundImage: "/images/services/dental-xray.jpg",
-    shortDescription:
-      "Expert diagnosis and treatment for cracked, fractured, or damaged teeth using advanced imaging technology.",
-  },
-  {
-    title: "Dental Trauma",
-    slug: "dental-trauma",
-    icon: "trauma",
-    backgroundImage: "/images/general/dental-exam.jpg",
-    shortDescription:
-      "Emergency endodontic care for knocked-out, displaced, or injured teeth. Time-sensitive treatment when you need it most.",
-  },
-  {
-    title: "CBCT 3D Imaging",
-    slug: "cbct-imaging",
-    icon: "cbct",
-    backgroundImage: "/images/services/dental-chair.jpg",
-    shortDescription:
-      "State-of-the-art cone beam CT scanning provides detailed 3D images with up to 90% less radiation than medical CT scans.",
-  },
-];
+const phoneTelHref = `tel:+1${PHONE_LAFAYETTE.replace(/\D/g, "")}`;
+const phoneCtaLabel = `Call ${PHONE_LAFAYETTE}`;
 
 // ─── Homepage ─────────────────────────────────────────────────────────────────
 
 export default function HomePage() {
-  const phoneHref = `tel:${PHONE_LAFAYETTE.replace(/[^\d+]/g, "")}`;
-
   return (
     <>
-      {/* ════════════════════════════════════════════════════════════════════════
-          1. HERO CAROUSEL
-          ════════════════════════════════════════════════════════════════════════ */}
-      <HeroCarousel />
+      {/* 1. BANNER ─────────────────────────────────────────────────────────── */}
+      <Banner
+        eyebrow="LAFAYETTE · NEW IBERIA"
+        heading="Acadiana Endodontics"
+        tagline="Specialist care for saving your natural teeth — Lafayette and New Iberia, Louisiana."
+        primaryCta={{
+          label: "Request an Appointment",
+          href: "/contact",
+        }}
+        secondaryCta={{
+          label: phoneCtaLabel,
+          href: phoneTelHref,
+        }}
+        image="/images/office/hero-dentist-patient.webp"
+        imageAlt="Dr. Fowler with a patient in the treatment room"
+        overlay="left"
+        align="left"
+        height="full"
+      />
 
-      {/* ════════════════════════════════════════════════════════════════════════
-          2. STATS STRIP
-          ════════════════════════════════════════════════════════════════════════ */}
-      <StatsStrip />
+      {/* 2. INTRO BLOCK ─────────────────────────────────────────────────────── */}
+      <IntroBlock eyebrow="BOARD-CERTIFIED ENDODONTISTS">
+        <p className="text-lead text-gray-700">
+          Dr. Robert Fowler and Dr. James Reaves are members of the American
+          Association of Endodontists, serving Acadiana with advanced root
+          canal therapy, retreatment, and microsurgery. Two convenient
+          locations, focused exclusively on saving your natural teeth.
+        </p>
+      </IntroBlock>
 
-      {/* ════════════════════════════════════════════════════════════════════════
-          3. PROBLEM / SOLUTION — Why Choose a Specialist?
-          ════════════════════════════════════════════════════════════════════════ */}
-      <section className="section bg-white">
-        <div className="container">
-          <ScrollReveal>
-            <div className="mx-auto mb-12 max-w-2xl text-center lg:mb-16">
-              <div className="accent-bar mx-auto mb-4" />
-              <h2 className="heading-section">
-                Why Choose a Root Canal Specialist?
-              </h2>
-            </div>
-          </ScrollReveal>
+      {/* 3. ENTRY POINTS — What to expect ──────────────────────────────────── */}
+      <FeaturedCardRow
+        eyebrow="GETTING STARTED"
+        heading="What to expect"
+        items={homeEntryPoints}
+      />
 
-          {/* Two-column: Image + Problem/Solution cards */}
-          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
-            {/* Image column — Dr. Fowler at microscope */}
-            <ScrollReveal animation="slide-in-left" delay={100} className="lg:col-span-5">
-              <div className="relative overflow-hidden rounded-2xl shadow-xl">
-                <Image
-                  src="/images/general/dental-exam.jpg"
-                  alt="Board-certified endodontist in Lafayette LA performing a thorough dental examination with advanced microscope equipment"
-                  width={1097}
-                  height={800}
-                  sizes="(max-width: 1024px) 100vw, 42vw"
-                  className="h-auto w-full object-cover"
-                />
-                {/* Caption overlay */}
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy-900/80 to-transparent px-6 pb-5 pt-12">
-                  <p className="font-heading text-sm font-semibold text-white">
-                    Precision Under the Microscope
-                  </p>
-                  <p className="mt-1 text-xs text-navy-200">
-                    Our specialists use advanced surgical microscopes for every procedure
-                  </p>
-                </div>
-              </div>
-            </ScrollReveal>
+      {/* 4. PROCEDURE SPOTLIGHTS — Treatments we provide ───────────────────── */}
+      <FeaturedCardRow
+        eyebrow="OUR SPECIALTIES"
+        heading="Treatments we provide"
+        items={homeProcedureSpotlights}
+      />
 
-            {/* Problem / Solution cards column */}
-            <div className="space-y-8 lg:col-span-7">
-              {/* Problem side */}
-              <ScrollReveal animation="slide-in-right" delay={200}>
-                <div className="relative rounded-2xl bg-gray-50 p-5 sm:p-8 lg:p-10">
-                  {/* Red accent */}
-                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-red-50">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-7 w-7 text-red-400" aria-hidden="true">
-                      <path fillRule="evenodd" d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003zM12 8.25a.75.75 0 01.75.75v3.75a.75.75 0 01-1.5 0V9a.75.75 0 01.75-.75zm0 8.25a.75.75 0 100-1.5.75.75 0 000 1.5z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <h3 className="heading-subsection mb-4 !text-navy-800">
-                    The Problem with General Treatment
-                  </h3>
-                  <ul className="space-y-3">
-                    {[
-                      "Dental anxiety prevents millions from seeking needed care",
-                      "General dentists perform root canals occasionally — specialists perform them daily",
-                      "Outdated equipment can miss hidden canals and complex anatomy",
-                      "Delayed treatment leads to tooth loss, infection, and higher costs",
-                    ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-3 text-gray-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="mt-0.5 h-5 w-5 shrink-0 text-red-300" aria-hidden="true">
-                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clipRule="evenodd" />
-                        </svg>
-                        <span className="text-sm leading-relaxed">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </ScrollReveal>
+      {/* 5. PATIENT REVIEWS ─────────────────────────────────────────────────── */}
+      <ReviewGrid
+        eyebrow="WHAT OUR PATIENTS SAY"
+        heading="Care, in their own words"
+        testimonials={testimonials}
+        columns={2}
+      />
 
-              {/* Solution side */}
-              <ScrollReveal animation="slide-in-right" delay={300}>
-                <div className="relative rounded-2xl border-2 border-gold-200 bg-gold-50/50 p-5 sm:p-8 lg:p-10">
-                  {/* Gold accent */}
-                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-gold-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-7 w-7 text-gold-600" aria-hidden="true">
-                      <path fillRule="evenodd" d="M8.603 3.799A4.49 4.49 0 0112 2.25c1.357 0 2.573.6 3.397 1.549a4.49 4.49 0 013.498 1.307 4.491 4.491 0 011.307 3.497A4.49 4.49 0 0121.75 12a4.49 4.49 0 01-1.549 3.397 4.491 4.491 0 01-1.307 3.497 4.491 4.491 0 01-3.497 1.307A4.49 4.49 0 0112 21.75a4.49 4.49 0 01-3.397-1.549 4.49 4.49 0 01-3.498-1.306 4.491 4.491 0 01-1.307-3.498A4.49 4.49 0 012.25 12c0-1.357.6-2.573 1.549-3.397a4.49 4.49 0 011.307-3.497 4.49 4.49 0 013.497-1.307z" clipRule="evenodd" />
-                    </svg>
-                  </div>
-                  <h3 className="heading-subsection mb-4 !text-navy-800">
-                    The Acadiana Endodontics Difference
-                  </h3>
-                  <ul className="space-y-3">
-                    {[
-                      "Board-certified specialists who focus exclusively on saving teeth",
-                      "Advanced CBCT 3D imaging reveals what standard X-rays miss",
-                      "Gentle approach with modern anesthesia — most patients feel no pain",
-                      "Two convenient locations serving Lafayette and New Iberia",
-                    ].map((item, i) => (
-                      <li key={i} className="flex items-start gap-3 text-navy-700">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="mt-0.5 h-5 w-5 shrink-0 text-gold-500" aria-hidden="true">
-                          <path fillRule="evenodd" d="M16.403 12.652a3 3 0 000-5.304 3 3 0 00-3.75-3.751 3 3 0 00-5.305 0 3 3 0 00-3.751 3.75 3 3 0 000 5.305 3 3 0 003.75 3.751 3 3 0 005.305 0 3 3 0 003.751-3.75zm-2.546-4.46a.75.75 0 00-1.214-.883l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
-                        </svg>
-                        <span className="text-sm leading-relaxed">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </ScrollReveal>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* 6. LOCATIONS ───────────────────────────────────────────────────────── */}
+      <LocationsBlock
+        eyebrow="VISIT US"
+        heading="Two locations across Acadiana"
+        showMaps={false}
+      />
 
-      {/* ════════════════════════════════════════════════════════════════════════
-          4. SERVICES GRID
-          ════════════════════════════════════════════════════════════════════════ */}
-      <section className="section bg-gray-50">
-        <div className="container">
-          <ScrollReveal>
-            <div className="mx-auto mb-12 max-w-2xl text-center lg:mb-16">
-              <div className="accent-bar mx-auto mb-4" />
-              <h2 className="heading-section">Our Services</h2>
-              <p className="text-lead mt-4">
-                Comprehensive endodontic care with advanced technology and a
-                gentle touch
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service, i) => (
-              <ScrollReveal key={service.slug} delay={i * 100} animation="scale-in">
-                <ServiceCard
-                  title={service.title}
-                  shortDescription={service.shortDescription}
-                  slug={service.slug}
-                  icon={service.icon}
-                  backgroundImage={service.backgroundImage}
-                />
-              </ScrollReveal>
-            ))}
-          </div>
-
-          <ScrollReveal delay={600}>
-            <div className="mt-12 text-center">
-              <Link
-                href="/services"
-                className="btn btn-outline btn-lg"
-              >
-                View All Services
-              </Link>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════════════════
-          4b. PARALLAX IMAGE BREAK — Confident Smile
-          ════════════════════════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden py-16 sm:py-0 sm:h-[420px] lg:h-[500px]">
-        {/* Background image with parallax-style fixed attachment */}
-        <Image
-          src="/images/general/happy-patient.jpg"
-          alt="Patient with a confident, healthy smile after root canal treatment at Acadiana Endodontics in Lafayette LA"
-          fill
-          sizes="100vw"
-          className="object-cover"
-          style={{ objectPosition: "center 40%" }}
-        />
-        {/* Dark overlay */}
-        <div className="absolute inset-0 bg-navy-900/65" />
-        {/* Content */}
-        <div className="container relative flex h-full flex-col items-center justify-center text-center">
-          <ScrollReveal>
-            <div className="mx-auto max-w-3xl">
-              <div className="mx-auto mb-6 h-1 w-16 rounded-full bg-gold-400" />
-              <blockquote className="font-heading text-xl font-bold leading-snug text-white sm:text-2xl md:text-3xl lg:text-4xl">
-                &ldquo;Nothing looks, feels, or functions like your natural tooth. Our mission is to help you keep it.&rdquo;
-              </blockquote>
-              <ParallaxStats />
-              {/* Staff photo row */}
-              <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:mt-8 sm:flex-row">
-                <div className="flex -space-x-3">
-                  {[
-                    { src: "/images/doctors/dr-fowler.jpg", alt: "Dr. Robert Fowler, board-certified endodontist in Lafayette LA" },
-                    { src: "/images/doctors/dr-reaves.jpg", alt: "Dr. James Reaves, root canal specialist at Acadiana Endodontics" },
-                    { src: "/images/office/dentist-female.png", alt: "Acadiana Endodontics dental team member" },
-                    { src: "/images/office/assistant-male.png", alt: "Acadiana Endodontics dental assistant" },
-                    { src: "/images/office/hygienist-smiling.png", alt: "Acadiana Endodontics hygienist" },
-                    { src: "/images/office/hygienist-teal.png", alt: "Acadiana Endodontics clinical staff member" },
-                  ].map((person, i) => (
-                    <div key={i} className="relative h-9 w-9 overflow-hidden rounded-full border-2 border-white/80 shadow-sm sm:h-10 sm:w-10">
-                      <Image
-                        src={person.src}
-                        alt={person.alt}
-                        width={80}
-                        height={80}
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                  ))}
-                </div>
-                <p className="text-sm font-medium text-gold-200">Your dedicated care team</p>
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════════════════
-          5. MEET OUR DOCTORS
-          ════════════════════════════════════════════════════════════════════════ */}
-      <section className="section bg-white">
-        <div className="container">
-          <ScrollReveal>
-            <div className="mx-auto mb-12 max-w-2xl text-center lg:mb-16">
-              <div className="accent-bar mx-auto mb-4" />
-              <h2 className="heading-section">Meet Our Doctors</h2>
-              <p className="text-lead mt-4">
-                Our board-certified endodontists combine decades of expertise
-                with genuine compassion for every patient
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <div className="mx-auto grid max-w-4xl gap-8 md:grid-cols-2">
-            {doctors.map((doctor, i) => (
-              <ScrollReveal key={doctor.name} delay={i * 150} animation="fade-up">
-                <DoctorCard
-                  name={doctor.name}
-                  credentials={doctor.credentials}
-                  title={doctor.title}
-                  bio={doctor.bio}
-                  imageUrl={doctor.imageUrl}
-                />
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════════════════
-          6. TECHNOLOGY SHOWCASE
-          ════════════════════════════════════════════════════════════════════════ */}
-      <section className="section bg-gray-50">
-        <div className="container">
-          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-            {/* Text column */}
-            <ScrollReveal animation="slide-in-left">
-              <div>
-                <div className="accent-bar mb-4" />
-                <h2 className="heading-section mb-6">
-                  State-of-the-Art Technology
-                </h2>
-                <p className="text-lead mb-8">
-                  Our CBCT 3D imaging system provides detailed, three-dimensional
-                  views of your teeth and surrounding structures — revealing
-                  hidden canals, fractures, and infections that traditional X-rays
-                  can miss.
-                </p>
-                <ul className="space-y-4 mb-8">
-                  {[
-                    {
-                      title: "Up to 90% Less Radiation",
-                      desc: "Significantly lower dose compared to traditional medical CT scans",
-                    },
-                    {
-                      title: "Precise 3D Visualization",
-                      desc: "See every angle of the tooth structure for accurate diagnosis",
-                    },
-                    {
-                      title: "Faster, More Accurate Treatment",
-                      desc: "Better imaging means fewer surprises and better outcomes",
-                    },
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-start gap-3">
-                      <div className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-gold-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-4 w-4 text-gold-600" aria-hidden="true">
-                          <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                      <div>
-                        <p className="font-heading text-sm font-semibold text-navy-800">
-                          {item.title}
-                        </p>
-                        <p className="text-sm text-gray-600">{item.desc}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-                <Link
-                  href="/services/cbct-imaging"
-                  className="btn btn-primary"
-                >
-                  Learn More About CBCT
-                </Link>
-              </div>
-            </ScrollReveal>
-
-            {/* Image column — treatment room with modern equipment */}
-            <ScrollReveal animation="slide-in-right" delay={150}>
-              <div className="relative">
-                {/* Decorative frame */}
-                <div className="absolute -inset-4 rounded-2xl border-2 border-dashed border-gold-200/60" />
-                <div className="relative overflow-hidden rounded-2xl shadow-xl">
-                  <Image
-                    src="/images/services/dental-chair.jpg"
-                    alt="Modern endodontic treatment room with CBCT 3D imaging and advanced dental equipment at Acadiana Endodontics Lafayette"
-                    width={1280}
-                    height={1920}
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="h-auto w-full object-cover"
-                  />
-                  {/* Floating badge overlay */}
-                  <div className="absolute bottom-6 left-6 right-6 rounded-xl bg-white/90 p-4 shadow-lg backdrop-blur-sm">
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-navy-100">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-5 w-5 text-navy-600" aria-hidden="true">
-                          <path d="M3 3h5v2H5v3H3V3Zm13 0h5v5h-2V5h-3V3ZM3 16h2v3h3v2H3v-5Zm16 0h2v5h-5v-2h3v-3ZM7 7h10v10H7V7Zm2 2v6h6V9H9Z" />
-                        </svg>
-                      </div>
-                      <div>
-                        <p className="font-heading text-sm font-semibold text-navy-800">
-                          CBCT 3D Imaging On-Site
-                        </p>
-                        <p className="text-xs text-gray-600">
-                          Advanced cone beam computed tomography
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════════════════
-          7. TESTIMONIALS
-          ════════════════════════════════════════════════════════════════════════ */}
-      <section className="section bg-white">
-        <div className="container">
-          <ScrollReveal>
-            <div className="mx-auto mb-12 max-w-2xl text-center lg:mb-16">
-              <div className="accent-bar mx-auto mb-4" />
-              <h2 className="heading-section">What Our Patients Say</h2>
-              <p className="text-lead mt-4">
-                Real reviews from real patients — see why Acadiana trusts us with
-                their smiles
-              </p>
-            </div>
-          </ScrollReveal>
-
-          <ScrollReveal delay={200}>
-            <TestimonialCarousel testimonials={testimonials} />
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════════════════
-          8. FOR REFERRING DOCTORS
-          ════════════════════════════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden bg-navy-800 py-16 lg:py-24">
-        {/* Background photo — office exterior at sunset */}
-        <Image
-          src="/images/office/lafayette-exterior.jpg"
-          alt="Acadiana Endodontics office exterior in Lafayette LA — endodontist and root canal specialist serving Acadiana"
-          fill
-          sizes="100vw"
-          className="object-cover"
-          style={{ objectPosition: "center 60%" }}
-        />
-        {/* Dark overlay to keep text legible */}
-        <div className="absolute inset-0 bg-navy-900/80" />
-        <div className="absolute inset-0 bg-gradient-to-br from-navy-900/40 via-transparent to-navy-700/30" />
-        <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-gold-400/5" />
-        <div className="absolute -bottom-16 -left-16 h-64 w-64 rounded-full bg-gold-400/5" />
-
-        <div className="container relative">
-          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-            {/* Text */}
-            <ScrollReveal animation="slide-in-left">
-              <div>
-                <div className="mb-4 h-1 w-12 rounded-full bg-gold-400" />
-                <h2 className="heading-section mb-6 !text-white">
-                  For Referring Doctors
-                </h2>
-                <p className="mb-8 text-lg leading-relaxed text-navy-200">
-                  We value our relationships with referring dentists and make the
-                  referral process as seamless as possible. Your patients are in
-                  expert hands.
-                </p>
-                <ul className="space-y-4">
-                  {[
-                    "Same-day emergency appointments available",
-                    "Detailed treatment reports sent promptly",
-                    "Easy online and fax referral options",
-                    "Direct line for doctor-to-doctor consultations",
-                  ].map((item, i) => (
-                    <li
-                      key={i}
-                      className="flex items-center gap-3 text-navy-100"
-                    >
-                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5 shrink-0 text-gold-400" aria-hidden="true">
-                        <path fillRule="evenodd" d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z" clipRule="evenodd" />
-                      </svg>
-                      <span className="text-sm">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </ScrollReveal>
-
-            {/* CTA card */}
-            <ScrollReveal animation="slide-in-right" delay={150}>
-              <div className="rounded-2xl border border-navy-600/50 bg-navy-700/50 p-5 text-center backdrop-blur-sm sm:p-8 lg:p-10">
-                <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gold-400/10">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="h-8 w-8 text-gold-400" aria-hidden="true">
-                    <path d="M7.5 3.375c0-1.036.84-1.875 1.875-1.875h.375a3.75 3.75 0 013.75 3.75v1.875C13.5 8.161 14.34 9 15.375 9h1.875A3.75 3.75 0 0121 12.75v3.375C21 17.16 20.16 18 19.125 18h-9.75A1.875 1.875 0 017.5 16.125V3.375z" />
-                    <path d="M15 5.25a5.23 5.23 0 00-1.279-3.434 9.768 9.768 0 016.963 6.963A5.23 5.23 0 0017.25 7.5h-1.875A.375.375 0 0115 7.125V5.25zM4.875 6H6v10.125A3.375 3.375 0 009.375 19.5H16.5v1.125c0 1.035-.84 1.875-1.875 1.875h-9.75A1.875 1.875 0 013 20.625V7.875C3 6.839 3.84 6 4.875 6z" />
-                  </svg>
-                </div>
-                <h3 className="mb-3 font-heading text-xl font-bold text-white">
-                  Streamlined Referral Process
-                </h3>
-                <p className="mb-8 text-sm leading-relaxed text-navy-200">
-                  Our dedicated referral coordinator ensures a smooth experience for
-                  both you and your patients. We keep you informed every step of the
-                  way.
-                </p>
-                <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
-                  <Link
-                    href="/referring-doctors"
-                    className="btn btn-lg bg-gold-400 text-navy-900 hover:bg-gold-500"
-                  >
-                    Refer a Patient
-                  </Link>
-                  <a
-                    href={phoneHref}
-                    className="btn btn-lg border-white/25 text-white hover:bg-white/10"
-                  >
-                    Call Us Directly
-                  </a>
-                </div>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════════════════
-          9. INSURANCE / PAYMENT STRIP
-          ════════════════════════════════════════════════════════════════════════ */}
-      <section className="border-y border-steel-100 bg-gray-50 py-12 lg:py-16">
-        <div className="container">
-          <ScrollReveal>
-            <div className="flex flex-col items-center gap-8 text-center lg:flex-row lg:justify-between lg:text-left">
-              {/* Left text */}
-              <div>
-                <h2 className="font-heading text-xl font-bold text-navy-800 lg:text-2xl">
-                  We Accept Most Major Insurance Plans
-                </h2>
-                <p className="mt-2 text-sm text-gray-600">
-                  Our team will help verify your coverage and maximize your
-                  benefits. CareCredit financing also available.
-                </p>
-              </div>
-
-              {/* Insurance brand marks */}
-              <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 lg:gap-8">
-                {[
-                  { name: "Delta Dental", color: "#005A9C" },
-                  { name: "Cigna", color: "#C85A18" },
-                  { name: "Aetna", color: "#6A3580" },
-                  { name: "MetLife", color: "#007A3A" },
-                  { name: "CareCredit", color: "#008573" },
-                ].map((ins) => (
-                  <div
-                    key={ins.name}
-                    className="flex h-11 items-center justify-center rounded-lg bg-white px-4 shadow-sm transition-all duration-200 hover:scale-105 hover:shadow-md sm:h-14 sm:px-6"
-                  >
-                    <span className="text-sm font-bold tracking-tight sm:text-base" style={{ color: ins.color }}>
-                      {ins.name}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ════════════════════════════════════════════════════════════════════════
-          10. FINAL CTA
-          ════════════════════════════════════════════════════════════════════════ */}
+      {/* 7. FINAL CTA (existing component; quieted further in Task 6) ──────── */}
       <CTASection
-        title="Ready to Save Your Smile?"
-        description="Our specialists are here to help. Schedule your appointment today or call us for immediate assistance."
-        primaryCTA={{ label: "Request Appointment", href: "/contact" }}
-        secondaryCTA={{ label: "Call (337) 981-0144", href: "tel:3379810144" }}
+        title="Ready to save your tooth?"
+        description="Request an appointment online, or call us during business hours."
+        primaryCTA={{ label: "Request an Appointment", href: "/contact" }}
+        secondaryCTA={{ label: phoneCtaLabel, href: phoneTelHref }}
       />
     </>
   );

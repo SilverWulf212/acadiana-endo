@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   PRACTICE_NAME,
   PRACTICE_EMAIL,
@@ -8,6 +9,7 @@ import {
   LOCATION_NEW_IBERIA,
   SERVICE_LINKS,
 } from "@/app/lib/constants";
+import { formatAddress, getHoursSummary } from "@/app/lib/utils";
 
 const quickLinks = [
   { label: "Home", href: "/" },
@@ -17,26 +19,6 @@ const quickLinks = [
   { label: "Contact", href: "/contact" },
   { label: "FAQ", href: "/faq" },
 ];
-
-function formatAddress(loc: typeof LOCATION_LAFAYETTE) {
-  return `${loc.address}, ${loc.city}, ${loc.state} ${loc.zip}`;
-}
-
-function getHoursSummary(loc: typeof LOCATION_LAFAYETTE) {
-  const openDays = loc.hours.filter((h) => h.hours !== "Closed");
-  if (openDays.length === 0) return "By appointment";
-  if (openDays.length === 1) {
-    return `${openDays[0].day}: ${openDays[0].hours}`;
-  }
-  // Check for consecutive days with same hours
-  const firstDay = openDays[0].day;
-  const lastDay = openDays[openDays.length - 1].day;
-  const sameHours = openDays.every((d) => d.hours === openDays[0].hours);
-  if (sameHours) {
-    return `${firstDay}–${lastDay}: ${openDays[0].hours}`;
-  }
-  return openDays.map((d) => `${d.day}: ${d.hours}`).join(", ");
-}
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -186,6 +168,20 @@ export default function Footer() {
             <p className="text-xs font-medium tracking-wide text-navy-200">
               Proudly Serving Acadiana
             </p>
+          </div>
+
+          {/* Built by SilverWulf */}
+          <div className="mt-6 flex items-center justify-center gap-2 text-navy-200/80">
+            <Image
+              src="/silverwulf-logo.png"
+              alt="SilverWulf"
+              width={20}
+              height={20}
+              className="h-5 w-5 opacity-80"
+            />
+            <span className="text-[11px] tracking-widest uppercase">
+              Built by SilverWulf
+            </span>
           </div>
         </div>
       </div>
