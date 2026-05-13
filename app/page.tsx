@@ -77,7 +77,7 @@ export default function HomePage() {
         }}
         image="/images/office/hero-dentist-patient.webp"
         imageAlt="Dr. Fowler with a patient in the treatment room"
-        overlay="left"
+        overlay="left-soft"
         align="left"
         height="full"
       />

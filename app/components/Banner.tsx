@@ -13,7 +13,7 @@ type BannerProps = {
   primaryCta: { label: string; href: string };
   secondaryCta?: { label: string; href: string };
   align?: "left" | "center";
-  overlay?: "left" | "bottom";
+  overlay?: "left" | "left-soft" | "bottom";
   height?: "full" | "tall";
   priority?: boolean;
 };
@@ -45,7 +45,11 @@ export default function Banner({
       : "items-start text-left";
 
   const overlayClass =
-    overlay === "bottom" ? "banner-overlay-bottom" : "banner-overlay-left";
+    overlay === "bottom"
+      ? "banner-overlay-bottom"
+      : overlay === "left-soft"
+        ? "banner-overlay-left-soft"
+        : "banner-overlay-left";
 
   return (
     <section
