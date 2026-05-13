@@ -89,7 +89,6 @@ function AnchorRow({
           {/* Copy */}
           <div>
             <h2 className="heading-section">{heading}</h2>
-            <div className="accent-bar mt-4" aria-hidden="true" />
             <div className="mt-6 space-y-4 text-base leading-relaxed text-gray-700">
               {children}
             </div>

@@ -57,7 +57,7 @@ export default function PageHero({
       />
 
       <div
-        className="banner-overlay banner-overlay-left"
+        className="banner-overlay banner-overlay-left-soft"
         aria-hidden="true"
       />
 

@@ -115,7 +115,6 @@ export default function FeaturedCardRow({
           {heading && (
             <h2 className="heading-section mt-3">{heading}</h2>
           )}
-          {heading && <div className="accent-bar mx-auto mt-4" />}
         </div>
       )}
 

@@ -61,7 +61,6 @@ export default function DoctorCard({
           <div>
             <p className="eyebrow">{eyebrow}</p>
             <h2 className="heading-section mt-3">{name}</h2>
-            <div className="accent-bar mt-4" aria-hidden="true" />
 
             {/* Bio — first paragraph as lead, remaining as body */}
             <div className="mt-6">

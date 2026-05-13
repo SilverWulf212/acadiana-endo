@@ -114,7 +114,6 @@ export default function ReferringDoctorsPage() {
           <div className="mb-10 text-center sm:mb-14">
             <p className="eyebrow">SUBMIT A REFERRAL</p>
             <h2 className="heading-section mt-3">Refer a patient</h2>
-            <div className="accent-bar mx-auto mt-4" />
           </div>
 
           <ReferralForm />

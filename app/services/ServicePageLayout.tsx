@@ -142,7 +142,6 @@ export default function ServicePageLayout({ service }: ServicePageLayoutProps) {
                 <h2 className="heading-section mt-3">
                   Benefits of {service.title.toLowerCase()} with our specialists
                 </h2>
-                <div className="accent-bar mx-auto mt-4" aria-hidden="true" />
               </div>
 
               <div className="card-flat mt-10">
@@ -173,7 +172,6 @@ export default function ServicePageLayout({ service }: ServicePageLayoutProps) {
                 <h2 className="heading-section mt-3">
                   Questions about {service.title}
                 </h2>
-                <div className="accent-bar mx-auto mt-4" aria-hidden="true" />
               </div>
 
               <div className="mt-10">

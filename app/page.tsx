@@ -80,6 +80,7 @@ export default function HomePage() {
         overlay="left-soft"
         align="left"
         height="full"
+        credentials="MEMBER · AMERICAN ASSOCIATION OF ENDODONTISTS"
       />
 
       {/* 2. INTRO BLOCK ─────────────────────────────────────────────────────── */}

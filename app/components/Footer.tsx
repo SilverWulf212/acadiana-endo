@@ -24,31 +24,31 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative bg-navy-800 text-white" role="contentinfo">
+    <footer className="relative bg-cream-50 text-navy-700" role="contentinfo">
       {/* Decorative top accent */}
       <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-gold-400 via-gold-300 to-gold-400" />
 
-      <div className="container pt-16 pb-20 sm:pb-8">
+      <div className="container pt-12 pb-12 sm:pb-8">
         {/* Columns */}
         <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
           {/* Column 1: About */}
           <div>
             <div className="mb-4">
-              <span className="font-heading text-xl font-bold tracking-tight text-white">
+              <span className="font-heading text-xl font-bold tracking-tight text-navy-800">
                 Acadiana{" "}
               </span>
-              <span className="font-heading text-xl font-light tracking-tight text-gold-400">
+              <span className="font-heading text-xl font-light tracking-tight text-gold-700">
                 Endodontics
               </span>
             </div>
-            <p className="mb-4 text-sm leading-relaxed text-navy-200">
+            <p className="mb-4 text-sm leading-relaxed text-navy-600">
               Serving the Acadiana region with expert endodontic care. Our
               specialists are dedicated to saving your natural teeth with gentle,
               advanced treatment.
             </p>
             <Link
               href="/about"
-              className="link-underline inline-flex items-center gap-1 text-sm font-medium text-gold-400 transition-colors duration-200 hover:text-gold-300"
+              className="link-underline inline-flex items-center gap-1 text-sm font-medium text-navy-700 transition-colors duration-200 hover:text-navy-800"
             >
               Learn more about us
               <svg
@@ -69,7 +69,7 @@ export default function Footer() {
 
           {/* Column 2: Quick Links */}
           <div>
-            <h3 className="mb-5 font-heading text-sm font-semibold uppercase tracking-widest text-gold-400">
+            <h3 className="mb-5 font-heading text-sm font-semibold uppercase tracking-widest text-navy-800">
               Quick Links
             </h3>
             <ul className="space-y-1">
@@ -77,7 +77,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="inline-block py-1.5 text-sm text-navy-200 transition-colors duration-200 hover:text-gold-400"
+                    className="inline-block py-1.5 text-sm text-navy-600 transition-colors duration-200 hover:text-navy-800"
                   >
                     {link.label}
                   </Link>
@@ -88,7 +88,7 @@ export default function Footer() {
 
           {/* Column 3: Services */}
           <div>
-            <h3 className="mb-5 font-heading text-sm font-semibold uppercase tracking-widest text-gold-400">
+            <h3 className="mb-5 font-heading text-sm font-semibold uppercase tracking-widest text-navy-800">
               Services
             </h3>
             <ul className="space-y-1">
@@ -96,7 +96,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="inline-block py-1.5 text-sm text-navy-200 transition-colors duration-200 hover:text-gold-400"
+                    className="inline-block py-1.5 text-sm text-navy-600 transition-colors duration-200 hover:text-navy-800"
                   >
                     {link.label}
                   </Link>
@@ -107,44 +107,44 @@ export default function Footer() {
 
           {/* Column 4: Contact Info */}
           <div>
-            <h3 className="mb-5 font-heading text-sm font-semibold uppercase tracking-widest text-gold-400">
+            <h3 className="mb-5 font-heading text-sm font-semibold uppercase tracking-widest text-navy-800">
               Contact
             </h3>
 
             {/* Lafayette */}
             <div className="mb-5">
-              <p className="mb-1 text-sm font-semibold text-white">
+              <p className="mb-1 text-sm font-semibold text-navy-800">
                 {LOCATION_LAFAYETTE.name} Office
               </p>
-              <p className="text-sm text-navy-200">
+              <p className="text-sm text-navy-600">
                 {formatAddress(LOCATION_LAFAYETTE)}
               </p>
               <a
                 href={`tel:${PHONE_LAFAYETTE.replace(/[^\d+]/g, "")}`}
-                className="inline-block py-1 text-sm text-navy-200 transition-colors duration-200 hover:text-gold-400"
+                className="inline-block py-1 text-sm text-navy-700 transition-colors duration-200 hover:text-gold-700"
               >
                 {PHONE_LAFAYETTE}
               </a>
-              <p className="mt-1 text-xs text-navy-200">
+              <p className="mt-1 text-xs text-navy-500">
                 {getHoursSummary(LOCATION_LAFAYETTE)}
               </p>
             </div>
 
             {/* New Iberia */}
             <div className="mb-5">
-              <p className="mb-1 text-sm font-semibold text-white">
+              <p className="mb-1 text-sm font-semibold text-navy-800">
                 {LOCATION_NEW_IBERIA.name} Office
               </p>
-              <p className="text-sm text-navy-200">
+              <p className="text-sm text-navy-600">
                 {formatAddress(LOCATION_NEW_IBERIA)}
               </p>
               <a
                 href={`tel:${PHONE_NEW_IBERIA.replace(/[^\d+]/g, "")}`}
-                className="inline-block py-1 text-sm text-navy-200 transition-colors duration-200 hover:text-gold-400"
+                className="inline-block py-1 text-sm text-navy-700 transition-colors duration-200 hover:text-gold-700"
               >
                 {PHONE_NEW_IBERIA}
               </a>
-              <p className="mt-1 text-xs text-navy-200">
+              <p className="mt-1 text-xs text-navy-500">
                 {getHoursSummary(LOCATION_NEW_IBERIA)}
               </p>
             </div>
@@ -152,7 +152,7 @@ export default function Footer() {
             {/* Email */}
             <a
               href={`mailto:${PRACTICE_EMAIL}`}
-              className="inline-block py-1 text-sm text-navy-200 transition-colors duration-200 hover:text-gold-400"
+              className="inline-block py-1 text-sm text-navy-600 transition-colors duration-200 hover:text-gold-700"
             >
               {PRACTICE_EMAIL}
             </a>
@@ -160,29 +160,34 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 border-t border-navy-700/50 pt-8">
+        <div className="mt-12 border-t border-steel-200 pt-8">
           <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-            <p className="text-xs text-navy-200">
+            <p className="text-xs text-navy-500">
               &copy; {currentYear} {PRACTICE_NAME}. All rights reserved.
             </p>
-            <p className="text-xs font-medium tracking-wide text-navy-200">
+            <p className="text-xs font-medium tracking-wide text-navy-500">
               Proudly Serving Acadiana
             </p>
           </div>
 
           {/* Built by SilverWulf */}
-          <div className="mt-6 flex items-center justify-center gap-2 text-navy-200/80">
+          <a
+            href="https://silverwulf.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-6 flex items-center justify-center gap-2.5 text-navy-500 transition-opacity duration-200 hover:text-gold-700 hover:opacity-100"
+          >
             <Image
               src="/silverwulf-logo.png"
               alt="SilverWulf"
-              width={20}
-              height={20}
-              className="h-5 w-5 opacity-80"
+              width={28}
+              height={28}
+              className="h-6 w-6 opacity-90"
             />
-            <span className="text-[11px] tracking-widest uppercase">
+            <span className="text-[13px] tracking-widest uppercase">
               Built by SilverWulf
             </span>
-          </div>
+          </a>
         </div>
       </div>
     </footer>

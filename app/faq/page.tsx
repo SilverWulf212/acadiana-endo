@@ -114,7 +114,6 @@ export default function FAQPage() {
               >
                 <p className="eyebrow">{category.label.toUpperCase()}</p>
                 <h2 className="heading-section mt-3">{category.label}</h2>
-                <div className="accent-bar mt-4" aria-hidden="true" />
 
                 <div className="mt-8">
                   <FAQAccordion faqs={categoryFaqs} />

@@ -251,6 +251,16 @@ body {
 
 @layer components {
 
+/* ─── Text-Wrap — orphan/widow prevention (progressive enhancement) ──────── */
+
+h1, h2, h3, .heading-display, .heading-section, .heading-subsection {
+  text-wrap: balance;
+}
+
+p, .text-lead {
+  text-wrap: pretty;
+}
+
 /* ─── Heading Classes ─────────────────────────────────────────────────────── */
 
 .heading-display {

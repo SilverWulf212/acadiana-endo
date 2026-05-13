@@ -78,7 +78,6 @@ export default function ContactPage() {
               <h2 className="heading-section mt-3">
                 Tell us how we can help
               </h2>
-              <div className="accent-bar mt-4" aria-hidden="true" />
 
               <div className="mt-8">
                 <AppointmentForm />

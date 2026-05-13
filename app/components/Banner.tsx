@@ -16,6 +16,8 @@ type BannerProps = {
   overlay?: "left" | "left-soft" | "bottom";
   height?: "full" | "tall";
   priority?: boolean;
+  /** Optional small credential badge rendered below the CTA row. */
+  credentials?: string;
 };
 
 /**
@@ -34,6 +36,7 @@ export default function Banner({
   overlay = "left",
   height = "full",
   priority = true,
+  credentials,
 }: BannerProps) {
   // Unique id for aria-labelledby (avoids collisions when two Banners share a heading).
   const reactId = useId();
@@ -118,6 +121,13 @@ export default function Banner({
                 </Link>
               )}
             </div>
+
+            {credentials && (
+              <p className="mt-6 inline-flex items-center gap-2 self-start rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-[11px] font-heading font-semibold uppercase tracking-[0.18em] text-white/85 backdrop-blur-sm">
+                <span aria-hidden="true" className="inline-block h-1.5 w-1.5 rounded-full bg-gold-400" />
+                {credentials}
+              </p>
+            )}
           </div>
         </div>
       </div>
