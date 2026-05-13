@@ -41,7 +41,7 @@ export default function LocationCard({
 
   return (
     <article
-      className={cn("office-info", variant === "compact" && "p-5 sm:p-5")}
+      className={cn("office-info", variant === "compact" && "p-5")}
     >
       <p className="eyebrow">Location</p>
 

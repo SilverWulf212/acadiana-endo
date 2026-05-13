@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { cn } from "@/app/lib/utils";
 
 type IntroBlockProps = {
   eyebrow?: string;
@@ -19,11 +20,11 @@ export default function IntroBlock({
     <div className="intro-block">
       {eyebrow && <p className="eyebrow">{eyebrow}</p>}
       {heading && (
-        <h2 className={`heading-section ${eyebrow ? "mt-3" : ""}`}>
+        <h2 className={cn("heading-section", eyebrow && "mt-3")}>
           {heading}
         </h2>
       )}
-      <div className={eyebrow || heading ? "mt-5" : ""}>{children}</div>
+      <div className={cn((eyebrow || heading) && "mt-5")}>{children}</div>
     </div>
   );
 }

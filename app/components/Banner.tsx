@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useId } from "react";
 import { cn } from "@/app/lib/utils";
 
 type BannerProps = {
@@ -33,11 +34,9 @@ export default function Banner({
   height = "full",
   priority = true,
 }: BannerProps) {
-  // Stable id derived from heading, used for aria-labelledby.
-  const headingId = `banner-${heading
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "")}`;
+  // Unique id for aria-labelledby (avoids collisions when two Banners share a heading).
+  const reactId = useId();
+  const headingId = `banner-h-${reactId}`;
 
   const alignClasses =
     align === "center"
@@ -102,7 +101,7 @@ export default function Banner({
               {secondaryCta && (
                 <Link
                   href={secondaryCta.href}
-                  className="inline-flex items-center gap-2 px-2 py-3 font-heading text-base font-semibold text-white underline underline-offset-4 transition-colors hover:text-gold-300"
+                  className="inline-flex items-center gap-2 px-2 py-3 font-heading text-base font-semibold text-white underline underline-offset-4 transition-colors hover:text-gold-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                 >
                   {secondaryCta.label}
                 </Link>

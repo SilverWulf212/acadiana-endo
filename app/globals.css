@@ -422,6 +422,7 @@ body {
   background: var(--gradient-overlay-bottom);
 }
 
+/* isolation: isolate is required so .featured-card-body::before z-index: -1 stays inside the card */
 .featured-card {
   position: relative;
   overflow: hidden;

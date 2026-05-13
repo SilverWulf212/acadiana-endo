@@ -67,6 +67,8 @@ export default function FeaturedCardRow({
   items,
   columns = 3,
 }: FeaturedCardRowProps) {
+  if (items.length === 0) return null;
+
   const gridCols =
     columns === 2
       ? "grid grid-cols-1 sm:grid-cols-2 gap-6"
@@ -86,14 +88,14 @@ export default function FeaturedCardRow({
 
       <div className="container">
         <div className={gridCols}>
-          {items.map((item) => {
+          {items.map((item, index) => {
             const sizes =
               "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw";
 
             if (item.mode === "link") {
               return (
                 <Link
-                  key={item.title + item.href}
+                  key={`${item.title}-${index}`}
                   href={item.href}
                   className={cn(
                     "featured-card group",
@@ -114,7 +116,10 @@ export default function FeaturedCardRow({
             }
 
             return (
-              <article key={item.title} className="featured-card">
+              <article
+                key={`${item.title}-${index}`}
+                className="featured-card"
+              >
                 <div className="featured-card-image">
                   <Image
                     src={item.image}

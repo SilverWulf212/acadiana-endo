@@ -29,10 +29,18 @@ export function getHoursSummary(loc: Location): string {
   if (openDays.length === 1) {
     return `${openDays[0].day}: ${openDays[0].hours}`;
   }
+  // Detect whether the open days form a single uninterrupted run in the canonical week order.
+  const openIndices = loc.hours
+    .map((h, i) => (h.hours !== "Closed" ? i : -1))
+    .filter((i) => i >= 0);
+  const isContiguous =
+    openIndices.length > 0 &&
+    openIndices[openIndices.length - 1] - openIndices[0] ===
+      openIndices.length - 1;
   const firstDay = openDays[0].day;
   const lastDay = openDays[openDays.length - 1].day;
   const sameHours = openDays.every((d) => d.hours === openDays[0].hours);
-  if (sameHours) {
+  if (sameHours && isContiguous) {
     return `${firstDay}–${lastDay}: ${openDays[0].hours}`;
   }
   return openDays.map((d) => `${d.day}: ${d.hours}`).join(", ");
@@ -42,6 +50,5 @@ export function getHoursSummary(loc: Location): string {
  * Build a Google Maps "directions to" URL for a Location.
  */
 export function getDirectionsUrl(location: Location): string {
-  const dest = `${location.address}, ${location.city}, ${location.state} ${location.zip}`;
-  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(dest)}`;
+  return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(formatAddress(location))}`;
 }

@@ -9,12 +9,12 @@ type ReviewGridProps = {
 
 function initials(name?: string): string {
   if (!name) return "—";
-  const parts = name.trim().split(/\s+/).slice(0, 2);
-  const letters = parts
-    .map((w) => w[0])
-    .filter(Boolean)
-    .join("");
-  return letters || "—";
+  const parts = name.trim().split(/\s+/);
+  const letters =
+    parts.length >= 2
+      ? parts[0][0] + parts[parts.length - 1][0] // first + last word
+      : (parts[0][0] ?? "") + (parts[0][1] ?? ""); // first two letters of single word
+  return letters.toUpperCase().slice(0, 2) || "—";
 }
 
 function StarRow({ rating }: { rating: number }) {
@@ -72,11 +72,11 @@ export default function ReviewGrid({
 
       <div className="container">
         <div className={gridCols}>
-          {testimonials.map((t, idx) => {
+          {testimonials.map((t) => {
             const displayName = t.name ?? t.author;
             return (
               <figure
-                key={`${displayName}-${idx}`}
+                key={`${t.author}-${t.text.slice(0, 32)}`}
                 className="review-card"
               >
                 <StarRow rating={t.rating} />
