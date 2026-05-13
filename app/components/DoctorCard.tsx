@@ -1,137 +1,122 @@
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/app/lib/utils";
+import type { Doctor } from "@/app/lib/types";
 
-interface DoctorCardProps {
-  name: string;
-  credentials: string;
-  title: string;
-  bio: string;
-  imageUrl: string;
-  education?: { degree: string; institution: string; year?: string }[];
-  className?: string;
-}
+export type DoctorCardProps = {
+  doctor: Doctor;
+  /**
+   * Controls which side the portrait sits on at the lg breakpoint.
+   * DOM order is fixed (image first) so screen-reader narration is consistent
+   * regardless of visual layout — see plan §10 accessibility rule.
+   *
+   * - `"image-left"`  → portrait on the left, copy on the right (default).
+   * - `"image-right"` → portrait visually moves right via `.component-row.reverse`,
+   *                     but stays first in the DOM.
+   */
+  align?: "image-left" | "image-right";
+};
 
-/** Extract initials from a name like "John H. Smith" => "JS" */
-function getInitials(name: string): string {
-  return name
-    .split(" ")
-    .filter((part) => !part.endsWith(".") || part.length > 2)
-    .map((part) => part[0])
-    .filter(Boolean)
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
-}
-
-
+/**
+ * Highland-style full-width zig-zag content row for a single doctor:
+ *   portrait on one side, copy (eyebrow + name + bio + education + memberships + CTA)
+ *   on the other.
+ *
+ * NOT a small avatar card. Composed inside `<section className="section">` and
+ * uses the `.component-row` / `.component-row.reverse` primitives from globals.css.
+ *
+ * Server Component.
+ */
 export default function DoctorCard({
-  name,
-  credentials,
-  title,
-  bio,
-  imageUrl,
-  education,
-  className,
+  doctor,
+  align = "image-left",
 }: DoctorCardProps) {
-  const initials = getInitials(name);
-  const hasImage = imageUrl && imageUrl.trim() !== "";
+  const { name, credentials, bio, imageUrl, education, memberships } = doctor;
+  const eyebrow = `${credentials.toUpperCase()} · BOARD-CERTIFIED ENDODONTIST`;
+  const bioParagraphs = bio.split("\n\n").filter((p) => p.trim().length > 0);
+  const lastName = name.split(" ").slice(-1)[0] || name;
+  const isReverse = align === "image-right";
 
   return (
-    <div
-      className={cn(
-        "group flex flex-col items-center rounded-xl border border-steel-200 bg-white p-5 text-center transition-all duration-300 sm:p-8 lg:p-10",
-        "hover:-translate-y-1 hover:shadow-lg hover:shadow-navy-800/5",
-        className
-      )}
-    >
-      {/* Photo / Initials Avatar */}
-      <div className="mb-6">
-        {hasImage ? (
-          <div className="relative h-36 w-36 overflow-hidden rounded-full ring-4 ring-navy-100 transition-all duration-300 group-hover:ring-gold-300 group-hover:shadow-[0_0_15px_rgba(200,169,110,0.4)]">
+    <section className="section">
+      <div className="container">
+        {/*
+          DOM order: image element ALWAYS first child.
+          `.component-row.reverse` flips visual order at lg via CSS `order: 2`,
+          so screen-reader narration stays: image → copy regardless of visual side.
+        */}
+        <div className={cn("component-row", isReverse && "reverse")}>
+          {/* Portrait */}
+          <div className="relative aspect-[5/6] overflow-hidden rounded-xl">
             <Image
               src={imageUrl}
-              alt={`${name}, ${credentials} — board-certified endodontist at Acadiana Endodontics Lafayette LA`}
-              width={288}
-              height={288}
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              alt={`${name}, ${credentials} — board-certified endodontist at Acadiana Endodontics`}
+              fill
+              className="object-cover object-top"
+              sizes="(min-width: 1024px) 50vw, 100vw"
             />
           </div>
-        ) : (
-          <div className="flex h-36 w-36 items-center justify-center rounded-full bg-gradient-to-br from-navy-100 to-navy-200 ring-4 ring-navy-100 transition-all duration-300 group-hover:ring-gold-300 group-hover:shadow-[0_0_15px_rgba(200,169,110,0.4)]">
-            <span className="font-heading text-3xl font-bold text-navy-400">
-              {initials}
-            </span>
+
+          {/* Copy */}
+          <div>
+            <p className="eyebrow">{eyebrow}</p>
+            <h2 className="heading-section mt-3">{name}</h2>
+            <div className="accent-bar mt-4" aria-hidden="true" />
+
+            {/* Bio — first paragraph as lead, remaining as body */}
+            <div className="mt-6">
+              {bioParagraphs.map((paragraph, index) => (
+                <p
+                  key={index}
+                  className={cn(
+                    index === 0
+                      ? "text-lead text-gray-700"
+                      : "mt-4 text-base leading-relaxed text-gray-700"
+                  )}
+                >
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+
+            {/* Education */}
+            {education && education.length > 0 && (
+              <div className="mt-8">
+                <h3 className="heading-subsection text-lg">Education</h3>
+                <ul className="mt-3 list-disc list-inside space-y-1.5 text-gray-700">
+                  {education.map((edu, index) => (
+                    <li key={index}>
+                      {edu.degree}, {edu.institution}
+                      {edu.year ? ` (${edu.year})` : ""}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Memberships */}
+            {memberships && memberships.length > 0 && (
+              <div className="mt-8">
+                <h3 className="heading-subsection text-lg">
+                  Professional Memberships
+                </h3>
+                <ul className="mt-3 list-disc list-inside space-y-1.5 text-gray-700">
+                  {memberships.map((membership, index) => (
+                    <li key={index}>{membership}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* CTA */}
+            <div className="mt-8">
+              <Link href="/contact" className="btn btn-primary">
+                Request an appointment with {lastName}
+              </Link>
+            </div>
           </div>
-        )}
-      </div>
-
-      {/* Name + Credentials */}
-      <h3 className="font-heading text-xl font-bold text-navy-800">
-        {name}
-        {credentials && (
-          <span className="ml-1 font-semibold text-navy-500">
-            , {credentials}
-          </span>
-        )}
-      </h3>
-
-      {/* Title */}
-      <p className="mt-1 text-sm font-medium text-gold-600">{title}</p>
-
-      {/* Gold accent */}
-      <div
-        className="mx-auto mt-4 h-0.5 w-12 rounded-full bg-gold-400"
-        aria-hidden="true"
-      />
-
-      {/* Bio excerpt — reveals more text on hover with gradient fade */}
-      <div className="relative mt-4 max-h-[4.5em] overflow-hidden transition-all duration-500 group-hover:max-h-[10em]">
-        <p className="text-sm leading-relaxed text-gray-600">
-          {bio.split("\n\n")[0]}
-        </p>
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-white to-transparent transition-opacity duration-300 group-hover:opacity-0" />
-      </div>
-
-      {/* Education (optional) */}
-      {education && education.length > 0 && (
-        <div className="mt-5 w-full border-t border-steel-100 pt-4">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-widest text-navy-600">
-            Education
-          </p>
-          <ul className="space-y-1">
-            {education.slice(0, 3).map((edu, index) => (
-              <li key={index} className="text-xs text-gray-600">
-                {edu.degree} &mdash; {edu.institution}
-                {edu.year && (
-                  <span className="text-gray-500"> ({edu.year})</span>
-                )}
-              </li>
-            ))}
-          </ul>
         </div>
-      )}
-
-      {/* View full bio link */}
-      <Link
-        href="/about"
-        className="mt-6 inline-flex items-center gap-1.5 py-2 text-sm font-medium text-navy-700 transition-all duration-200 hover:text-gold-600"
-      >
-        View full bio
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5"
-          aria-hidden="true"
-        >
-          <path
-            fillRule="evenodd"
-            d="M5 10a.75.75 0 0 1 .75-.75h6.638L10.23 7.29a.75.75 0 1 1 1.04-1.08l3.5 3.25a.75.75 0 0 1 0 1.08l-3.5 3.25a.75.75 0 1 1-1.04-1.08l2.158-1.96H5.75A.75.75 0 0 1 5 10Z"
-            clipRule="evenodd"
-          />
-        </svg>
-      </Link>
-    </div>
+      </div>
+    </section>
   );
 }
