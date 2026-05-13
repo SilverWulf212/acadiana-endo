@@ -68,8 +68,8 @@ export default function ReferringDoctorsPage() {
     {
       mode: "info",
       title: "Direct doctor line",
-      image: "/images/office/hero-dentist-patient.webp",
-      imageAlt: "Endodontist consulting",
+      image: "/images/general/doctor-patient.jpg",
+      imageAlt: "Endodontist in conversation with a patient",
       description:
         "Reach Dr. Fowler or Dr. Reaves directly when you need a quick consult.",
     },

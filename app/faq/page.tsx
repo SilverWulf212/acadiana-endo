@@ -5,6 +5,7 @@ import Breadcrumbs from "@/app/components/Breadcrumbs";
 import IntroBlock from "@/app/components/IntroBlock";
 import FAQAccordion from "@/app/components/FAQAccordion";
 import { faqs, faqCategories } from "@/app/data/faqs";
+import { cn } from "@/app/lib/utils";
 
 // ─── Metadata ─────────────────────────────────────────────────────────────────
 
@@ -98,29 +99,31 @@ export default function FAQPage() {
         </p>
       </IntroBlock>
 
-      {/* 3. STACKED FAQ SECTIONS ───────────────────────────────────────────── */}
-      {faqCategories.map((category) => {
-        const categoryFaqs = faqs[category.id];
-        if (!categoryFaqs || categoryFaqs.length === 0) return null;
+      {/* 3. STACKED FAQ CATEGORIES (single section, tightened rhythm) ─────── */}
+      <section className="section">
+        <div className="container max-w-3xl">
+          {faqCategories.map((category, index) => {
+            const categoryFaqs = faqs[category.id];
+            if (!categoryFaqs || categoryFaqs.length === 0) return null;
 
-        return (
-          <section
-            key={category.id}
-            id={category.id}
-            className="section scroll-mt-24"
-          >
-            <div className="container max-w-3xl">
-              <p className="eyebrow">{category.label.toUpperCase()}</p>
-              <h2 className="heading-section mt-3">{category.label}</h2>
-              <div className="accent-bar mt-4" aria-hidden="true" />
+            return (
+              <div
+                key={category.id}
+                id={category.id}
+                className={cn("scroll-mt-24", index > 0 && "mt-16")}
+              >
+                <p className="eyebrow">{category.label.toUpperCase()}</p>
+                <h2 className="heading-section mt-3">{category.label}</h2>
+                <div className="accent-bar mt-4" aria-hidden="true" />
 
-              <div className="mt-8">
-                <FAQAccordion faqs={categoryFaqs} />
+                <div className="mt-8">
+                  <FAQAccordion faqs={categoryFaqs} />
+                </div>
               </div>
-            </div>
-          </section>
-        );
-      })}
+            );
+          })}
+        </div>
+      </section>
     </>
   );
 }
