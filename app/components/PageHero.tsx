@@ -53,7 +53,7 @@ export default function PageHero({
         fetchPriority="high"
         loading="eager"
         sizes="100vw"
-        className="object-cover"
+        className="object-cover image-grade"
       />
 
       <div
@@ -70,7 +70,10 @@ export default function PageHero({
               <p className="eyebrow eyebrow-on-dark">{eyebrow}</p>
             )}
 
-            <h1 id={headingId} className="heading-display text-white">
+            <h1
+              id={headingId}
+              className="heading-display text-white hero-h1-shadow"
+            >
               {title}
             </h1>
 

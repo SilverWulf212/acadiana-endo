@@ -52,7 +52,7 @@ export default function DoctorCard({
               src={imageUrl}
               alt={`${name}, ${credentials} — board-certified endodontist at Acadiana Endodontics`}
               fill
-              className="object-cover object-top"
+              className="object-cover object-top image-grade"
               sizes="(min-width: 1024px) 50vw, 100vw"
             />
           </div>

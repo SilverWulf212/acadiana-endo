@@ -5,6 +5,11 @@ type ReviewGridProps = {
   heading?: string;
   testimonials: Testimonial[];
   columns?: 2 | 3;
+  /**
+   * Outer section background. Used to create alternating white/cream rhythm
+   * across the page. Defaults to "default" (transparent — inherits page bg).
+   */
+  surface?: "default" | "cream" | "gray";
 };
 
 function initials(name?: string): string {
@@ -52,6 +57,7 @@ export default function ReviewGrid({
   heading,
   testimonials,
   columns = 2,
+  surface = "default",
 }: ReviewGridProps) {
   if (testimonials.length === 0) return null;
 
@@ -60,8 +66,15 @@ export default function ReviewGrid({
       ? "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
       : "grid grid-cols-1 md:grid-cols-2 gap-6";
 
+  const surfaceClass =
+    surface === "cream"
+      ? "section-cream"
+      : surface === "gray"
+        ? "bg-gray-50"
+        : "";
+
   return (
-    <section className="section">
+    <section className={`section ${surfaceClass}`.trim()}>
       {(eyebrow || heading) && (
         <div className="container mb-10 text-center sm:mb-14">
           {eyebrow && <p className="eyebrow">{eyebrow}</p>}

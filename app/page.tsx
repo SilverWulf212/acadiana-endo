@@ -92,41 +92,44 @@ export default function HomePage() {
         </p>
       </IntroBlock>
 
-      {/* 3. ENTRY POINTS — What to expect ──────────────────────────────────── */}
+      {/* 3. ENTRY POINTS — What to expect (cream) ──────────────────────────── */}
       <FeaturedCardRow
         eyebrow="GETTING STARTED"
         heading="What to expect"
         items={homeEntryPoints}
+        surface="cream"
       />
 
-      {/* 4. PROCEDURE SPOTLIGHTS — Treatments we provide ───────────────────── */}
+      {/* 4. PROCEDURE SPOTLIGHTS — Treatments we provide (white) ────────────── */}
       <FeaturedCardRow
         eyebrow="OUR SPECIALTIES"
         heading="Treatments we provide"
         items={homeProcedureSpotlights}
       />
 
-      {/* 5. PATIENT REVIEWS ─────────────────────────────────────────────────── */}
+      {/* 5. PATIENT REVIEWS (cream) ─────────────────────────────────────────── */}
       <ReviewGrid
         eyebrow="WHAT OUR PATIENTS SAY"
         heading="Care, in their own words"
         testimonials={testimonials}
         columns={2}
+        surface="cream"
       />
 
-      {/* 6. LOCATIONS ───────────────────────────────────────────────────────── */}
+      {/* 6. LOCATIONS (white) ───────────────────────────────────────────────── */}
       <LocationsBlock
         eyebrow="VISIT US"
         heading="Two locations across Acadiana"
         showMaps={false}
       />
 
-      {/* 7. FINAL CTA (existing component; quieted further in Task 6) ──────── */}
+      {/* 7. FINAL CTA (cream) ──────────────────────────────────────────────── */}
       <CTASection
         title="Ready to save your tooth?"
         description="Request an appointment online, or call us during business hours."
         primaryCTA={{ label: "Request an Appointment", href: "/contact" }}
         secondaryCTA={{ label: phoneCtaLabel, href: phoneTelHref }}
+        className="section-cream"
       />
     </>
   );

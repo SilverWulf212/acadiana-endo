@@ -48,7 +48,7 @@ export default function Footer() {
             </p>
             <Link
               href="/about"
-              className="inline-flex items-center gap-1 text-sm font-medium text-gold-400 transition-colors duration-200 hover:text-gold-300"
+              className="link-underline inline-flex items-center gap-1 text-sm font-medium text-gold-400 transition-colors duration-200 hover:text-gold-300"
             >
               Learn more about us
               <svg

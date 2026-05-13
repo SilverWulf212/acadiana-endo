@@ -21,6 +21,11 @@ type FeaturedCardRowProps = {
   heading?: string;
   items: FeaturedCardItem[];
   columns?: 2 | 3;
+  /**
+   * Outer section background. Used to create alternating white/cream rhythm
+   * across the page. Defaults to "default" (transparent — inherits page bg).
+   */
+  surface?: "default" | "cream" | "gray";
 };
 
 function ArrowIcon() {
@@ -86,6 +91,7 @@ export default function FeaturedCardRow({
   heading,
   items,
   columns = 3,
+  surface = "default",
 }: FeaturedCardRowProps) {
   if (items.length === 0) return null;
 
@@ -94,8 +100,15 @@ export default function FeaturedCardRow({
       ? "grid grid-cols-1 sm:grid-cols-2 gap-6"
       : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6";
 
+  const surfaceClass =
+    surface === "cream"
+      ? "section-cream"
+      : surface === "gray"
+        ? "bg-gray-50"
+        : "";
+
   return (
-    <section className="section">
+    <section className={cn("section", surfaceClass)}>
       {(eyebrow || heading) && (
         <div className="container mb-10 text-center sm:mb-14">
           {eyebrow && <p className="eyebrow">{eyebrow}</p>}
@@ -140,6 +153,7 @@ export default function FeaturedCardRow({
                       alt={item.imageAlt}
                       fill
                       sizes={sizes}
+                      className="image-grade"
                     />
                   </div>
                   <CardBody item={item} />
@@ -162,6 +176,7 @@ export default function FeaturedCardRow({
                     alt={item.imageAlt}
                     fill
                     sizes={sizes}
+                    className="image-grade"
                   />
                 </div>
                 <CardBody item={item} />

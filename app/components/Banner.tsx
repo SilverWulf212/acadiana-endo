@@ -64,7 +64,7 @@ export default function Banner({
         fetchPriority={priority ? "high" : undefined}
         loading={priority ? "eager" : undefined}
         sizes="100vw"
-        className="object-cover"
+        className="object-cover image-grade"
         // TODO(perf): add blurDataURL once a build-time generator is wired up.
         // priority + sizes="100vw" already make this an LCP-friendly image.
       />
@@ -88,7 +88,7 @@ export default function Banner({
 
             <h1
               id={headingId}
-              className="heading-display animate-fade-up text-white"
+              className="heading-display animate-fade-up text-white hero-h1-shadow"
             >
               {heading}
             </h1>

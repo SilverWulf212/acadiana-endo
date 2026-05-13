@@ -93,6 +93,9 @@ export default function RootLayout({
         <main id="main-content">{children}</main>
         <Footer />
         <ClickToCall />
+
+        {/* Whisper-thin film grain — fixed, non-interactive, single paint */}
+        <div className="global-grain" aria-hidden="true" />
       </body>
     </html>
   );
