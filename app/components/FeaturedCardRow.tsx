@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import type { MouseEvent } from "react";
 import { cn } from "@/app/lib/utils";
 
 type FeaturedCardItemBase = {
@@ -58,8 +61,25 @@ function CardBody({ item }: { item: FeaturedCardItem }) {
 }
 
 /**
+ * Set CSS variables --hover-x / --hover-y (0..1) on the card so the radial
+ * glow originates at the cursor's entry point. Cheap, runs on enter/move only.
+ */
+function setHoverVars(
+  e: MouseEvent<HTMLElement>,
+  el: HTMLElement | null
+): void {
+  if (!el) return;
+  const rect = el.getBoundingClientRect();
+  const x = (e.clientX - rect.left) / rect.width;
+  const y = (e.clientY - rect.top) / rect.height;
+  el.style.setProperty("--hover-x", String(Math.max(0, Math.min(1, x))));
+  el.style.setProperty("--hover-y", String(Math.max(0, Math.min(1, y))));
+}
+
+/**
  * Highland-style photo-led card row.
- * Server Component — supports link cards (entire card is a <Link>) or info-only cards.
+ * Client Component — needs DOM access for directional hover glow.
+ * The glow originates at the cursor's entry edge and tracks subtly on move.
  */
 export default function FeaturedCardRow({
   eyebrow,
@@ -92,17 +112,28 @@ export default function FeaturedCardRow({
             const sizes =
               "(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw";
 
+            const onEnter = (e: MouseEvent<HTMLElement>) =>
+              setHoverVars(e, e.currentTarget);
+            const onMove = (e: MouseEvent<HTMLElement>) =>
+              setHoverVars(e, e.currentTarget);
+
             if (item.mode === "link") {
               return (
                 <Link
                   key={`${item.title}-${index}`}
                   href={item.href}
+                  onMouseEnter={onEnter}
+                  onMouseMove={onMove}
                   style={{ animationDelay: `${index * 80}ms` }}
                   className={cn(
                     "featured-card group animate-fade-up",
                     "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-400"
                   )}
                 >
+                  <div
+                    className="featured-card-glow"
+                    aria-hidden="true"
+                  />
                   <div className="featured-card-image">
                     <Image
                       src={item.image}
@@ -119,9 +150,12 @@ export default function FeaturedCardRow({
             return (
               <article
                 key={`${item.title}-${index}`}
+                onMouseEnter={onEnter}
+                onMouseMove={onMove}
                 style={{ animationDelay: `${index * 80}ms` }}
                 className="featured-card animate-fade-up"
               >
+                <div className="featured-card-glow" aria-hidden="true" />
                 <div className="featured-card-image">
                   <Image
                     src={item.image}

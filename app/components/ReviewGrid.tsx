@@ -79,7 +79,8 @@ export default function ReviewGrid({
             return (
               <figure
                 key={t.id ?? `${idx}-${t.author}`}
-                className="review-card"
+                style={{ animationDelay: `${idx * 80}ms` }}
+                className="review-card animate-fade-up"
               >
                 <StarRow rating={t.rating} />
 

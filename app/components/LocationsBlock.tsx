@@ -12,13 +12,16 @@ type LocationsBlockProps = {
 
 /**
  * Composes the two practice location cards.
- * Server Component.
+ * Server Component. Each card is wrapped in a stagger shell so LocationCard's
+ * own API surface stays untouched.
  */
 export default function LocationsBlock({
   eyebrow,
   heading,
   showMaps = false,
 }: LocationsBlockProps) {
+  const locations = [LOCATION_LAFAYETTE, LOCATION_NEW_IBERIA];
+
   return (
     <section className="section">
       <div className="container">
@@ -33,8 +36,15 @@ export default function LocationsBlock({
         )}
 
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <LocationCard location={LOCATION_LAFAYETTE} showMap={showMaps} />
-          <LocationCard location={LOCATION_NEW_IBERIA} showMap={showMaps} />
+          {locations.map((loc, idx) => (
+            <div
+              key={loc.name}
+              className="animate-fade-up"
+              style={{ animationDelay: `${idx * 120}ms` }}
+            >
+              <LocationCard location={loc} showMap={showMaps} />
+            </div>
+          ))}
         </div>
       </div>
     </section>

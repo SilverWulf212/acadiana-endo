@@ -348,6 +348,40 @@ body {
   font-size: 1.0625rem;
 }
 
+/* Spotlight CTA — stacks on top of any .btn variant.
+   A cursor-tracked radial highlight tints the surface when the pointer is near.
+   Coordinates are fed via --mx / --my (set by SpotlightCTA on mouse move). */
+.spotlight-cta {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.spotlight-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    120px circle at var(--mx, 50%) var(--my, 50%),
+    oklch(1 0 0 / 0.35),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 200ms ease-out;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.spotlight-cta:hover::before {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spotlight-cta::before {
+    display: none;
+  }
+}
+
 /* ─── Cards ───────────────────────────────────────────────────────────────── */
 
 .card {
@@ -447,6 +481,7 @@ body {
 .featured-card-image {
   position: absolute;
   inset: 0;
+  z-index: 0;
 }
 
 .featured-card-image img {
@@ -465,10 +500,41 @@ body {
   }
 }
 
+/* Directional-hover glow layer.
+   Sits above the image but below the body text. Cursor entry point is fed
+   via --hover-x / --hover-y (set by FeaturedCardRow on mouse enter/move). */
+.featured-card-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(
+    300px circle at
+    calc(var(--hover-x, 0.5) * 100%)
+    calc(var(--hover-y, 0.5) * 100%),
+    oklch(0.75 0.085 83 / 0.18),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 200ms ease-out;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.featured-card:hover .featured-card-glow {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .featured-card-glow {
+    display: none;
+  }
+}
+
 .featured-card-body {
   position: absolute;
   inset-inline: 0;
   bottom: 0;
+  z-index: 2;
   padding: 1.5rem 1.75rem;
   color: #ffffff;
 }

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useId } from "react";
 import { cn } from "@/app/lib/utils";
+import SpotlightCTA from "@/app/components/SpotlightCTA";
 
 type BannerProps = {
   image: string;
@@ -100,12 +101,10 @@ export default function Banner({
                 align === "center" && "justify-center"
               )}
             >
-              <Link
+              <SpotlightCTA
                 href={primaryCta.href}
-                className="btn btn-secondary btn-lg"
-              >
-                {primaryCta.label}
-              </Link>
+                label={primaryCta.label}
+              />
               {secondaryCta && (
                 <Link
                   href={secondaryCta.href}
