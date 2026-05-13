@@ -1,35 +1,58 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+
 import PageHero from "@/app/components/PageHero";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
-import ServiceCard from "@/app/components/ServiceCard";
-import CTASection from "@/app/components/CTASection";
-import ScrollReveal from "@/app/components/ScrollReveal";
-import { services } from "@/app/data/services";
-import { PHONE_LAFAYETTE } from "@/app/lib/constants";
+import IntroBlock from "@/app/components/IntroBlock";
+import FeaturedCardRow from "@/app/components/FeaturedCardRow";
+import { services, servicesAsFeaturedCards } from "@/app/data/services";
+
+// ─── Metadata ─────────────────────────────────────────────────────────────────
+
+const pageTitle = "Endodontic Services — Acadiana Endodontics";
+const pageDescription =
+  "Root canals, retreatment, apicoectomy, cracked teeth, dental trauma, and CBCT 3D imaging — performed by board-certified endodontists in Lafayette and New Iberia, LA.";
+const ogImage = "/images/services/treatment-room.jpg";
 
 export const metadata: Metadata = {
-  title: "Endodontic Services in Lafayette, LA",
-  description:
-    "Root canals, retreatment, apicoectomy, cracked teeth, dental trauma, and CBCT 3D imaging in Lafayette, LA. Board-certified specialists. Call (337) 981-0144.",
+  title: pageTitle,
+  description: pageDescription,
   alternates: {
     canonical: "/services",
   },
   openGraph: {
-    title: "Our Endodontic Services | Acadiana Endodontics",
-    description:
-      "Comprehensive endodontic care in Lafayette & New Iberia, LA. Root canals, retreatment, apicoectomy, dental trauma, and CBCT 3D imaging.",
+    type: "website",
+    url: "/services",
+    siteName: "Acadiana Endodontics",
+    title: pageTitle,
+    description: pageDescription,
+    images: [
+      {
+        url: ogImage,
+        width: 1200,
+        height: 630,
+        alt: "Surgical treatment room at Acadiana Endodontics",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: pageTitle,
+    description: pageDescription,
+    images: [ogImage],
   },
 };
 
+// ─── Page ─────────────────────────────────────────────────────────────────────
+
 export default function ServicesPage() {
+  const serviceCards = servicesAsFeaturedCards(services);
+
   return (
     <>
-      {/* ─── Hero ─────────────────────────────────────────────────────────── */}
+      {/* 1. PAGE HERO ──────────────────────────────────────────────────────── */}
       <PageHero
-        title="Our Services"
-        backgroundImage="/images/services/dental-chair.jpg"
-        description="Comprehensive endodontic care using advanced technology, delivered with precision and compassion by board-certified specialists."
+        title="Endodontic Services"
+        backgroundImage="/images/services/treatment-room.jpg"
         breadcrumbs={
           <Breadcrumbs
             items={[
@@ -40,99 +63,17 @@ export default function ServicesPage() {
         }
       />
 
-      {/* ─── Services Grid ────────────────────────────────────────────────── */}
-      <section className="section bg-gray-50">
-        <div className="container">
-          <ScrollReveal>
-            <div className="mx-auto max-w-2xl text-center">
-              <h2 className="heading-section">
-                Specialized Endodontic Treatment
-              </h2>
-              <p className="text-lead mt-4">
-                From routine root canals to complex microsurgery, our specialists
-                provide the full spectrum of endodontic care — all under one roof.
-              </p>
-            </div>
-          </ScrollReveal>
+      {/* 2. INTRO BLOCK ────────────────────────────────────────────────────── */}
+      <IntroBlock eyebrow="WHAT WE TREAT">
+        <p>
+          Every service below is performed by board-certified endodontists
+          using surgical microscopes and CBCT 3D imaging. Click any treatment
+          to learn more about how we approach it.
+        </p>
+      </IntroBlock>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((service, index) => (
-              <ScrollReveal key={service.slug} delay={index * 100}>
-                <ServiceCard
-                  title={service.title}
-                  shortDescription={service.shortDescription}
-                  slug={service.slug}
-                  icon={service.icon}
-                  className="h-full"
-                />
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Technology Section ────────────────────────────────────────────── */}
-      <section className="section">
-        <div className="container">
-          <div className="mx-auto max-w-4xl">
-            <ScrollReveal>
-              <div className="rounded-2xl border border-steel-200 bg-white p-8 lg:p-12">
-                <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:gap-12">
-                  {/* Icon */}
-                  <div className="flex shrink-0 items-center justify-center">
-                    <div className="rounded-2xl bg-navy-50 p-6">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                        className="h-16 w-16 text-navy-600"
-                        aria-hidden="true"
-                      >
-                        <path d="M3 3h5v2H5v3H3V3Zm13 0h5v5h-2V5h-3V3ZM3 16h2v3h3v2H3v-5Zm16 0h2v5h-5v-2h3v-3ZM7 7h10v10H7V7Zm2 2v6h6V9H9Z" />
-                      </svg>
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div>
-                    <h2 className="heading-subsection">
-                      Advanced Technology for Better Outcomes
-                    </h2>
-                    <p className="mt-3 text-base leading-relaxed text-gray-600">
-                      Every treatment at Acadiana Endodontics is guided by
-                      state-of-the-art technology. Our CBCT 3D imaging provides
-                      detailed three-dimensional views of your tooth anatomy with
-                      up to 90% less radiation than medical CT scans. Combined
-                      with surgical microscopes that magnify the treatment area
-                      up to 25x, our specialists can diagnose and treat
-                      conditions with unmatched precision.
-                    </p>
-                    <div className="mt-6">
-                      <Link
-                        href="/services/cbct-imaging"
-                        className="btn btn-outline btn-sm"
-                      >
-                        Learn About CBCT Imaging
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── CTA ──────────────────────────────────────────────────────────── */}
-      <CTASection
-        title="Ready to Schedule Your Appointment?"
-        description="Our team is here to help. Contact us today to schedule a consultation or get answers to your questions."
-        primaryCTA={{ label: "Contact Us", href: "/contact" }}
-        secondaryCTA={{
-          label: `Call ${PHONE_LAFAYETTE}`,
-          href: `tel:+13379810144`,
-        }}
-      />
+      {/* 3. SERVICES GRID ──────────────────────────────────────────────────── */}
+      <FeaturedCardRow items={serviceCards} columns={3} />
     </>
   );
 }

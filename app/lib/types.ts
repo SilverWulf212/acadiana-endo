@@ -12,6 +12,8 @@ export interface Service {
   benefits: string[];
   faqs: FAQ[];
   icon: string;
+  image: string;
+  imageAlt: string;
   metaTitle: string;
   metaDescription: string;
 }
