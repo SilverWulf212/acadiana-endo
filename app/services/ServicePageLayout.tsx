@@ -81,6 +81,7 @@ export default function ServicePageLayout({ service }: ServicePageLayoutProps) {
         title={service.title}
         description={service.shortDescription.split(". ")[0] + "."}
         backgroundImage={service.image}
+        overlay={service.heroOverlay ?? "soft"}
         breadcrumbs={
           <Breadcrumbs
             items={[

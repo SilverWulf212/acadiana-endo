@@ -53,6 +53,7 @@ export default function ServicesPage() {
       <PageHero
         title="Endodontic Services"
         backgroundImage="/images/services/treatment-room.jpg"
+        overlay="deep"
         breadcrumbs={
           <Breadcrumbs
             items={[

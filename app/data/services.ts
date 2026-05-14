@@ -40,6 +40,7 @@ export const services: Service[] = [
     metaTitle: "Root Canal Therapy in Lafayette, LA",
     metaDescription:
       "Gentle, pain-free root canal treatment by board-certified endodontists in Lafayette, LA. Advanced CBCT imaging, single-visit procedures. Call (337) 981-0144.",
+    heroOverlay: "deep",
   },
   {
     slug: "retreatment",
@@ -108,6 +109,7 @@ export const services: Service[] = [
     metaTitle: "Apicoectomy Specialist in Lafayette, LA",
     metaDescription:
       "Apicoectomy and endodontic microsurgery by board-certified specialists in Lafayette, LA. Minimally invasive root-end surgery. Call (337) 981-0144.",
+    heroOverlay: "deep",
   },
   {
     slug: "cracked-teeth",
@@ -177,6 +179,7 @@ export const services: Service[] = [
     metaTitle: "Emergency Dental Trauma Treatment in Lafayette, LA",
     metaDescription:
       "Same-day emergency dental trauma care in Lafayette, LA. Knocked-out teeth, fractures, and injuries treated by endodontic specialists. Call (337) 981-0144.",
+    heroOverlay: "deep",
   },
   {
     slug: "cbct-imaging",
@@ -211,6 +214,7 @@ export const services: Service[] = [
     metaTitle: "CBCT 3D Imaging | Endodontist in Lafayette, LA",
     metaDescription:
       "CBCT 3D cone beam imaging with up to 90% less radiation at Acadiana Endodontics in Lafayette, LA. Precise diagnosis for root canals. Call (337) 981-0144.",
+    heroOverlay: "deep",
   },
 ];
 

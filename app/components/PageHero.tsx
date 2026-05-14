@@ -19,14 +19,18 @@ interface PageHeroProps {
   breadcrumbs?: ReactNode;
   /** Optional CTA row rendered under the heading/description. */
   children?: ReactNode;
+  /** Overlay strength. Use "deep" for bright photos where H1 contrast suffers;
+   *  default "soft" works for mid-tone photos. */
+  overlay?: "soft" | "deep";
 }
 
 /**
  * Subpage hero — same visual language as Banner, but shorter and image-first.
  *
  * Server Component. Uses next/image with priority + sizes="100vw" so the hero
- * is a viable LCP candidate (plan §11). Overlay is `.banner-overlay-left` for
- * legibility against any photo.
+ * is a viable LCP candidate (plan §11). Overlay defaults to
+ * `.banner-overlay-left-soft`; pass `overlay="deep"` for bright photos where
+ * the H1 needs extra contrast.
  */
 export default function PageHero({
   backgroundImage,
@@ -36,6 +40,7 @@ export default function PageHero({
   description,
   breadcrumbs,
   children,
+  overlay = "soft",
 }: PageHeroProps) {
   const reactId = useId();
   const headingId = `page-hero-h-${reactId}`;
@@ -57,7 +62,11 @@ export default function PageHero({
       />
 
       <div
-        className="banner-overlay banner-overlay-left-soft"
+        className={
+          overlay === "deep"
+            ? "banner-overlay banner-overlay-left"
+            : "banner-overlay banner-overlay-left-soft"
+        }
         aria-hidden="true"
       />
 

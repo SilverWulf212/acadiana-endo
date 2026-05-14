@@ -27,6 +27,7 @@ export default function PrivacyPage() {
         imageAlt=""
         title="Privacy Notice"
         description="How we protect your information"
+        overlay="deep"
         breadcrumbs={
           <Breadcrumbs
             items={[

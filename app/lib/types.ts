@@ -16,6 +16,9 @@ export interface Service {
   imageAlt: string;
   metaTitle: string;
   metaDescription: string;
+  /** Hero overlay strength for the /services/[slug] page.
+   *  Defaults to "soft" if omitted; use "deep" for bright service photos. */
+  heroOverlay?: "soft" | "deep";
 }
 
 export interface Doctor {

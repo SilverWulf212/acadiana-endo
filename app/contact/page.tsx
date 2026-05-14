@@ -58,6 +58,7 @@ export default function ContactPage() {
         title="Contact Us"
         description="Lafayette & New Iberia, LA"
         backgroundImage="/images/office/lafayette-exterior.jpg"
+        overlay="deep"
         breadcrumbs={
           <Breadcrumbs
             items={[

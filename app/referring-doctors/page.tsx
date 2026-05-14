@@ -82,6 +82,7 @@ export default function ReferringDoctorsPage() {
         title="For Referring Doctors"
         description="Seamless specialist care for your patients"
         backgroundImage="/images/office/treatment-room.jpg"
+        overlay="deep"
         breadcrumbs={
           <Breadcrumbs
             items={[
